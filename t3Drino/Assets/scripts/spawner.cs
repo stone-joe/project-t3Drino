@@ -13,6 +13,7 @@ public class spawner : MonoBehaviour {
     //you can see it in the  inspector
     // I dragged my tetrino prefabs in the array and we now have  ref to each one of the 
     public GameObject[] golist = new GameObject[6];
+    public int numberOfTetrinosToSpawn=20;
 
     // Use this for initialization
     void Start () {
@@ -32,7 +33,7 @@ public class spawner : MonoBehaviour {
 
 
             tetrinoCount++;
-            if (tetrinoCount < 12)
+            if (tetrinoCount < numberOfTetrinosToSpawn)
             {
                 index = tetrinoCount % 5;
                 GameObject go = golist[index];

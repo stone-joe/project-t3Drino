@@ -30,8 +30,15 @@ public class clickDrag : MonoBehaviour {
     {
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
         Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+        if(transform.parent.tag == "movableTag")
         transform.parent.transform.position = curPosition; //I make the parent move to the ouse's position.
 
+    }
+    
+    void OnCollisionEnter(Collision collision)
+    {
+        transform.GetComponent<Renderer>().material.color = Color.black;
+        transform.parent.tag = "notMovableTag";
     }
 
 }

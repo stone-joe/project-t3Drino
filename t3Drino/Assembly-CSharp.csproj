@@ -45,7 +45,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\scripts\blockScript.cs" />
      <Compile Include="Assets\scripts\clickDrag.cs" />
+     <Compile Include="Assets\scripts\shootingRay.cs" />
      <Compile Include="Assets\scripts\spawner.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
