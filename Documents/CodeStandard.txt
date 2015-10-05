@@ -1,0 +1,174 @@
+Project Coding Standards
+
+I think we should use this for the most part. Below are some of the most common conventions to use (or at least the ones we'll use the most).
+http://www.dofactory.com/reference/csharp-coding-standards
+
+---- VERTICALLY ALIGN CURLY BRACES ----
+// Correct
+class Program
+{
+    static void Main(string[] args)
+    {
+    }
+}
+
+---- DECLARE ALL VARIABLES AT THE TOP, STATIC VARIABLES ABOVE OTHERS ----
+// Correct
+public class Account
+{
+    public static string BankName;
+    public static decimal Reserves;
+ 
+    public string Number {get; set;}
+    public DateTime DateOpened {get; set;}
+    public DateTime DateClosed {get; set;}
+    public decimal Balance {get; set;}
+ 
+    // Constructor
+    public Account()
+    {
+        // ...
+    }
+}
+
+---- PRIVATE VARIABLES ----
+int _myInteger = 10;
+
+---- PUBLIC VARIABLES ----
+// Correct
+public DateTime clientAppointment;
+public TimeSpan timeLeft;
+
+// Avoid
+public DateTime client_Appointment;
+public TimeSpan time_Left;
+
+// Exception (private variables)
+private DateTime _registrationDate;
+
+---- PREDEFINED TYPENAMES ----
+// Correct
+string firstName;
+int lastIndex;
+bool isSaved;
+
+// Avoid
+String firstName;
+Int32 lastIndex;
+Boolean isSaved;
+
+---- CONSTANTS ----
+// Correct
+public static const string ShippingType = "DropShip";
+
+// Avoid
+public static const string SHIPPINGTYPE = "DropShip";
+
+---- CAMEL CASING FOR METHODS AND LOCAL VARIABLES ----
+public class UserLog
+{
+    public void Add(LogEvent logEvent)
+    {
+        int itemCount = logEvent.Items.Count;
+        // ...
+    }
+}
+
+---- PASCAL NOTATION FOR CLASS NAMES AND METHOD NAMES
+public class ClientActivity
+{
+    public void ClearStatistics()
+    {
+        //...
+    }
+    public void CalculateStatistics()
+    {
+        //...
+    }
+}
+
+---- CAMEL CASING FOR METHOD ARGUMENTS AND LOCAL VARIABLES ----
+public class UserLog
+{
+    public void Add(LogEvent logEvent)
+    {
+        int itemCount = logEvent.Items.Count;
+        // ...
+    }
+}
+
+---- HUNGARIAN NOTATION FOR OTHER ----
+// Correct
+int counter;
+string name;
+
+// Avoid
+int iCounter;
+string strName;
+
+---- AVOID ABBREVIATIONS
+// Correct
+UserGroup userGroup;
+Assignment employeeAssignment;
+
+// Avoid
+UserGroup usrGrp;
+Assignment empAssignment;
+
+// Exceptions
+CustomerId customerId;
+XmlDocument xmlDocument;
+FtpHelper ftpHelper;
+UriPart uriPart;
+
+---- NOUNS OR NOUN PHRASES FOR CLASSES ----
+public class Employee
+{
+}
+public class BusinessLocation
+{
+}
+public class DocumentCollection
+{
+}
+
+---- PREFIX WITH I FOR INTERFACES ----
+public interface IShape
+{
+}
+public interface IShapeCollection
+{
+}
+public interface IGroupable
+{
+}
+
+---- SINGULAR NAMES FOR ENUMS ----
+// Correct
+public enum Color
+{
+    Red,
+    Green,
+    Blue,
+    Yellow,
+    Magenta,
+    Cyan
+}
+ 
+// Exception
+[Flags]
+public enum Dockings
+{
+    None = 0,
+    Top = 1, 
+    Right = 2, 
+    Bottom = 4,
+    Left = 8
+}
+
+---- NAME SOURCE FILES ACCORDING TO THEIR MAIN CLASSES ----
+// Located in Task.cs
+public partial class Task
+{
+    //...
+}
