@@ -3,7 +3,12 @@
 using UnityEngine;
 using System.Collections;
 
-public class spawner : MonoBehaviour {
+public class Spawner : MonoBehaviour {
+
+    public float period = 3f; //every 3 seconds
+    private float nextActionTime = 0.0f;
+    private int index = 0;
+    private int tetrinoCount = 0;
 
     //this script is attached to an empty GameObject called TheSpawner
     // if you click on TheSpawner in the Hierarchy column you will see this script as 
@@ -21,16 +26,11 @@ public class spawner : MonoBehaviour {
 
     }
 
-    private float nextActionTime = 0.0f;
-    public float period = 3f; //every 3 seconds
-    private int index = 0;    
-    private int tetrinoCount = 0;
     void FixedUpdate()
     {
         if (Time.time > nextActionTime)
         {
             nextActionTime += period;
-
 
             tetrinoCount++;
             if (tetrinoCount < numberOfTetrinosToSpawn)

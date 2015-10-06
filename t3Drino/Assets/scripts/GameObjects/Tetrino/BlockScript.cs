@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class blockScript : MonoBehaviour {
+public class BlockScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

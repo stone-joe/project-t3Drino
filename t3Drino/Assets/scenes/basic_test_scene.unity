@@ -664,7 +664,7 @@ GameObject:
   - 65: {fileID: 568400324}
   - 23: {fileID: 568400323}
   m_Layer: 0
-  m_Name: wall_right
+  m_Name: wallRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -872,7 +872,7 @@ GameObject:
   - 4: {fileID: 859642506}
   - 114: {fileID: 859642505}
   m_Layer: 0
-  m_Name: TheSpawner
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -889,6 +889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56f806f2c10bc874a8906990c1e2c47d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  period: 3
   golist:
   - {fileID: 195632, guid: 6bb4433df78eea445b8651df742e4f76, type: 2}
   - {fileID: 152028, guid: fc8e41b23e20bab4da126a902c71b2ef, type: 2}
@@ -897,7 +898,6 @@ MonoBehaviour:
   - {fileID: 106294, guid: a368335641f8a82499109b0ac9af9226, type: 2}
   - {fileID: 181350, guid: 59f0a049a570cb1429496044771abd97, type: 2}
   numberOfTetrinosToSpawn: 20
-  period: 3
 --- !u!4 &859642506
 Transform:
   m_ObjectHideFlags: 0
@@ -1549,7 +1549,7 @@ GameObject:
   - 65: {fileID: 1794826237}
   - 23: {fileID: 1794826236}
   m_Layer: 0
-  m_Name: wall_left
+  m_Name: wallLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1735,7 +1735,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1866411805}
   m_Layer: 0
-  m_Name: walls
+  m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

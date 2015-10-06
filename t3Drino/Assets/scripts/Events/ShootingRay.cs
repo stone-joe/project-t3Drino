@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class shootingRay : MonoBehaviour {
+public class ShootingRay : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
