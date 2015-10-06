@@ -20,14 +20,16 @@ public class ShootingRay : MonoBehaviour {
         for (int i = 0; i < hits.Length; i++)
         {
             RaycastHit hit = hits[i];
-            GameObject ObjectHitByRay = hit.transform.gameObject;
+            GameObject ObjectHitByRay = hit.collider.transform.gameObject;
 
             //fyi:the hit.length also includes the 2 vertical walls 
                 if (hits.Length > 8) {
-                    if (ObjectHitByRay.tag == "blockTag")  //the side walls should not be tagged, only the blocks are
-                    Destroy(ObjectHitByRay);
+                    if (ObjectHitByRay.tag == "blockTag") { //the side walls should not be tagged, only the blocks are
+                        hit.collider.transform.GetComponent<Renderer> ().material.color = Color.red;
+                        //TODO: De-parent block(s) from tet
+                        Destroy(ObjectHitByRay, 1);
+                    }
                 }
         }
-
     }
 }
