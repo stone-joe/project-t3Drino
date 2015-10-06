@@ -11,13 +11,13 @@ public class clickDrag : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    
+    }
+    
+    // Update is called once per frame
+    void Update () {
+    
+    }
 
 
     void OnMouseDown()
@@ -30,15 +30,19 @@ public class clickDrag : MonoBehaviour {
     {
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
         Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
-        if(transform.parent.tag == "movableTag")
-        transform.parent.transform.position = curPosition; //I make the parent move to the ouse's position.
-
+        if(transform.tag == "movableTag") {
+            transform.position = curPosition; //I make the parent move to the ouse's position.
+        }
     }
     
     void OnCollisionEnter(Collision collision)
     {
-        transform.GetComponent<Renderer>().material.color = Color.black;
-        transform.parent.tag = "notMovableTag";
+        //if (collision.gameObject.CompareTag ("floorTag") || collision.gameObject.CompareTag ("notMovableTag")) {
+            foreach (Transform child in transform) {
+                child.GetComponent<Renderer> ().material.color = Color.black;
+            }
+            transform.tag = "notMovableTag";
+        //}
     }
 
 }
