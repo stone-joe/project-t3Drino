@@ -803,7 +803,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1001 &823545656
 Prefab:
   m_ObjectHideFlags: 0
@@ -1348,7 +1348,7 @@ Transform:
   - {fileID: 317858988}
   - {fileID: 2035381495}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!1001 &1459629239
 Prefab:
   m_ObjectHideFlags: 0
@@ -1782,7 +1782,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 430016, guid: 6bb4433df78eea445b8651df742e4f76, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -4.40999985
+      value: 2.0999999
       objectReference: {fileID: 0}
     - target: {fileID: 430016, guid: 6bb4433df78eea445b8651df742e4f76, type: 2}
       propertyPath: m_LocalPosition.z
