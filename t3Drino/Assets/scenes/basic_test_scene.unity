@@ -2048,6 +2048,7 @@ GameObject:
   - 4: {fileID: 1964351325}
   - 23: {fileID: 1964351324}
   - 102: {fileID: 1964351323}
+  - 114: {fileID: 1964351322}
   m_Layer: 0
   m_Name: ElapsedTime
   m_TagString: Untagged
@@ -2055,6 +2056,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1964351322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1964351321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1287e12fcfa18647a866f73aaadcd5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  txtElapsed: 
 --- !u!102 &1964351323
 TextMesh:
   serializedVersion: 3
@@ -2062,7 +2075,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1964351321}
-  m_Text: Hello World
+  m_Text: 00:00
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
