@@ -23,8 +23,13 @@ public class clickDrag : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate ()
     {
+        float rotateDirection = 0.0f;
         if (canRotate  && transform.tag == "movableTag") {
-            transform.RotateAround(curPosition, Vector3.back, rortateSpeed * Time.deltaTime  * Input.GetAxis("Horizontal"));
+            if (Input.GetKey(KeyCode.LeftArrow)) rotateDirection = -1.0f;
+            else
+                if (Input.GetKey(KeyCode.RightArrow)) rotateDirection = 1.0f;
+
+            transform.RotateAround(curPosition, Vector3.back, rortateSpeed * Time.deltaTime * rotateDirection);
         }
     }
 
