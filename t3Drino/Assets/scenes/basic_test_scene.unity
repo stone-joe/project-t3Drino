@@ -288,7 +288,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 402014, guid: d671b69db8a315b4b89b1304ccb1e918, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d671b69db8a315b4b89b1304ccb1e918, type: 2}
@@ -1209,7 +1209,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 480792, guid: d0d92614b1a9025419452abe035de0b9, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0d92614b1a9025419452abe035de0b9, type: 2}
@@ -1586,7 +1586,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 430016, guid: 6bb4433df78eea445b8651df742e4f76, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6551254, guid: 6bb4433df78eea445b8651df742e4f76, type: 2}
       propertyPath: m_Enabled
@@ -2067,7 +2067,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1287e12fcfa18647a866f73aaadcd5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  txtElapsed: 
 --- !u!102 &1964351323
 TextMesh:
   serializedVersion: 3

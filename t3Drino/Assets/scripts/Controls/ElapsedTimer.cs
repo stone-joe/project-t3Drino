@@ -3,9 +3,7 @@ using System.Collections;
 
 public class ElapsedTimer : Timer {
 
-	public string txtElapsed;
 	private TextMesh _txtMesh;
-	private string timer = "0";
 
 	// Use this for initialization
 	public override void Start ()

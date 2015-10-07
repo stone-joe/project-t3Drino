@@ -138,7 +138,8 @@ public class Timer : MonoBehaviour {
 	{
 		int minutes = Mathf.FloorToInt(_currentTime / 60F);
 		int seconds = Mathf.FloorToInt(_currentTime - minutes * 60);
-		string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
+		string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds); // For format: 0:00
+		//string niceTime = string.Format("{0:00}:{1:00}", minutes, seconds); // For format: 00:00
 
 		return niceTime;
 	}

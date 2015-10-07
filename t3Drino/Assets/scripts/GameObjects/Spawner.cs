@@ -7,8 +7,8 @@ public class Spawner : MonoBehaviour {
 
     public float period = 3f; //every 3 seconds
     private float nextActionTime = 0.0f;
-    private int _index = 0;
     private int _tetrinoCount = 0;
+	private TetrinoSelector _tetrinoSelector;
 
     //this script is attached to an empty GameObject called TheSpawner
     // if you click on TheSpawner in the Hierarchy column you will see this script as 
@@ -23,6 +23,8 @@ public class Spawner : MonoBehaviour {
     // Use this for initialization
     void Start () {
         
+		GameObject obj = new GameObject();
+		_tetrinoSelector =  obj.AddComponent<TetrinoSelector>();
 
     }
 
@@ -35,8 +37,7 @@ public class Spawner : MonoBehaviour {
 			_tetrinoCount++;
 			if (_tetrinoCount < numberOfTetrinosToSpawn)
             {
-                _index = Random.Range(0, 6);
-				GameObject go = golist[_index];
+				GameObject go = _tetrinoSelector.Pop();
 
                 Instantiate(go, transform.position, transform.rotation); //this will instanciate a tetrino at the location and rotation of the object on which this script is attached (TheSpawner)
             }
