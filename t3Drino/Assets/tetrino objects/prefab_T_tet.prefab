@@ -64,6 +64,7 @@ GameObject:
   - 4: {fileID: 443468}
   - 54: {fileID: 5427144}
   - 114: {fileID: 11463742}
+  - 114: {fileID: 11458224}
   m_Layer: 0
   m_Name: prefab_T_tet
   m_TagString: movableTag
@@ -340,6 +341,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .020000007, y: .0200000089, z: .0199999996}
   m_Center: {x: -4.65661287e-10, y: -9.31322575e-10, z: 0}
+--- !u!114 &11458224
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 181350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 139e3b8c5c95af3459a81e8623ab22c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11463742
 MonoBehaviour:
   m_ObjectHideFlags: 1
