@@ -35,7 +35,7 @@ public class Spawner : MonoBehaviour {
             tetrinoCount++;
             if (tetrinoCount < numberOfTetrinosToSpawn)
             {
-                index = tetrinoCount % 5;
+                index = Random.Range(0, 6);
                 GameObject go = golist[index];
                 Instantiate(go, transform.position, transform.rotation); //this will instanciate a tetrino at the location and rotation of the object on which this script is attached (TheSpawner)
             }
