@@ -932,13 +932,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   period: 3
-  golist:
-  - {fileID: 195632, guid: 6bb4433df78eea445b8651df742e4f76, type: 2}
-  - {fileID: 152028, guid: fc8e41b23e20bab4da126a902c71b2ef, type: 2}
-  - {fileID: 170566, guid: d0d92614b1a9025419452abe035de0b9, type: 2}
-  - {fileID: 164752, guid: d671b69db8a315b4b89b1304ccb1e918, type: 2}
-  - {fileID: 106294, guid: a368335641f8a82499109b0ac9af9226, type: 2}
-  - {fileID: 181350, guid: 59f0a049a570cb1429496044771abd97, type: 2}
   numberOfTetrinosToSpawn: 20
 --- !u!4 &859642506
 Transform:

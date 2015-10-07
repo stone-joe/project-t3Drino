@@ -17,13 +17,14 @@ public class Spawner : MonoBehaviour {
     // created an array of GameObjects , since this array is public
     //you can see it in the  inspector
     // I dragged my tetrino prefabs in the array and we now have  ref to each one of the 
-    public GameObject[] golist = new GameObject[6];
+    //public GameObject[] golist = new GameObject[6];
     public int numberOfTetrinosToSpawn=20;
 
     // Use this for initialization
     void Start () {
         
 		GameObject obj = new GameObject();
+		obj.name = "TetrinoSelector";
 		_tetrinoSelector =  obj.AddComponent<TetrinoSelector>();
 
     }
