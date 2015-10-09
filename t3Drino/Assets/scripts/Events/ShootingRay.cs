@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 
 public class ShootingRay : MonoBehaviour {
+    private int neighborCount = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -17,41 +18,76 @@ public class ShootingRay : MonoBehaviour {
         RaycastHit[] hits;
         hits = Physics.RaycastAll(transform.position, transform.right, 100);
 
-        for (int i = 0; i < hits.Length; i++)
-        {
-            RaycastHit hit = hits[i];
-            Transform TransformHitByRay = hit.collider.transform;
+        // hit.length also includes the 2 vertical walls 
+        if (hits.Length > 8) {
+            bool moving = false;
 
-            //fyi:the hit.length also includes the 2 vertical walls 
-                if (hits.Length > 8) {
-                    if (TransformHitByRay.parent.gameObject.tag == "notMovableTag") { //the side walls should not be tagged, only the blocks are
+            for (int i = 0; i < hits.Length; i++) {
+                RaycastHit hit = hits[i];
+                // Get hit tet
+                Transform TetHit = hit.transform;
+
+                if (TetHit.gameObject.tag == "notMovableTag") {
+                    if (TetHit.gameObject.GetComponent<Rigidbody>().velocity.magnitude > 0.05F) {
+                        moving = true;
+                    }
+                }
+            }
+            if (!moving) {
+                for (int i = 0; i < hits.Length; i++) {
+                    RaycastHit hit = hits[i];
+                    // Get hit block
+                    Transform TransformHitByRay = hit.collider.transform;
+
+                    if (TransformHitByRay.parent != null && TransformHitByRay.parent.gameObject.tag == "notMovableTag") { // only handle blocks, not the side walls
                         TransformHitByRay.GetComponent<Renderer> ().material.color = Color.red;
+                        
+                        // Make deleting blocks freeze to prevent chain reaction line completions
+                        if (TransformHitByRay.gameObject.GetComponent<Rigidbody>() == null) {
+                            TransformHitByRay.gameObject.AddComponent<Rigidbody>();
+                        }
+                        TransformHitByRay.gameObject.GetComponent<Rigidbody>().useGravity = false;
+                        TransformHitByRay.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                        
                         Destroy(TransformHitByRay.gameObject, 1F);
+                        TransformHitByRay.gameObject.tag = "blockDestroyingTag";
 
+                        // iterate through all children blocks in tet/new parent...
                         foreach (Transform child in TransformHitByRay.parent) {
-                            GameObject newParent = new GameObject("newParent");
-                            newParent.tag = "notMovableTag";
-                            newParent.AddComponent<SelfCleanUp>();
-                            //get siblings only
-                            if (child.name != TransformHitByRay.name) {
-                                //get distance
-                                Vector3 difference = (child.localPosition - TransformHitByRay.localPosition);
-                                if (difference.magnitude <= 2) {
-                                    child.GetComponent<Renderer> ().material.color = Color.grey;
-                                    // create new parent object for unparented block so it can be hit with shooting ray again
-                                    child.parent = newParent.transform;
-                                    child.gameObject.AddComponent<Rigidbody>();
-                                    child.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ
-                                                                                             | RigidbodyConstraints.FreezeRotationX
-                                                                                             | RigidbodyConstraints.FreezeRotationY; 
+                            // ...except for the destroyed block or any destroying block
+                            if (child.name != TransformHitByRay.name && child.gameObject.tag != "blockDestroyingTag") {
+                                neighborCount = 0;
+                                // count number of adjacent neighbors...
+                                foreach (Transform potentialNeighbor in TransformHitByRay.parent) {
+                                    // ...besides the destroyed block or any other blocks to be destroyed
+                                    if (potentialNeighbor.name != child.name && potentialNeighbor.gameObject.tag != "blockDestroyingTag") {
+                                        //get distance
+                                        Vector3 difference = (child.localPosition - potentialNeighbor.localPosition);
+                                        if (difference.magnitude <= 2) {
+                                            //potentialNeighbor.GetComponent<Renderer> ().material.color = Color.yellow;
+                                            neighborCount++;
+                                        }
+                                    }
+                                }
+                                // Re-parent block if no neighbors found
+                                if (neighborCount == 0) {
+                                        //child.GetComponent<Renderer> ().material.color = Color.grey;
+                                        // create new parent object for unparented block so it can be hit with shooting ray again
+                                        GameObject newParent = new GameObject("newParent");
+                                        newParent.AddComponent<SelfCleanUp>();
+                                        newParent.tag = "notMovableTag";                                
+                                        child.parent = newParent.transform;
+                                        child.gameObject.AddComponent<Rigidbody>();
+                                        child.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ
+                                                                                                 | RigidbodyConstraints.FreezeRotationX
+                                                                                                 | RigidbodyConstraints.FreezeRotationY; 
                                 }
                             }
                         }
+                        TransformHitByRay.parent = null;
                     }
                 }
+            }
         }
-
-
     }
 }

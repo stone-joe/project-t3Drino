@@ -9,6 +9,7 @@ TagManager:
   - notMovableTag
   - floorTag
   - borderTag
+  - blockDestroyingTag
   layers:
   - Default
   - TransparentFX
