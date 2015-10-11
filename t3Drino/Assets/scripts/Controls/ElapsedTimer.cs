@@ -15,9 +15,8 @@ public class ElapsedTimer : Timer {
 
 		_txtMesh = GetComponent<TextMesh>();
 	}
-	
-	// Update is called once per frame
-	void Update () 
+
+	void FixedUpdate () 
 	{
 		base.UpdateTime();
 		_txtMesh.text = base.TextCurrentTime;

@@ -22,11 +22,9 @@ public class Spawner : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
-		GameObject obj = new GameObject();
-		obj.name = "TetrinoSelector";
-		_tetrinoSelector =  obj.AddComponent<TetrinoSelector>();
 
+		GameObject go = GameObject.Find("TetrinoSelector");
+		_tetrinoSelector = (TetrinoSelector) go.GetComponent(typeof(TetrinoSelector));
     }
 
     void FixedUpdate()
