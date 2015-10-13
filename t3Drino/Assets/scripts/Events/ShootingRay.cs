@@ -43,8 +43,16 @@ public class ShootingRay : MonoBehaviour {
                         }
                         hitBlock.gameObject.GetComponent<Rigidbody>().useGravity = false;
                         hitBlock.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+
+
+                        //geting the position of explosion, the starting the explosion.
+                        //each explosion has a ExplosionSelfDestruct.cs which takes care of destroying the eplosion particle system
+                        Vector3 pos = hitBlock.transform.position;         
+                        GameObject explo = (Resources.Load("Explosions/Explosion1", typeof(GameObject))) as GameObject;
+                        Instantiate(explo, pos, Quaternion.identity);
                        
                         Destroy(hitBlock.gameObject, 1F);
+
                         hitBlock.gameObject.tag = "blockDestroyingTag";
 
                         // iterate through all children blocks in tet/new parent...
