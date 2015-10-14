@@ -59,9 +59,9 @@ public class clickDrag : MonoBehaviour {
     {
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
 
-         curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+        curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
 		if(transform.tag == "movableTag" && curPosition.x > _negativeXBorder.x && curPosition.x < _positiveXBorder.x) {
-			transform.position = Vector3.Lerp(transform.position, curPosition, Time.deltaTime * 20f);
+			transform.position = Vector3.Lerp(transform.position, curPosition, Time.deltaTime * 30f);
         }
     }
     
