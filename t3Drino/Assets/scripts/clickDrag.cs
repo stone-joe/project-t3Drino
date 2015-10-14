@@ -15,6 +15,7 @@ public class clickDrag : MonoBehaviour {
 	private Vector3 _negativeXBorder;
 	private Vector3 _positiveXBorder;
 	private Vector3 _targetPosition;
+	private bool _collided;
 
 
     // Use this for initialization
@@ -24,6 +25,7 @@ public class clickDrag : MonoBehaviour {
         rortateSpeed = 300.0f;
 		_wallLeft = GameObject.Find("wallLeft");
 		_wallRight = GameObject.Find("wallRight");
+		_collided = false;
     }
     
     // Update is called once per frame
@@ -55,14 +57,16 @@ public class clickDrag : MonoBehaviour {
     }
 
 	void OnMouseDrag()
-    //void OnMouseDrag()
     {
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
 
-        curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+		if (!_collided)
+        	curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+
 		if(transform.tag == "movableTag" && curPosition.x > _negativeXBorder.x && curPosition.x < _positiveXBorder.x) {
 			transform.position = Vector3.Lerp(transform.position, curPosition, Time.deltaTime * 30f);
         }
+		_collided = false;
     }
     
     void OnCollisionEnter(Collision collision)
@@ -81,6 +85,7 @@ public class clickDrag : MonoBehaviour {
 		{
 			ContactPoint contactPoint = collision.contacts[0];
 			curPosition = contactPoint.point;
+			_collided = true;
 		}
     }
 
