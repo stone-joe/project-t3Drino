@@ -47,7 +47,7 @@ GameObject:
   - 54: {fileID: 5467128}
   - 114: {fileID: 11452438}
   - 114: {fileID: 11449752}
-  - 114: {fileID: 11480384}
+  - 114: {fileID: 11494538}
   m_Layer: 0
   m_Name: prefab_L_tet
   m_TagString: movableTag
@@ -365,7 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wholeobject: {fileID: 0}
---- !u!114 &11480384
+--- !u!114 &11494538
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -373,7 +373,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 152028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e527e87cd6044163af6fb4cda2139a9, type: 3}
+  m_Script: {fileID: 11500000, guid: abf0a6185332142f8bda1fb8755c50a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &100100000

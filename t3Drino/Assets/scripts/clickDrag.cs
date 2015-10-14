@@ -8,58 +8,69 @@ public class clickDrag : MonoBehaviour {
     private Vector3 offset;
     private Vector3 curPosition;
     private bool canRotate;
-    private float rortateSpeed;
+    private float rotateSpeed;
 
     public GameObject wholeobject;
+	private TetrominoState tetrominoState;
 
 
     // Use this for initialization
     void Start ()
     {
-        canRotate = false;
-        rortateSpeed = 300.0f;
+        rotateSpeed = 300.0f;
     }
     
     // Update is called once per frame
     void FixedUpdate ()
     {
-        float rotateDirection = 0.0f;
-        if (canRotate  && transform.tag == "movableTag") {
+		if (tetrominoState == null) {
+			tetrominoState = transform.gameObject.GetComponent<TetrominoState>();
+		}
+        
+		float rotateDirection = 0.0f;
+        if (tetrominoState.getState() == TetrominoState.states.GRABBED) {
             if (Input.GetKey(KeyCode.LeftArrow)) rotateDirection = -1.0f;
             else
                 if (Input.GetKey(KeyCode.RightArrow)) rotateDirection = 1.0f;
 
-            transform.RotateAround(curPosition, Vector3.back, rortateSpeed * Time.deltaTime * rotateDirection);
+            transform.RotateAround(curPosition, Vector3.back, rotateSpeed * Time.deltaTime * rotateDirection);
         }
     }
 
     void OnMouseDown()
     {
-        canRotate = true;
-        screenPoint = Camera.main.WorldToScreenPoint(transform.position);
-        offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+		if (tetrominoState.getState () != TetrominoState.states.INACTIVE) {
+			tetrominoState.setState (TetrominoState.states.GRABBED);
+			screenPoint = Camera.main.WorldToScreenPoint (transform.position);
+			offset = transform.position - Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+		}
     }
 
     void OnMouseUp()
     {
-        canRotate = false;
+		if (tetrominoState.getState () != TetrominoState.states.INACTIVE) {
+			tetrominoState.setState (TetrominoState.states.ACTIVE);
+		}
     }
 
     void OnMouseDrag()
     {
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
          curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
-        if(transform.tag == "movableTag") {
+        if(transform.gameObject.GetComponent<TetrominoState>().getState() == TetrominoState.states.GRABBED) {
             transform.position = curPosition; //I make the parent move to the mouse's position.
         }
     }
     
     void OnCollisionEnter(Collision collision)
     {
-        foreach (Transform child in transform) {
-            child.GetComponent<Renderer> ().material.color = Color.black;
-        }
-        transform.tag = "notMovableTag";
+		TetrominoState collidedTetromino = collision.gameObject.GetComponent<TetrominoState> ();
+		if (collidedTetromino == null || collidedTetromino.getState () == TetrominoState.states.INACTIVE) {
+			foreach (Transform child in transform) {
+				child.GetComponent<Renderer> ().material.color = Color.black;
+			}
+			tetrominoState.setState (TetrominoState.states.INACTIVE);
+		}
     }
 
 }

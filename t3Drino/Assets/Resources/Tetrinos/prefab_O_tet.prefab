@@ -65,7 +65,7 @@ GameObject:
   - 54: {fileID: 5413086}
   - 114: {fileID: 11470830}
   - 114: {fileID: 11453128}
-  - 114: {fileID: 11428212}
+  - 114: {fileID: 11478602}
   m_Layer: 0
   m_Name: prefab_O_tet
   m_TagString: movableTag
@@ -342,17 +342,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .020000007, y: .0200000089, z: .0199999996}
   m_Center: {x: -4.65661287e-10, y: -9.31322575e-10, z: 0}
---- !u!114 &11428212
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 170566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e527e87cd6044163af6fb4cda2139a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11453128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -376,6 +365,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wholeobject: {fileID: 0}
+--- !u!114 &11478602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 170566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf0a6185332142f8bda1fb8755c50a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
