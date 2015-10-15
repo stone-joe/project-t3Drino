@@ -33,13 +33,13 @@ public class Spawner : MonoBehaviour {
         {
             nextActionTime += period;
 
-			_tetrinoCount++;
-			if (_tetrinoCount < numberOfTetrinosToSpawn)
+            if (_tetrinoCount < numberOfTetrinosToSpawn)
             {
-				GameObject go = _tetrinoSelector.Pop();
+                GameObject go = _tetrinoSelector.Pop();
 
                 Instantiate(go, transform.position, transform.rotation); //this will instanciate a tetrino at the location and rotation of the object on which this script is attached (TheSpawner)
             }
+			_tetrinoCount++;
 
 
         }

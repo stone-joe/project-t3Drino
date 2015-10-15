@@ -70,7 +70,9 @@ public class ShootingRay : MonoBehaviour {
                                         // create new parent object for unparented block so it can be hit with shooting ray again
                                         GameObject newParent = new GameObject("newParent");
                                         newParent.AddComponent<SelfCleanUp>();
-                                        newParent.tag = "notMovableTag";                                
+                                        newParent.AddComponent<HandGrab>();
+                                        newParent.tag = "notMovableTag";
+                                        child.gameObject.layer = 9;
                                         child.parent = newParent.transform;
                                         child.gameObject.AddComponent<Rigidbody>();
                                         child.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ
