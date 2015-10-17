@@ -5,7 +5,7 @@ using Leap;
 public class HandScript : MonoBehaviour {
 
     private Hand hand;
-    private bool grabbed = false;
+    private bool grabbing = false;
     private GameObject grabbedObject;
     private Vector3 handCenterPos = new Vector3(0, 0, 0);
     private Vector3 offsetPos;
@@ -16,7 +16,7 @@ public class HandScript : MonoBehaviour {
 
     public float grabStrength;
     public static float grabRadius = 2.0F;
-    public static float maxDropVelocity = 30F;
+    public static float maxDropVelocity = 20F;
 
     void Start () {
         // Disable collisions between hand and inactive blocks
@@ -41,7 +41,7 @@ public class HandScript : MonoBehaviour {
         palmRotationZ = hand.PalmNormal.Roll * Mathf.Rad2Deg;
 
         if (grabStrength > 0.3F) {
-            if (!grabbed) {
+            if (!grabbing) {
                 grabbedObject = null;
                 // Look for closest object within sphere to grab
                 Collider[] close_things = Physics.OverlapSphere(handCenterPos, grabRadius);
@@ -60,7 +60,7 @@ public class HandScript : MonoBehaviour {
                 if (grabbedObject != null) {
                     // Found object to grab
                     print(string.Format("GRABBED {0}", grabbedObject));
-                    grabbed = true;
+                    grabbing = true;
                     // Record position and rotation relative to hand
                     offsetPos = handCenterPos - grabbedObject.transform.position;
                     offsetRot = palmRotationZ - grabbedObject.transform.localEulerAngles.z;
@@ -70,18 +70,18 @@ public class HandScript : MonoBehaviour {
                 }
             }
         } else {
-            if (grabbed) {
+            if (grabbing) {
                 print(string.Format("DROPPED {0}", grabbedObject));
                 dropVelocity = grabbedObject.GetComponent<Rigidbody>().velocity;
                 LimitVelocity(dropVelocity);
-                grabbedObject.GetComponent<Rigidbody>().velocity = new Vector3(dropVelocity.x, 0, dropVelocity.y);
+                grabbedObject.GetComponent<Rigidbody>().velocity = new Vector3(dropVelocity.x, dropVelocity.y, dropVelocity.z);
                 grabbedObject = null;
             }
-            grabbed = false;
+            grabbing = false;
         }
 
-        // Update position and rotation if grabbed shape
-        if (grabbed && grabbedObject != null) {
+        // Update position and rotation if grabbing shape
+        if (grabbing && grabbedObject != null) {
             pivotPoint = handCenterPos - offsetPos;
             grabbedObject.transform.position = new Vector3(pivotPoint.x, pivotPoint.y, 0);
             grabbedObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, palmRotationZ - offsetRot));
@@ -90,8 +90,9 @@ public class HandScript : MonoBehaviour {
             if (grabbedObject.transform.tag == "notMovableTag") {
                 dropVelocity = grabbedObject.GetComponent<Rigidbody>().velocity;
                 LimitVelocity(dropVelocity);
+                grabbedObject.GetComponent<Rigidbody>().velocity = new Vector3(dropVelocity.x, dropVelocity.y, dropVelocity.z);
                 grabbedObject = null;
-                grabbed = false;
+                grabbing = false;
             }
         }
     }
