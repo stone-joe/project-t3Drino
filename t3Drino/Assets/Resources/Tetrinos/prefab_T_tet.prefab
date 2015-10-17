@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3387200}
   - 23: {fileID: 2386974}
   - 65: {fileID: 6563094}
+  - 114: {fileID: 11439128}
   m_Layer: 0
   m_Name: simpleCubeU
   m_TagString: blockTag
@@ -29,6 +30,7 @@ GameObject:
   - 33: {fileID: 3361356}
   - 23: {fileID: 2301946}
   - 65: {fileID: 6563700}
+  - 114: {fileID: 11412556}
   m_Layer: 0
   m_Name: simpleCubeL
   m_TagString: blockTag
@@ -47,6 +49,7 @@ GameObject:
   - 33: {fileID: 3323606}
   - 23: {fileID: 2395206}
   - 65: {fileID: 6546464}
+  - 114: {fileID: 11447644}
   m_Layer: 0
   m_Name: simpleCubeM
   m_TagString: blockTag
@@ -84,6 +87,7 @@ GameObject:
   - 33: {fileID: 3352044}
   - 23: {fileID: 2380012}
   - 65: {fileID: 6508386}
+  - 114: {fileID: 11488054}
   m_Layer: 0
   m_Name: simpleCubeR
   m_TagString: blockTag
@@ -342,6 +346,39 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .020000007, y: .0200000089, z: .0199999996}
   m_Center: {x: -4.65661287e-10, y: -9.31322575e-10, z: 0}
+--- !u!114 &11412556
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fc1493f62e584085a518ba8349de1ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11439128
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fc1493f62e584085a518ba8349de1ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11447644
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fc1493f62e584085a518ba8349de1ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11458224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -374,6 +411,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abf0a6185332142f8bda1fb8755c50a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11488054
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 182786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fc1493f62e584085a518ba8349de1ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &100100000

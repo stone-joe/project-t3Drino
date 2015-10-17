@@ -82,19 +82,19 @@ public class ShootingRay : MonoBehaviour {
                         GameObject explo = (Resources.Load("Explosions/Explosion1", typeof(GameObject))) as GameObject;
                         Instantiate(explo, pos, Quaternion.identity);
                        
-                        Destroy(hitBlock.gameObject, 1F);
-
-                        hitBlock.gameObject.tag = "blockDestroyingTag";
+                        Destroy(hitBlock.gameObject, 1F);						                       
 
                         // iterate through all children blocks in tet/new parent...
                         foreach (Transform child in hitBlock.parent) {
                             // ...except for the destroyed block or any destroying block
-                            if (child.name != hitBlock.name && child.gameObject.tag != "blockDestroyingTag") {
+							Cube cube = child.gameObject.GetComponent<Cube>();
+                            if (child.name != hitBlock.name || (cube && cube.getState() == Cube.states.DO_NOT_DESTROY)) {
                                 neighborCount = 0;
                                 // count number of adjacent neighbors...
                                 foreach (Transform potentialNeighbor in hitBlock.parent) {
                                     // ...besides the destroyed block or any other blocks to be destroyed
-                                    if (potentialNeighbor.name != child.name && potentialNeighbor.gameObject.tag != "blockDestroyingTag") {
+									Cube neighborCube = potentialNeighbor.gameObject.GetComponent<Cube>();
+                                    if (potentialNeighbor.name != child.name || (neighborCube && neighborCube.getState() == Cube.states.DO_NOT_DESTROY)) {
                                         //get distance
                                         difference = (child.localPosition - potentialNeighbor.localPosition);
                                         if (difference.magnitude <= 2) {

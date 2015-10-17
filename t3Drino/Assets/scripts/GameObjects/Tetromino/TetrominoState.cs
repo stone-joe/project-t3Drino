@@ -52,6 +52,7 @@ public class TetrominoState : MonoBehaviour {
 	public bool isMoving(){
 		return moving;
 	}
+	private float mustMove = 0.0f;
 	/**
 	 * @member {method} Setup
 	 */
