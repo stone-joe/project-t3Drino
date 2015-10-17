@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3387200}
   - 23: {fileID: 2386974}
   - 65: {fileID: 6563094}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: simpleCubeU
   m_TagString: blockTag
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ GameObject:
   - 33: {fileID: 3361356}
   - 23: {fileID: 2301946}
   - 65: {fileID: 6563700}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: simpleCubeL
   m_TagString: blockTag
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - 33: {fileID: 3323606}
   - 23: {fileID: 2395206}
   - 65: {fileID: 6546464}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: simpleCubeM
   m_TagString: blockTag
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ GameObject:
   - 114: {fileID: 11463742}
   - 114: {fileID: 11458224}
   - 114: {fileID: 11470614}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: prefab_T_tet
   m_TagString: movableTag
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   - 33: {fileID: 3352044}
   - 23: {fileID: 2380012}
   - 65: {fileID: 6508386}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: simpleCubeR
   m_TagString: blockTag
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181350}
   serializedVersion: 2
-  m_Mass: 10
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 1
@@ -364,7 +364,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b603880086ecebf4796df0a9f92db0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wholeobject: {fileID: 0}
 --- !u!114 &11470614
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -445,6 +444,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Drag
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

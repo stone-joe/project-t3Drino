@@ -3,9 +3,11 @@ using UnityEngine;
 using System.Collections;
 
 public class ShootingRay : MonoBehaviour {
+
     private int neighborCount = 0;
     private bool moving = false;
     private RaycastHit[] hits;
+    private int layerMask = 1 << 9; // Only Raycast 'blocks' layer (9)
     private Transform hitBlock; 
     private Vector3 difference;
 
@@ -18,10 +20,9 @@ public class ShootingRay : MonoBehaviour {
 	void Update () {
         Debug.DrawRay(transform.position, transform.right * 100); // this only draws a line. just for visuals
 
-        hits = Physics.RaycastAll(transform.position, transform.right, 100);
+        hits = Physics.RaycastAll(transform.position, transform.right, 100, layerMask);
 
-        // hit.length also includes the 2 vertical walls 
-        if (hits.Length > 8) {
+        if (hits.Length >= 7) {
             // Only clear line if all objects are stationary
             moving = false;
             foreach (RaycastHit hit in hits) {
@@ -69,10 +70,9 @@ public class ShootingRay : MonoBehaviour {
                                         //child.GetComponent<Renderer> ().material.color = Color.grey;
                                         // create new parent object for unparented block so it can be hit with shooting ray again
                                         GameObject newParent = new GameObject("newParent");
+                                        newParent.layer = 9;
                                         newParent.AddComponent<SelfCleanUp>();
-                                        newParent.AddComponent<HandGrab>();
                                         newParent.tag = "notMovableTag";
-                                        child.gameObject.layer = 9;
                                         child.parent = newParent.transform;
                                         child.gameObject.AddComponent<Rigidbody>();
                                         child.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ
