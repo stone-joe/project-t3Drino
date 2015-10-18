@@ -17,6 +17,10 @@ public class HandScript : MonoBehaviour {
     public float grabStrength;
     public static float grabRadius = 2.0F;
     public static float maxDropVelocity = 20F;
+    public float handCenterPosOffsetX;
+    public float handCenterPosOffsetY;
+    public float handCenterPosOffsetZ;
+    public GameObject handObject;
 
     void Start () {
         // Disable collisions between hand and inactive blocks
@@ -26,6 +30,12 @@ public class HandScript : MonoBehaviour {
         Transform [] childTransforms = gameObject.GetComponentsInChildren<Transform>();
         foreach (Transform transform in childTransforms) {
             transform.gameObject.layer = 8;
+        }
+
+        handObject = GameObject.Find("HandControllerCycler");
+        if (handObject)
+        {
+
         }
     }
 
@@ -37,7 +47,16 @@ public class HandScript : MonoBehaviour {
     void Update() {
         hand = GetComponent<HandModel>().GetLeapHand();
         grabStrength = hand.GrabStrength;
-        handCenterPos = (new Vector(hand.PalmPosition.x, hand.PalmPosition.y-100, hand.PalmPosition.z+80)+hand.PalmNormal*50).ToUnityScaled()*40;
+        /*handCenterPos = (new Vector(-(handObject.transform.Find("palm").transform.position.x + handCenterPosOffsetX),
+                                    -(handObject.transform.Find("palm").transform.position.z + handCenterPosOffsetZ),
+                                    -(handObject.transform.Find("palm").transform.position.y + handCenterPosOffsetY)
+                                    ) + hand.PalmNormal * 50
+                                    ).ToUnityScaled() * 40;*/
+        handCenterPos = (new Vector(-(hand.PalmPosition.x + handCenterPosOffsetX),
+                                    -(hand.PalmPosition.z + handCenterPosOffsetZ),
+                                    -(hand.PalmPosition.y + handCenterPosOffsetY)
+                                    ) + hand.PalmNormal * 50
+                                    ).ToUnityScaled() * 40;
         palmRotationZ = hand.PalmNormal.Roll * Mathf.Rad2Deg;
 
         if (grabStrength > 0.3F) {

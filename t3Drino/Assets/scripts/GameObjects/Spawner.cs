@@ -22,11 +22,6 @@ public class Spawner : MonoBehaviour {
 	public int numberOfTetrinosToSpawn=20;
 
 
-	public Mesh me1;
-	public Mesh me2;
-	public Mesh me3;
-	public Mesh me4;
-	public Mesh me5;
 
 	private GameObject  MeshSelectorObject;
 	private TetrinoMeshSelector tms;
