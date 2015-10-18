@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
 	public static GameManager instance = null;
 	public TetrinoSelector _tetrinoSelector;
 	public TetrinoPreviewer _tetrinoPreviewer;
+    public TetrinoMeshSelector _tetrinoMeshSelector;
 
 	private int _level = 1;
 	//public BoardManager boardScript; // For referecing later
@@ -30,6 +31,10 @@ public class GameManager : MonoBehaviour {
 		_tetrinoSelector =  obj.AddComponent<TetrinoSelector>();
 		obj = new GameObject("TetrinoPreviewer");
 		_tetrinoPreviewer =  obj.AddComponent<TetrinoPreviewer>();
+
+        obj = new GameObject("TetrinoMeshSelect");
+        _tetrinoMeshSelector = obj.AddComponent<TetrinoMeshSelector>();
+
 	}
 
 	// Use this for initialization
