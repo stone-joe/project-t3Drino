@@ -1,44 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum GameState { INTRO, MAINMENU, CLASSIC }
+public delegate void OnStateChangeHandler();
+
 public class GameManager : MonoBehaviour {
 
-	public static GameManager instance = null;
-	public TetrinoSelector _tetrinoSelector;
-	public TetrinoPreviewer _tetrinoPreviewer;
+	private static GameManager _instance = null;
+	public event OnStateChangeHandler OnStateChange;
+	public GameState gameState { get; private set; }
 
-	private int _level = 1;
-	//public BoardManager boardScript; // For referecing later
-
-	void Awake()
+	// Singleton pattern
+	public static GameManager Instance
 	{
-		if (instance == null)
-			instance = this;
-		else
-			Destroy (gameObject);
+		get {
 
-		DontDestroyOnLoad(gameObject); // Allows persist between scenes
+			if (GameManager._instance == null)
+			{
+				GameObject manager= new GameObject("GameManager");
+				GameManager._instance = manager.AddComponent<GameManager>();
+				DontDestroyOnLoad(GameManager._instance);
+			}
 
-		//boardScript = GetComponent<BoardManager>();
-		InitGame();
+			return GameManager._instance;
+		}
 	}
 
-	public void InitGame()
+	public void SetGameState(GameState gameState)
 	{
-		//boardScript.SetupScene(_level);
-		GameObject obj = new GameObject("TetrinoSelector");
-		_tetrinoSelector =  obj.AddComponent<TetrinoSelector>();
-		obj = new GameObject("TetrinoPreviewer");
-		_tetrinoPreviewer =  obj.AddComponent<TetrinoPreviewer>();
+		this.gameState = gameState;
+		OnStateChange();
 	}
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	public void OnApplicationQuit()
+	{
+		GameManager._instance = null;
 	}
 }

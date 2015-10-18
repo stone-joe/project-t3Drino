@@ -853,7 +853,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!1001 &823545656
 Prefab:
   m_ObjectHideFlags: 0
@@ -912,47 +912,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 46aca6dcfb0b46e4f9ac461aa0eed65f, type: 3}
   m_IsPrefabParent: 0
---- !u!1 &859642504
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 859642506}
-  - 114: {fileID: 859642505}
-  m_Layer: 0
-  m_Name: Spawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &859642505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 859642504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56f806f2c10bc874a8906990c1e2c47d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  period: 3
-  numberOfTetrinosToSpawn: 20
---- !u!4 &859642506
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 859642504}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 21, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
 --- !u!1 &863889144
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,7 +998,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!114 &863889150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1048,10 +1007,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 863889144}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fe3382893c734345bfeed342c2fce6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e9e35355e038e94a82d8fda3ec5cc66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 122638, guid: c9cd31dead1941047b1e5b240dcd10e9, type: 2}
+  gameManager: {fileID: 0}
+  _tetrinoSelector: {fileID: 0}
+  _tetrinoPreviewer: {fileID: 0}
+  _tetrinoSpawner: {fileID: 0}
 --- !u!1001 &871226614
 Prefab:
   m_ObjectHideFlags: 0
@@ -1534,7 +1496,7 @@ Transform:
   - {fileID: 317858988}
   - {fileID: 2035381495}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!1001 &1459629239
 Prefab:
   m_ObjectHideFlags: 0
@@ -2043,7 +2005,7 @@ Transform:
   - {fileID: 568400326}
   - {fileID: 506626668}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!1 &1964351321
 GameObject:
   m_ObjectHideFlags: 0
@@ -2129,7 +2091,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!1001 &2020829979
 Prefab:
   m_ObjectHideFlags: 0
