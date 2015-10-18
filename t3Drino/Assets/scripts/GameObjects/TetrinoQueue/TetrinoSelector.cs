@@ -21,7 +21,8 @@ public class TetrinoSelector : MonoBehaviour {
 		// Pre-populate queue
 		for (int ii = 0; ii < _queueSize; ii++)
 		{
-			_queue.Add(GetNextTetrino());
+			GameObject tetrino = GetNextTetrino();
+			_queue.Add(tetrino);
 		}
 	}
 
