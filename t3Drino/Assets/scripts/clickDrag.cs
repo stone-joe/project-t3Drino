@@ -10,7 +10,12 @@ public class clickDrag : MonoBehaviour {
     private bool canRotate;
     private float rortateSpeed;
 
-    public GameObject wholeobject;
+	private GameObject _wallLeft;
+	private GameObject _wallRight;
+	private Vector3 _negativeXBorder;
+	private Vector3 _positiveXBorder;
+	private Vector3 _targetPosition;
+	private bool _collided;
 
 
     // Use this for initialization
@@ -18,6 +23,9 @@ public class clickDrag : MonoBehaviour {
     {
         canRotate = false;
         rortateSpeed = 300.0f;
+		_wallLeft = GameObject.Find("wallLeft");
+		_wallRight = GameObject.Find("wallRight");
+		_collided = false;
     }
     
     // Update is called once per frame
@@ -38,6 +46,9 @@ public class clickDrag : MonoBehaviour {
         canRotate = true;
         screenPoint = Camera.main.WorldToScreenPoint(transform.position);
         offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+
+		_negativeXBorder = new Vector3(_wallLeft.transform.position.x, _wallLeft.transform.position.y, screenPoint.z);
+		_positiveXBorder = new Vector3(_wallRight.transform.position.x, _wallRight.transform.position.y, screenPoint.z);
     }
 
     void OnMouseUp()
@@ -45,21 +56,37 @@ public class clickDrag : MonoBehaviour {
         canRotate = false;
     }
 
-    void OnMouseDrag()
+	void OnMouseDrag()
     {
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-         curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
-        if(transform.tag == "movableTag") {
-            transform.position = curPosition; //I make the parent move to the mouse's position.
+
+		if (!_collided)
+        	curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+
+		if(transform.tag == "movableTag" && curPosition.x > _negativeXBorder.x && curPosition.x < _positiveXBorder.x) {
+			transform.position = Vector3.Lerp(transform.position, curPosition, Time.deltaTime * 30f);
         }
+		_collided = false;
     }
     
     void OnCollisionEnter(Collision collision)
     {
-        foreach (Transform child in transform) {
-            child.GetComponent<Renderer> ().material.color = Color.black;
-        }
-        transform.tag = "notMovableTag";
+		if (collision.transform.gameObject.name == "floor" || collision.transform.gameObject.tag == "notMovableTag")
+		{
+			// Change tetromino to inactive state when hitting floor or other tetrominos
+			foreach (Transform child in transform) {
+				child.GetComponent<Renderer>().material.color = Color.black;
+			}
+			
+			transform.tag = "notMovableTag";
+		}
+		
+		if ((collision.transform.gameObject.name == "wallLeft" || collision.transform.gameObject.name == "wallRight") && collision.transform.gameObject.tag == "movableTag")
+		{
+			ContactPoint contactPoint = collision.contacts[0];
+			curPosition = contactPoint.point;
+			_collided = true;
+		}
     }
 
 }
