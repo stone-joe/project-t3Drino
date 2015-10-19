@@ -18,7 +18,6 @@ public class MainMenu : MonoBehaviour {
 
 	public void OnGUI()
 	{
-		// Menu Layout
 		GUI.BeginGroup(new Rect(Screen.width / 2 - Screen.width * 0.25f, Screen.height / 2 - 200, Screen.width * 0.50f, Screen.height * 0.75f));
 		GUI.Box (new Rect(0, 0, Screen.width * 0.75f, Screen.height * 0.70f), "Main Menu");
 

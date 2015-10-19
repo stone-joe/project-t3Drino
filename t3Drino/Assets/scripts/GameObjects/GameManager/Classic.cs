@@ -5,9 +5,11 @@ public class Classic : MonoBehaviour {
 
 	public GameManager gameManager;
 
-	public TetrinoSelector _tetrinoSelector;
-	public TetrinoPreviewer _tetrinoPreviewer;
-	public Spawner _tetrinoSpawner;
+	public GameObject _tetrinoSelector;
+	public GameObject _tetrinoPreviewer;
+	public GameObject _tetrinoSpawner;
+
+	public ClassicLoseGUIComponents _loseGUIComponents;
 
 	// Use this for initialization
 	void Awake () {
@@ -19,29 +21,41 @@ public class Classic : MonoBehaviour {
 	void Start()
 	{
 		InitGame();
+		InitLoseScreen(); // Should only be called when we enter lose state
 	}
 	
 	void HandleOnStateChange ()
 	{
-		gameManager.SetGameState(GameState.MAINMENU);
 		Debug.Log("Handling state change to: " + gameManager.gameState);
-		Invoke("LoadLevel", 3f);
 	}
 	
-	public void LoadLevel()
+	public void LoadMainMenu()
 	{
 		Application.LoadLevel("MainMenu");
 	}
 
+	public void StartMainMenu()
+	{
+		gameManager.SetGameState(GameState.MAINMENU);
+		Debug.Log(gameManager.gameState);
+		Invoke("LoadMainMenu", 1f);
+	}
+
 	public void InitGame()
 	{
-		GameObject obj = new GameObject("TetrinoSelector");
-		_tetrinoSelector = obj.AddComponent<TetrinoSelector>();
-		
-		obj = new GameObject("TetrinoPreviewer");
-		_tetrinoPreviewer = obj.AddComponent<TetrinoPreviewer>();
+		_tetrinoSelector = new GameObject("TetrinoSelector");
+		_tetrinoSelector.AddComponent<TetrinoSelector>();
 
-		obj = new GameObject("Spawner");
-		_tetrinoSpawner = obj.AddComponent<Spawner>();
+		_tetrinoPreviewer = new GameObject("TetrinoPreviewer");
+		_tetrinoPreviewer.AddComponent<TetrinoPreviewer>();
+
+		_tetrinoSpawner = new GameObject("TetrinoSpawner");
+		_tetrinoSpawner.AddComponent<Spawner>();
+	}
+
+	public void InitLoseScreen()
+	{
+		GameObject obj = new GameObject("ClassicLoseGUIComponents");
+		_loseGUIComponents = obj.AddComponent<ClassicLoseGUIComponents>();
 	}
 }

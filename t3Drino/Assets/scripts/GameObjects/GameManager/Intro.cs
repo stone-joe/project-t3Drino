@@ -5,7 +5,7 @@ public class Intro : MonoBehaviour {
 	
 	public GameManager gameManager;
 
-	public IntroGUIComponents _guiComponents;
+	private IntroGUIComponents _guiComponents;
 
 	void Awake () {
 		

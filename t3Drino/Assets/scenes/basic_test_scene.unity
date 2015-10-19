@@ -1014,6 +1014,7 @@ MonoBehaviour:
   _tetrinoSelector: {fileID: 0}
   _tetrinoPreviewer: {fileID: 0}
   _tetrinoSpawner: {fileID: 0}
+  _loseGUIComponents: {fileID: 0}
 --- !u!1001 &871226614
 Prefab:
   m_ObjectHideFlags: 0
