@@ -8,8 +8,25 @@ public class Classic : MonoBehaviour {
 	public GameObject _tetrinoSelector;
 	public GameObject _tetrinoPreviewer;
 	public GameObject _tetrinoSpawner;
+	public GameObject _tetrinoSpawnTimer;
+	//public GameObject _elapsedTimer;
 
-	public ClassicLoseGUIComponents _loseGUIComponents;
+	public ClassicLoseGUI _loseGUIComponents;
+	private bool _inLoseState;
+
+	#region Public Properties
+	public bool InLoseState
+	{
+		get
+		{
+			return _inLoseState;
+		}
+		set
+		{
+			_inLoseState = value;
+		}
+	}
+	#endregion
 
 	// Use this for initialization
 	void Awake () {
@@ -21,7 +38,6 @@ public class Classic : MonoBehaviour {
 	void Start()
 	{
 		InitGame();
-		InitLoseScreen(); // Should only be called when we enter lose state
 	}
 	
 	void HandleOnStateChange ()
@@ -37,25 +53,37 @@ public class Classic : MonoBehaviour {
 	public void StartMainMenu()
 	{
 		gameManager.SetGameState(GameState.MAINMENU);
-		Debug.Log(gameManager.gameState);
 		Invoke("LoadMainMenu", 1f);
 	}
 
 	public void InitGame()
 	{
+		_inLoseState = false;
+
 		_tetrinoSelector = new GameObject("TetrinoSelector");
 		_tetrinoSelector.AddComponent<TetrinoSelector>();
 
 		_tetrinoPreviewer = new GameObject("TetrinoPreviewer");
 		_tetrinoPreviewer.AddComponent<TetrinoPreviewer>();
 
+		_tetrinoSpawnTimer = new GameObject("TetrinoSpawnTimer");
+		_tetrinoSpawnTimer.AddComponent<TetrinoSpawnTimer>();
+
 		_tetrinoSpawner = new GameObject("TetrinoSpawner");
 		_tetrinoSpawner.AddComponent<Spawner>();
+
+		//_elapsedTimer = new GameObject("ElapsedTimer");
+		//_elapsedTimer.AddComponent<ElapsedTimer>();
 	}
 
 	public void InitLoseScreen()
 	{
-		GameObject obj = new GameObject("ClassicLoseGUIComponents");
-		_loseGUIComponents = obj.AddComponent<ClassicLoseGUIComponents>();
+		// Only enter lose state once
+		if (!_inLoseState)
+		{
+			GameObject obj = new GameObject("ClassicLoseGUI");
+			_loseGUIComponents = obj.AddComponent<ClassicLoseGUI>();
+			_inLoseState = true;
+		}
 	}
 }

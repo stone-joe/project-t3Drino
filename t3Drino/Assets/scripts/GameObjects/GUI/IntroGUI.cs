@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IntroGUIComponents : MonoBehaviour {
+public class IntroGUI : MonoBehaviour {
 
 	public GameObject SplashScreen;
 

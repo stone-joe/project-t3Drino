@@ -12,6 +12,7 @@ public class clickDrag : MonoBehaviour {
 
     public GameObject wholeobject;
 
+	public Classic _classicModeState;
 
     // Use this for initialization
     void Start ()
@@ -56,6 +57,14 @@ public class clickDrag : MonoBehaviour {
     
     void OnCollisionEnter(Collision collision)
     {
+		// TODO: Merge this & apply state changes... this code initalizes the lose screen
+		if (transform.tag == "notMovableTag" && collision.gameObject.name == "roof")
+		{
+			GameObject go = GameObject.Find("Main Camera");
+			_classicModeState = (Classic)go.GetComponent(typeof(Classic));
+			_classicModeState.InitLoseScreen();
+		}
+
         foreach (Transform child in transform) {
             child.GetComponent<Renderer> ().material.color = Color.black;
         }

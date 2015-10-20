@@ -1014,6 +1014,7 @@ MonoBehaviour:
   _tetrinoSelector: {fileID: 0}
   _tetrinoPreviewer: {fileID: 0}
   _tetrinoSpawner: {fileID: 0}
+  _tetrinoSpawnTimer: {fileID: 0}
   _loseGUIComponents: {fileID: 0}
 --- !u!1001 &871226614
 Prefab:
@@ -2019,7 +2020,7 @@ GameObject:
   - 102: {fileID: 1964351323}
   - 114: {fileID: 1964351322}
   m_Layer: 0
-  m_Name: ElapsedTime
+  m_Name: ElapsedTimer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
