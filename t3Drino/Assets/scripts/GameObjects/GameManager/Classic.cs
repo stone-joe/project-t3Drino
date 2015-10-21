@@ -9,6 +9,7 @@ public class Classic : MonoBehaviour {
 	public GameObject _tetrinoPreviewer;
 	public GameObject _tetrinoSpawner;
 	public GameObject _tetrinoSpawnTimer;
+	public GameObject _tetrinoSpawnRateModifier;
 	//public GameObject _elapsedTimer;
 
 	public ClassicLoseGUI _loseGUIComponents;
@@ -69,8 +70,14 @@ public class Classic : MonoBehaviour {
 		_tetrinoSpawnTimer = new GameObject("TetrinoSpawnTimer");
 		_tetrinoSpawnTimer.AddComponent<TetrinoSpawnTimer>();
 
+		_tetrinoSpawnRateModifier = new GameObject("TetrinoSpawnRateModifier");
+		_tetrinoSpawnRateModifier.AddComponent<TetrinoSpawnRateModifier>();
+
 		_tetrinoSpawner = new GameObject("TetrinoSpawner");
-		_tetrinoSpawner.AddComponent<Spawner>();
+		_tetrinoSpawner.AddComponent<TetrinoSpawner>();
+	
+
+
 
 		//_elapsedTimer = new GameObject("ElapsedTimer");
 		//_elapsedTimer.AddComponent<ElapsedTimer>();

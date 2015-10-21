@@ -1015,6 +1015,7 @@ MonoBehaviour:
   _tetrinoPreviewer: {fileID: 0}
   _tetrinoSpawner: {fileID: 0}
   _tetrinoSpawnTimer: {fileID: 0}
+  _tetrinoSpawnRateModifier: {fileID: 0}
   _loseGUIComponents: {fileID: 0}
 --- !u!1001 &871226614
 Prefab:
