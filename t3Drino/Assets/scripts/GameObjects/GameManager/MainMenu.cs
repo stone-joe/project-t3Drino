@@ -3,7 +3,29 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour {
 
-	public GameManager gameManager;
+    // box dimensions
+    public float boxWidthPercentage;
+    public float boxHeightPercentage;
+
+    private float boxWidth;
+    private float boxHeight;
+
+    // button dimensions
+    public float buttonWidthPercentage;
+
+    private float buttonCount;
+    private float buttonWidth;
+    private float buttonHeight;
+
+    // button positioning
+    public float buttonTopPaddingPercentage;
+    public float buttonBetweenPercentage;
+
+    private float buttonSidePadding;
+    private float buttonTopPadding;
+    private float buttonBetweenPadding;
+
+    public GameManager gameManager;
 
 	void Awake () {
 
@@ -11,21 +33,44 @@ public class MainMenu : MonoBehaviour {
 		gameManager.OnStateChange += HandleOnStateChange;
 	}
 	
+    void Start () {
+        boxWidthPercentage = 0.75f;
+        boxHeightPercentage = 0.70f;
+        buttonWidthPercentage = 0.90f;
+        buttonTopPaddingPercentage = 0.07f;
+        buttonBetweenPercentage = 0.05f;
+        buttonCount = 2;
+    }
+
 	void HandleOnStateChange ()
 	{
 		Debug.Log("OnStateChange! This is the MainMenu scene script.");
 	}
 
-	public void OnGUI()
+    public void OnGUI()
 	{
-		GUI.BeginGroup(new Rect(Screen.width / 2 - Screen.width * 0.25f, Screen.height / 2 - 200, Screen.width * 0.50f, Screen.height * 0.75f));
+        // setting box dimensions
+        boxWidth = Screen.width * boxWidthPercentage;
+        boxHeight = Screen.height * boxHeightPercentage;
 
-		GUI.Box (new Rect(0, 0, Screen.width * 0.75f, Screen.height * 0.70f), "Main Menu");
+        // setting button positions
+        buttonSidePadding = boxWidth * ((1 - buttonWidthPercentage) / 2); //also used as bottom padding
+        buttonTopPadding = boxHeight * buttonTopPaddingPercentage;
 
-		if (GUI.Button(new Rect(10, 40, 150, 150), "Classic Mode"))
+        // setting button dimensions
+        buttonWidth = boxWidth * buttonWidthPercentage;
+        buttonHeight = (boxHeight - (buttonTopPadding + buttonBetweenPadding * (buttonCount - 1) + buttonSidePadding)) / buttonCount;
+       
+        buttonBetweenPadding = buttonHeight * buttonBetweenPercentage;
+
+        GUI.BeginGroup(new Rect(Screen.width * ((1 - boxWidthPercentage) / 2), Screen.height * ((1 - boxHeightPercentage)/2), boxWidth, boxHeight));
+
+		GUI.Box (new Rect(0, 0, boxWidth, boxHeight), "Main Menu");
+        
+		if (GUI.Button(new Rect(buttonSidePadding, buttonTopPadding, buttonWidth, buttonHeight), "Classic Mode"))
 			StartClassicMode();
 
-		if (GUI.Button(new Rect(10, 160, 150, 150), "Quit"))
+        if (GUI.Button(new Rect(buttonSidePadding, buttonTopPadding + buttonHeight + buttonBetweenPadding, buttonWidth, buttonHeight), "Quit"))
 			Quit();
 
 		GUI.EndGroup();
