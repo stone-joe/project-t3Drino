@@ -10,6 +10,11 @@ public class Classic : MonoBehaviour {
 	public GameObject _tetrinoSpawner;
 	public GameObject _tetrinoSpawnTimer;
 	public GameObject _tetrinoSpawnRateModifier;
+
+	public GameObject _score;
+	public GameObject _player;
+	public GameObject _scoreManager;
+	public GameObject _scoreGUI;
 	//public GameObject _elapsedTimer;
 
 	public ClassicLoseGUI _loseGUIComponents;
@@ -61,6 +66,7 @@ public class Classic : MonoBehaviour {
 	{
 		_inLoseState = false;
 
+		// Tetromino controls
 		_tetrinoSelector = new GameObject("TetrinoSelector");
 		_tetrinoSelector.AddComponent<TetrinoSelector>();
 
@@ -77,6 +83,21 @@ public class Classic : MonoBehaviour {
 		_tetrinoSpawner.AddComponent<TetrinoSpawner>();
 	
 
+		// Player score and score manager
+		_score = new GameObject("Score");
+		_score.AddComponent<Score>();
+
+		_player = new GameObject("Player");
+		_player.AddComponent<Player>();
+
+		_scoreGUI = new GameObject("ScoreGUI");
+		_scoreGUI.AddComponent<ScoreGUI>();
+
+		_scoreManager = new GameObject("ScoreManager");
+		_scoreManager.AddComponent<ScoreManager>();
+
+		// Ray casters
+		Instantiate(Resources.Load("RayCasters/RayCasters"));
 
 
 		//_elapsedTimer = new GameObject("ElapsedTimer");

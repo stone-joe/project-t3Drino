@@ -8,33 +8,48 @@ public class ShootingRay : MonoBehaviour {
     private RaycastHit[] hits;
     private Transform hitBlock; 
     private Vector3 difference;
+	private ScoreManager _scoreManager;
 
 	// Use this for initialization
 	void Start () {
-	
+
+		Debug.DrawRay(transform.position, transform.right * 100); // this only draws a line. just for visuals
+
+		// Get score manager reference
+		GameObject go = GameObject.Find("ScoreManager");
+		_scoreManager = (ScoreManager) go.GetComponent(typeof(ScoreManager));
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.DrawRay(transform.position, transform.right * 100); // this only draws a line. just for visuals
 
         hits = Physics.RaycastAll(transform.position, transform.right, 100);
 
         // hit.length also includes the 2 vertical walls 
         if (hits.Length > 8) {
+
             // Only clear line if all objects are stationary
             moving = false;
-            foreach (RaycastHit hit in hits) {
+			bool _isRowCleared = true;
+            foreach (RaycastHit hit in hits)
+			{
                 if (hit.transform.gameObject.tag == "notMovableTag" && hit.transform.gameObject.GetComponent<Rigidbody>().velocity.magnitude > 0.05F) {
                     moving = true;
+
+					// TODO: Add to score since a row was cleared: UPDATE THIS.. THIS IS AN INITIAL TEST
+					_scoreManager.AddToScore(100f);
                 }
             }
-            if (!moving) {
-                foreach (RaycastHit hit in hits) {
+
+            if (!moving) 
+			{
+                foreach (RaycastHit hit in hits)
+				{
                     // Get hit block
                     hitBlock = hit.collider.transform;
 
                     if (hitBlock.parent != null && hitBlock.parent.gameObject.tag == "notMovableTag") { // only handle blocks, not the side walls
+
                         hitBlock.GetComponent<Renderer> ().material.color = Color.red;
                         
                         // Make deleting blocks freeze to prevent chain reaction line completions
@@ -56,14 +71,18 @@ public class ShootingRay : MonoBehaviour {
                         hitBlock.gameObject.tag = "blockDestroyingTag";
 
                         // iterate through all children blocks in tet/new parent...
-                        foreach (Transform child in hitBlock.parent) {
+                        foreach (Transform child in hitBlock.parent) 
+						{
                             // ...except for the destroyed block or any destroying block
-                            if (child.name != hitBlock.name && child.gameObject.tag != "blockDestroyingTag") {
+                            if (child.name != hitBlock.name && child.gameObject.tag != "blockDestroyingTag") 
+							{
                                 neighborCount = 0;
                                 // count number of adjacent neighbors...
-                                foreach (Transform potentialNeighbor in hitBlock.parent) {
+                                foreach (Transform potentialNeighbor in hitBlock.parent) 
+								{
                                     // ...besides the destroyed block or any other blocks to be destroyed
-                                    if (potentialNeighbor.name != child.name && potentialNeighbor.gameObject.tag != "blockDestroyingTag") {
+                                    if (potentialNeighbor.name != child.name && potentialNeighbor.gameObject.tag != "blockDestroyingTag") 
+									{
                                         //get distance
                                         difference = (child.localPosition - potentialNeighbor.localPosition);
                                         if (difference.magnitude <= 2) {
