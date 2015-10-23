@@ -49,10 +49,9 @@ GameObject:
   - 54: {fileID: 5467128}
   - 114: {fileID: 11452438}
   - 114: {fileID: 11449752}
-  - 114: {fileID: 11499254}
   m_Layer: 0
   m_Name: prefab_J_tet
-  m_TagString: movableTag
+  m_TagString: Tetromino_J
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -296,7 +295,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 56
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!65 &6529998
 BoxCollider:
@@ -413,17 +412,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc1493f62e584085a518ba8349de1ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11499254
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 152028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abf0a6185332142f8bda1fb8755c50a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -433,11 +421,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: blockFlag
+      value: Tetromino_J
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Constraints
-      value: 56
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.z

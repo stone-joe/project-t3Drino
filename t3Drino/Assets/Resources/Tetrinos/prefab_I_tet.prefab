@@ -87,10 +87,10 @@ GameObject:
   - 54: {fileID: 5453774}
   - 114: {fileID: 11427606}
   - 114: {fileID: 11410092}
-  - 114: {fileID: 11407626}
+  - 114: {fileID: 11468690}
   m_Layer: 0
   m_Name: prefab_I_tet
-  m_TagString: movableTag
+  m_TagString: Tetromino_I
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -296,7 +296,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 56
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!65 &6532266
 BoxCollider:
@@ -368,17 +368,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc1493f62e584085a518ba8349de1ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11407626
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 195632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abf0a6185332142f8bda1fb8755c50a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11410092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -424,6 +413,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc1493f62e584085a518ba8349de1ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11468690
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c58fa0301b2724e75b04efc3ef7c7f37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -433,7 +434,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: blockTag
+      value: Tetromino_I
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_UseGravity
@@ -493,7 +494,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Constraints
-      value: 56
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Name

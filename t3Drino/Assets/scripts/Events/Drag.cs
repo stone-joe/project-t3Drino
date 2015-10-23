@@ -10,38 +10,39 @@ public class Drag : MonoBehaviour {
     private bool canRotate;
     private float rotateSpeed;
 
+	private Tetromino tetromino;
     public GameObject wholeobject;
-	private TetrominoState tetrominoState;
-	private float directionToUnlock = 0.0f;
 
 
     // Use this for initialization
     void Start ()
     {
         rotateSpeed = 300.0f;
+		tetromino = transform.gameObject.GetComponent<Tetromino>();
     }
     
     // Update is called once per frame
     void FixedUpdate ()
     {
-		if (tetrominoState == null) {
-			tetrominoState = transform.gameObject.GetComponent<TetrominoState>();
-		}
-        
 		float rotateDirection = 0.0f;
-        if (tetrominoState.getState() == TetrominoState.states.GRABBED) {
-            if (Input.GetKey(KeyCode.LeftArrow)) rotateDirection = -1.0f;
-            else
-                if (Input.GetKey(KeyCode.RightArrow)) rotateDirection = 1.0f;
 
-            transform.RotateAround(curPosition, Vector3.back, rotateSpeed * Time.deltaTime * rotateDirection);
-        }
+		if (tetromino) {
+			if (tetromino.getState () == Tetromino.states.GRABBED) {
+				if (Input.GetKey (KeyCode.LeftArrow))
+					rotateDirection = -1.0f;
+				else
+	                if (Input.GetKey (KeyCode.RightArrow))
+					rotateDirection = 1.0f;
+
+				transform.RotateAround (curPosition, Vector3.back, rotateSpeed * Time.deltaTime * rotateDirection);
+			}
+		}
     }
 
     void OnMouseDown()
     {
-		if (tetrominoState.getState () != TetrominoState.states.INACTIVE) {
-			tetrominoState.setState (TetrominoState.states.GRABBED);
+		if (tetromino.getState () != Tetromino.states.INACTIVE) {
+			tetromino.setState (Tetromino.states.GRABBED);
 			screenPoint = Camera.main.WorldToScreenPoint (transform.position);
 			offset = transform.position - Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
 		}
@@ -49,26 +50,42 @@ public class Drag : MonoBehaviour {
 
     void OnMouseUp()
     {
-		if (tetrominoState.getState () != TetrominoState.states.INACTIVE) {
-			tetrominoState.setState (TetrominoState.states.ACTIVE);
+		if (tetromino.getState () != Tetromino.states.INACTIVE) {
+			tetromino.setState (Tetromino.states.ACTIVE);
 		}
+		Debug.Log (tetromino.GetType());
     }
 
     void OnMouseDrag()
     {
-        Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-        curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
-        if(transform.gameObject.GetComponent<TetrominoState>().getState() == TetrominoState.states.GRABBED) {
-            transform.position = curPosition; //I make the parent move to the mouse's position.
+		if(tetromino.getState() == Tetromino.states.GRABBED) {
+			Vector3 curScreenPoint = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+	        curPosition = curScreenPoint + offset;
+			float[] bounds = tetromino.calculateBounds();
+
+			if ( curScreenPoint.x > bounds[0] && curScreenPoint.x < bounds[1] ){
+				// If none of the corners will be outside of the wall then it
+				transform.position = curPosition; //I make the parent move to the mouse's position.            
+			}
+			else {
+				transform.position = new Vector3(transform.position.x, curPosition.y , transform.position.z);
+			}
+
+			Debug.Log (curScreenPoint.x);
+			Debug.Log (bounds[0]);
+			Debug.Log (bounds[1]);
         }
     }
     
     void OnCollisionEnter(Collision collision)
     {	
-		TetrominoState tetrominoState = transform.gameObject.GetComponent<TetrominoState> ();
-		foreach (Transform child in transform) {
-			child.GetComponent<Renderer> ().material.color = Color.black;
+		if (tetromino) {
+			if ( collision.transform.gameObject.GetComponent<Tetromino>() != null ){
+				foreach (Transform child in transform) {
+					child.GetComponent<Renderer> ().material.color = Color.black;
+				}
+				tetromino.setState (Tetromino.states.INACTIVE);	
+			}
 		}
-		tetrominoState.setState (TetrominoState.states.INACTIVE);	
     }
 }

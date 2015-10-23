@@ -4,12 +4,16 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - blockTag
-  - movableTag
-  - notMovableTag
+  - Tetromino_I
+  - Tetromino_J
   - floorTag
   - borderTag
-  - blockDestroyingTag
+  - Tetromino_O
+  - Tetromino_L
+  - Tetromino_S
+  - Tetromino_Z
+  - Tetromino_T
+  - blockTag
   layers:
   - Default
   - TransparentFX

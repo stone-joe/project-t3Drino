@@ -55,8 +55,8 @@ public class ShootingRay : MonoBehaviour {
             // Only clear line if all objects are stationary
             moving = false;
             foreach (RaycastHit hit in hits) {
-				TetrominoState tetrominoState = hit.transform.GetComponent<TetrominoState>();
-                if (tetrominoState != null && (tetrominoState.getState () == TetrominoState.states.INACTIVE && tetrominoState.isMoving())) {
+				Tetromino tetrominoState = hit.transform.GetComponent<Tetromino>();
+                if (tetrominoState != null && (tetrominoState.getState () == Tetromino.states.INACTIVE && tetrominoState.isMoving())) {
                     moving = true;
                 }
             }
@@ -65,7 +65,7 @@ public class ShootingRay : MonoBehaviour {
                     // Get hit block
                     hitBlock = hit.collider.transform;
 
-                    if ( hitBlock.parent != null && hitBlock.parent.GetComponent<TetrominoState>() != null ) { // only handle blocks, not the side walls
+                    if ( hitBlock.parent != null && hitBlock.parent.GetComponent<Tetromino>() != null ) { // only handle blocks, not the side walls
                         hitBlock.GetComponent<Renderer> ().material.color = Color.red;
                         
                         // Make deleting blocks freeze to prevent chain reaction line completions
@@ -108,7 +108,7 @@ public class ShootingRay : MonoBehaviour {
                                     // create new parent object for unparented block so it can be hit with shooting ray again
                                     GameObject newParent = new GameObject("newParent");
                                     newParent.AddComponent<SelfCleanUp>();
-									newParent.AddComponent<TetrominoState>();
+									newParent.AddComponent<Tetromino>();
                                     child.parent = newParent.transform; 
                                 }
                             }
