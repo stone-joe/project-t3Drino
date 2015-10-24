@@ -9,6 +9,7 @@ public class ShootingRay : MonoBehaviour {
     private Transform hitBlock; 
     private Vector3 difference;
 	private ScoreManager _scoreManager;
+	private bool _isRowCleared;
 
 	// Use this for initialization
 	void Start () {
@@ -18,26 +19,31 @@ public class ShootingRay : MonoBehaviour {
 		// Get score manager reference
 		GameObject go = GameObject.Find("ScoreManager");
 		_scoreManager = (ScoreManager) go.GetComponent(typeof(ScoreManager));
+
+		_isRowCleared = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
         hits = Physics.RaycastAll(transform.position, transform.right, 100);
+		if (hits.Length > 8)
+			_isRowCleared = true;
 
         // hit.length also includes the 2 vertical walls 
-        if (hits.Length > 8) {
+		if (hits.Length > 8 && _isRowCleared) 
+		{
+			_isRowCleared = false;
+			// TODO: Add to score since a row was cleared: UPDATE THIS.. THIS IS AN INITIAL TEST
+			_scoreManager.AddToScore(100f);
 
             // Only clear line if all objects are stationary
             moving = false;
-			bool _isRowCleared = true;
+
             foreach (RaycastHit hit in hits)
 			{
                 if (hit.transform.gameObject.tag == "notMovableTag" && hit.transform.gameObject.GetComponent<Rigidbody>().velocity.magnitude > 0.05F) {
                     moving = true;
-
-					// TODO: Add to score since a row was cleared: UPDATE THIS.. THIS IS AN INITIAL TEST
-					_scoreManager.AddToScore(100f);
                 }
             }
 

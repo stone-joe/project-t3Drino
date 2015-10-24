@@ -23,10 +23,10 @@ public class ClassicLoseGUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		LoadTextures();
-		InitializeSplashScreenGO();
-		SetSplashScreenLocation(0, 0, 0);
-		ApplySplashScreenTexture();
+		//LoadTextures();
+		//InitializeSplashScreenGO();
+		//SetSplashScreenLocation(0, 0, 0);
+		//ApplySplashScreenTexture();
 		StopTetrinoSpawnTimer();
 		StopElaspedTimer();
 

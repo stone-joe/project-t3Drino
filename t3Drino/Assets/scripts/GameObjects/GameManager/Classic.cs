@@ -112,6 +112,7 @@ public class Classic : MonoBehaviour {
 			GameObject obj = new GameObject("ClassicLoseGUI");
 			_loseGUIComponents = obj.AddComponent<ClassicLoseGUI>();
 			_inLoseState = true;
+			_scoreManager.GetComponent<ScoreManager>().ScoreIsFrozen = true; // Freeze score
 		}
 	}
 }

@@ -48,7 +48,6 @@ public class IntroGUI : MonoBehaviour {
 
 		float scale = 150;
 
-
 		SplashScreen.GetComponent<Renderer>().material.mainTexture = _splashScreenTexture;
 		SplashScreen.GetComponent<Transform>().localScale = new Vector3(_splashScreenTexture.width/scale, 
 		                                                                _splashScreenTexture.height/scale, 

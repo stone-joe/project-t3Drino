@@ -13,6 +13,7 @@ public class TetrinoSpawner : MonoBehaviour {
 	private TetrinoSelector _tetrinoSelector;
 	private TetrinoSpawnTimer _tetrinoSpawnTimer;
 	private TetrinoSpawnRateModifier _tetrinoSpawnRateModifier;
+	private Classic _classicModeState;
 
     // Use this for initialization
     void Start () {
@@ -41,6 +42,10 @@ public class TetrinoSpawner : MonoBehaviour {
 		_tetrinoSpawnRateModifier = (TetrinoSpawnRateModifier) go3.GetComponent(typeof(TetrinoSpawnRateModifier));
 		_tetrinoSpawnRateModifier.SetDecreaseAmount(_decreaseAmount);				// Decrease by _decreaseAmount seconds at a set interval
 		_tetrinoSpawnRateModifier.SetIntervalPerDecrease(_intervalPerDecrease);		// Every _intervalPerDecrease seconds, decrease the interval by _decreaseAmount seconds
+
+		// Get Classic mode state to check if game is over
+		GameObject go4 = GameObject.Find("Main Camera");
+		_classicModeState = (Classic)go4.GetComponent(typeof(Classic));
     }
 
     void FixedUpdate()
@@ -49,16 +54,24 @@ public class TetrinoSpawner : MonoBehaviour {
 		if (_tetrinoSpawnTimer.ShouldPop)
 		{
 			GameObject go = _tetrinoSelector.Pop();	// I think we should :)
-			Instantiate(go, transform.position, transform.rotation);
+			Instantiate(go, transform.position, transform.rotation); // Pop goes the weasle!
 			_tetrinoSpawnTimer.ShouldPop = false; 	// Stop da pop
 		}
 
-		if (_tetrinoSpawnTimer.CurrentTime > _nextIntervalDecreaseTime)
+		// Apply modifier to rate if the interval between spawn is longer than 1 second, we have not lost yet, and if its time to update...
+		// 1 second is the minimum amount of time between spawns
+		// Afterwhich, we no longer decrease time
+		if (_tetrinoSpawnTimer.CurrentTime > _nextIntervalDecreaseTime && 
+		    _tetrinoSpawnTimer.IntervalBetweenSpawn > 1f
+		    && !_classicModeState.InLoseState)
 		{
 			ApplyDifficultyModifierToTimer();
 			//Debug.Log("Spawn timer current time: " + _tetrinoSpawnTimer.CurrentTime);
 			//Debug.Log ("Spawn timer interval between spawn: " + _tetrinoSpawnTimer.IntervalBetweenSpawn);
 		}
+
+		// We can do something similar here for applying a faster falling speed for the tetrominoes
+
     }
 
 	public void SetSpawnerLocation(Vector3 vector)
