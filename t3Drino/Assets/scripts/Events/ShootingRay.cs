@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 
 public class ShootingRay : MonoBehaviour {
+
     private int neighborCount = 0;
     private bool moving = false;
     private RaycastHit[] hits;
@@ -27,19 +28,45 @@ public class ShootingRay : MonoBehaviour {
 	void Update () {
 
         hits = Physics.RaycastAll(transform.position, transform.right, 100);
-		if (hits.Length > 8)
-			_isRowCleared = true;
+		foreach (RaycastHit hit in hits)
+		{
 
+			// hit.y
+			//blockthatwashit.transform.y - hit.point.y
+			// if above is smaller
+
+			// DETERMINE THRESTHOLD ABOVE/BELOW RayCast
+
+			// else hit = null
+		}
+
+		foreach (RaycastHit hit in hits)
+		{
+			if (hit == null)
+			{
+				// add to new array of hits
+			}
+		}
+
+		if (newHits.Length > 8)
+			_isRowCleared = true; // TODO
+
+		//if (hits.Length > 8)
+			//_isRowCleared = true;
+
+		// Check that we detect 8 blocks
         // hit.length also includes the 2 vertical walls 
 		if (hits.Length > 8 && _isRowCleared) 
 		{
 			_isRowCleared = false;
+
 			// TODO: Add to score since a row was cleared: UPDATE THIS.. THIS IS AN INITIAL TEST
-			_scoreManager.AddToScore(100f);
+			_scoreManager.AddToScore(10f);
 
             // Only clear line if all objects are stationary
             moving = false;
 
+			// Check that the block is moving or not.
             foreach (RaycastHit hit in hits)
 			{
                 if (hit.transform.gameObject.tag == "notMovableTag" && hit.transform.gameObject.GetComponent<Rigidbody>().velocity.magnitude > 0.05F) {
