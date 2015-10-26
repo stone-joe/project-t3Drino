@@ -917,7 +917,7 @@ GameObject:
   - 33: {fileID: 568400325}
   - 65: {fileID: 568400324}
   - 23: {fileID: 568400323}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wallRight
   m_TagString: borderTag
   m_Icon: {fileID: 0}
@@ -2420,7 +2420,7 @@ GameObject:
   - 33: {fileID: 1794826238}
   - 65: {fileID: 1794826237}
   - 23: {fileID: 1794826236}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wallLeft
   m_TagString: borderTag
   m_Icon: {fileID: 0}

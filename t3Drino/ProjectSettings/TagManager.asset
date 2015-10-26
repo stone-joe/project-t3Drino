@@ -14,6 +14,7 @@ TagManager:
   - Tetromino_Z
   - Tetromino_T
   - blockTag
+  - movableTag
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Walls
   - 
   - 
   - 
