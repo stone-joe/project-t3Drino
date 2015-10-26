@@ -13,18 +13,37 @@ public class HandScript : MonoBehaviour {
     private Vector3 dropVelocity;
     private float palmRotationZ;
     private float offsetRot;
+    private float handCenterPosOffsetX;
+    private float handCenterPosOffsetY;
+    private float handCenterPosOffsetZ;
+    private bool headMounted = false;
+
+    // configurable
+    private float grabRadius = 2.0F;
+    private float maxDropVelocity = 20F;
 
     public float grabStrength;
-    public static float grabRadius = 2.0F;
-    public static float maxDropVelocity = 20F;
-    public float handCenterPosOffsetX;
-    public float handCenterPosOffsetY;
-    public float handCenterPosOffsetZ;
     public GameObject handObject;
 
     void Start () {
         // Disable collisions between hand and inactive blocks
         Physics.IgnoreLayerCollision(8, 9, true);
+
+        // If camera is root parent, assume head-mounted
+        if (gameObject.transform.root.tag == "MainCamera") {
+            headMounted = true;
+        }
+
+        // Different offsets if facing up or facing out
+        if (headMounted) {
+            handCenterPosOffsetX = 0F;
+            handCenterPosOffsetY = -230F; // actually Z
+            handCenterPosOffsetZ = -310F; // actually Y
+        } else {
+            handCenterPosOffsetX = 0F;
+            handCenterPosOffsetY = -70F;
+            handCenterPosOffsetZ = 120F;
+        }
 
         //Assign hand rigidbodies to layer 8 to disable collision with blocks
         Transform [] childTransforms = gameObject.GetComponentsInChildren<Transform>();
@@ -47,16 +66,19 @@ public class HandScript : MonoBehaviour {
     void Update() {
         hand = GetComponent<HandModel>().GetLeapHand();
         grabStrength = hand.GrabStrength;
-        /*handCenterPos = (new Vector(-(handObject.transform.Find("palm").transform.position.x + handCenterPosOffsetX),
-                                    -(handObject.transform.Find("palm").transform.position.z + handCenterPosOffsetZ),
-                                    -(handObject.transform.Find("palm").transform.position.y + handCenterPosOffsetY)
-                                    ) + hand.PalmNormal * 50
-                                    ).ToUnityScaled() * 40;*/
-        handCenterPos = (new Vector(-(hand.PalmPosition.x + handCenterPosOffsetX),
-                                    -(hand.PalmPosition.z + handCenterPosOffsetZ),
-                                    -(hand.PalmPosition.y + handCenterPosOffsetY)
-                                    ) + hand.PalmNormal * 50
-                                    ).ToUnityScaled() * 40;
+        if (headMounted) {
+            handCenterPos = (new Vector(-(hand.PalmPosition.x + handCenterPosOffsetX + hand.PalmNormal.x * 50),
+                                        -(hand.PalmPosition.z + handCenterPosOffsetY + hand.PalmNormal.z * 50),
+                                        -(hand.PalmPosition.y + handCenterPosOffsetZ + hand.PalmNormal.y * 50)
+                                        )
+                                        ).ToUnityScaled() * 40;
+        } else {
+            handCenterPos = (new Vector((hand.PalmPosition.x + handCenterPosOffsetX + hand.PalmNormal.x * 50),
+                                        (hand.PalmPosition.y + handCenterPosOffsetY + hand.PalmNormal.y * 50),
+                                        (hand.PalmPosition.z + handCenterPosOffsetZ + hand.PalmNormal.z * 50)
+                                        )
+                                        ).ToUnityScaled() * 40;
+        }
         palmRotationZ = hand.PalmNormal.Roll * Mathf.Rad2Deg;
 
         if (grabStrength > 0.3F) {
