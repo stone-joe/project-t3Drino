@@ -22,7 +22,7 @@ public class TetrinoPreviewer : MonoBehaviour {
 		LoadTextureArrayIndices();
 		LoadTextures();
 		InitializeNextTetrominoGO();
-		SetNextTetrominoLocation(16.49f, 12.81f, 0);	// Set previewer location
+		SetNextTetrominoLocation(16.49f, 7.5f, 0);	// Set previewer location
 	}
 
 
