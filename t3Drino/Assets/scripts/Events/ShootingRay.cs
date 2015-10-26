@@ -51,8 +51,8 @@ public class ShootingRay : MonoBehaviour {
 		//if (newHits.Length > 8)
 		//	_isRowCleared = true; // TODO
 
-		//if (hits.Length > 8)
-			//_isRowCleared = true;
+		if (hits.Length > 8)
+			_isRowCleared = true;
 
 		// Check that we detect 8 blocks
         // hit.length also includes the 2 vertical walls 
