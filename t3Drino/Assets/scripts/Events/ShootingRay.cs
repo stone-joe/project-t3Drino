@@ -28,7 +28,7 @@ public class ShootingRay : MonoBehaviour {
 	void Update () {
 
         hits = Physics.RaycastAll(transform.position, transform.right, 100);
-		foreach (RaycastHit hit in hits)
+		/*foreach (RaycastHit hit in hits)
 		{
 
 			// hit.y
@@ -46,10 +46,10 @@ public class ShootingRay : MonoBehaviour {
 			{
 				// add to new array of hits
 			}
-		}
+		}*/
 
-		if (newHits.Length > 8)
-			_isRowCleared = true; // TODO
+		//if (newHits.Length > 8)
+		//	_isRowCleared = true; // TODO
 
 		//if (hits.Length > 8)
 			//_isRowCleared = true;
