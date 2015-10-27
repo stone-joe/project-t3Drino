@@ -3,7 +3,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class clickDrag : MonoBehaviour {
+public class ClickDrag : MonoBehaviour {
     private Vector3 screenPoint;
     private Vector3 offset;
     private Vector3 curPosition;

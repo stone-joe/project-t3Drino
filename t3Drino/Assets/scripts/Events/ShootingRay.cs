@@ -14,18 +14,16 @@ public class ShootingRay : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        // Get score manager reference
+        GameObject go = GameObject.Find("ScoreManager");
+        _scoreManager = (ScoreManager) go.GetComponent(typeof(ScoreManager));
 
+        _isRowCleared = false;
+    }
+    
+    // Update is called once per frame
+    void Update () {
 		Debug.DrawRay(transform.position, transform.right * 100); // this only draws a line. just for visuals
-
-		// Get score manager reference
-		GameObject go = GameObject.Find("ScoreManager");
-		_scoreManager = (ScoreManager) go.GetComponent(typeof(ScoreManager));
-
-		_isRowCleared = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
 
         hits = Physics.RaycastAll(transform.position, transform.right, 100);
 		/*foreach (RaycastHit hit in hits)

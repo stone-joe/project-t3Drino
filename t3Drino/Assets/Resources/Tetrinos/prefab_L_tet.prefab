@@ -49,7 +49,6 @@ GameObject:
   - 114: {fileID: 11449752}
   - 114: {fileID: 11480384}
   - 114: {fileID: 11426314}
-  - 65: {fileID: 6535182}
   m_Layer: 0
   m_Name: prefab_L_tet
   m_TagString: movableTag
@@ -288,8 +287,8 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 152028}
   serializedVersion: 2
-  m_Mass: 10
-  m_Drag: 1
+  m_Mass: 1
+  m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -308,18 +307,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .020000007, y: .0200000089, z: .0199999996}
   m_Center: {x: -4.65661287e-10, y: -9.31322575e-10, z: 0}
---- !u!65 &6535182
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 152028}
-  m_Material: {fileID: 13400000, guid: 8363da46b60738a40ae0e3daee260d20, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6535392
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -390,6 +377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wholeobject: {fileID: 0}
+  _classicModeState: {fileID: 0}
 --- !u!114 &11480384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -487,11 +475,11 @@ Prefab:
         type: 2}
     - target: {fileID: 0}
       propertyPath: m_Drag
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Mass
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
