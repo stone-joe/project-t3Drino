@@ -38,20 +38,60 @@ public class ShootingRay : MonoBehaviour {
 	 * @description Used to define whether or not cubes within a row are moving
 	 */
 	private bool moving = false;
+	private ScoreManager _scoreManager;
+	private bool _isRowCleared;
 
 	// Use this for initialization
 	void Start () {
-	
+
+		Debug.DrawRay(transform.position, transform.right * 100); // this only draws a line. just for visuals
+
+		// Get score manager reference
+		GameObject go = GameObject.Find("ScoreManager");
+		_scoreManager = (ScoreManager) go.GetComponent(typeof(ScoreManager));
+
+		_isRowCleared = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Debug.DrawRay(transform.position, transform.right * 100); // this only draws a line. just for visuals
 
         hits = Physics.RaycastAll(transform.position, transform.right, 100);
+		foreach (RaycastHit hit in hits)
+		{
 
+			// hit.y
+			//blockthatwashit.transform.y - hit.point.y
+			// if above is smaller
+
+			// DETERMINE THRESTHOLD ABOVE/BELOW RayCast
+
+			// else hit = null
+		}
+
+		foreach (RaycastHit hit in hits)
+		{
+			if (hit == null)
+			{
+				// add to new array of hits
+			}
+		}
+
+		if (newHits.Length > 8)
+			_isRowCleared = true; // TODO
+
+		//if (hits.Length > 8)
+			//_isRowCleared = true;
+
+		// Check that we detect 8 blocks
         // hit.length also includes the 2 vertical walls 
-        if (hits.Length == cubesPerRow+2) {
+		if (hits.Length > 8 && _isRowCleared) 
+		{
+			_isRowCleared = false;
+
+			// TODO: Add to score since a row was cleared: UPDATE THIS.. THIS IS AN INITIAL TEST
+			_scoreManager.AddToScore(10f);
+
             // Only clear line if all objects are stationary
             moving = false;
             foreach (RaycastHit hit in hits) {
@@ -60,8 +100,11 @@ public class ShootingRay : MonoBehaviour {
                     moving = true;
                 }
             }
-            if (!moving) {
-                foreach (RaycastHit hit in hits) {
+
+            if (!moving) 
+			{
+                foreach (RaycastHit hit in hits)
+				{
                     // Get hit block
                     hitBlock = hit.collider.transform;
 
@@ -85,13 +128,15 @@ public class ShootingRay : MonoBehaviour {
                         Destroy(hitBlock.gameObject, 1F);						                       
 
                         // iterate through all children blocks in tet/new parent...
-                        foreach (Transform child in hitBlock.parent) {
+                        foreach (Transform child in hitBlock.parent) 
+						{
                             // ...except for the destroyed block or any destroying block
 							Cube cube = child.gameObject.GetComponent<Cube>();
                             if (child.name != hitBlock.name || (cube && cube.getState() == Cube.states.DO_NOT_DESTROY)) {
                                 neighborCount = 0;
                                 // count number of adjacent neighbors...
-                                foreach (Transform potentialNeighbor in hitBlock.parent) {
+                                foreach (Transform potentialNeighbor in hitBlock.parent) 
+								{
                                     // ...besides the destroyed block or any other blocks to be destroyed
 									Cube neighborCube = potentialNeighbor.gameObject.GetComponent<Cube>();
                                     if (potentialNeighbor.name != child.name || (neighborCube && neighborCube.getState() == Cube.states.DO_NOT_DESTROY)) {

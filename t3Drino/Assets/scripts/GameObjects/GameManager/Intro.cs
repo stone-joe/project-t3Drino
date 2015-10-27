@@ -5,7 +5,7 @@ public class Intro : MonoBehaviour {
 	
 	public GameManager gameManager;
 
-	public IntroGUIComponents _guiComponents;
+	private IntroGUI _guiComponents;
 
 	void Awake () {
 		
@@ -35,7 +35,7 @@ public class Intro : MonoBehaviour {
 
 	public void InitSplashScreen()
 	{
-		GameObject obj = new GameObject("IntroGUIComponents");
-		_guiComponents = obj.AddComponent<IntroGUIComponents>();
+		GameObject obj = new GameObject("IntroGUI");
+		_guiComponents = obj.AddComponent<IntroGUI>();
 	}
 }

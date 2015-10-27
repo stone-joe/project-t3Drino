@@ -5,9 +5,34 @@ public class Classic : MonoBehaviour {
 
 	public GameManager gameManager;
 
-	public TetrinoSelector _tetrinoSelector;
-	public TetrinoPreviewer _tetrinoPreviewer;
-	public Spawner _tetrinoSpawner;
+	public GameObject _tetrinoSelector;
+	public GameObject _tetrinoPreviewer;
+	public GameObject _tetrinoSpawner;
+	public GameObject _tetrinoSpawnTimer;
+	public GameObject _tetrinoSpawnRateModifier;
+
+	public GameObject _score;
+	public GameObject _player;
+	public GameObject _scoreManager;
+	public GameObject _scoreGUI;
+	//public GameObject _elapsedTimer;
+
+	public ClassicLoseGUI _loseGUIComponents;
+	private bool _inLoseState;
+
+	#region Public Properties
+	public bool InLoseState
+	{
+		get
+		{
+			return _inLoseState;
+		}
+		set
+		{
+			_inLoseState = value;
+		}
+	}
+	#endregion
 
 	// Use this for initialization
 	void Awake () {
@@ -23,25 +48,71 @@ public class Classic : MonoBehaviour {
 	
 	void HandleOnStateChange ()
 	{
-		gameManager.SetGameState(GameState.MAINMENU);
 		Debug.Log("Handling state change to: " + gameManager.gameState);
-		Invoke("LoadLevel", 3f);
 	}
 	
-	public void LoadLevel()
+	public void LoadMainMenu()
 	{
 		Application.LoadLevel("MainMenu");
 	}
 
+	public void StartMainMenu()
+	{
+		gameManager.SetGameState(GameState.MAINMENU);
+		Invoke("LoadMainMenu", 1f);
+	}
+
 	public void InitGame()
 	{
-		GameObject obj = new GameObject("TetrinoSelector");
-		_tetrinoSelector = obj.AddComponent<TetrinoSelector>();
-		
-		obj = new GameObject("TetrinoPreviewer");
-		_tetrinoPreviewer = obj.AddComponent<TetrinoPreviewer>();
+		_inLoseState = false;
 
-		obj = new GameObject("Spawner");
-		_tetrinoSpawner = obj.AddComponent<Spawner>();
+		// Tetromino controls
+		_tetrinoSelector = new GameObject("TetrinoSelector");
+		_tetrinoSelector.AddComponent<TetrinoSelector>();
+
+		_tetrinoPreviewer = new GameObject("TetrinoPreviewer");
+		_tetrinoPreviewer.AddComponent<TetrinoPreviewer>();
+
+		_tetrinoSpawnTimer = new GameObject("TetrinoSpawnTimer");
+		_tetrinoSpawnTimer.AddComponent<TetrinoSpawnTimer>();
+
+		_tetrinoSpawnRateModifier = new GameObject("TetrinoSpawnRateModifier");
+		_tetrinoSpawnRateModifier.AddComponent<TetrinoSpawnRateModifier>();
+
+		_tetrinoSpawner = new GameObject("TetrinoSpawner");
+		_tetrinoSpawner.AddComponent<TetrinoSpawner>();
+	
+
+		// Player score and score manager
+		_score = new GameObject("Score");
+		_score.AddComponent<Score>();
+
+		_player = new GameObject("Player");
+		_player.AddComponent<Player>();
+
+		_scoreGUI = new GameObject("ScoreGUI");
+		_scoreGUI.AddComponent<ScoreGUI>();
+
+		_scoreManager = new GameObject("ScoreManager");
+		_scoreManager.AddComponent<ScoreManager>();
+
+		// Ray casters
+		Instantiate(Resources.Load("RayCasters/RayCasters"));
+
+
+		//_elapsedTimer = new GameObject("ElapsedTimer");
+		//_elapsedTimer.AddComponent<ElapsedTimer>();
+	}
+
+	public void InitLoseScreen()
+	{
+		// Only enter lose state once
+		if (!_inLoseState)
+		{
+			GameObject obj = new GameObject("ClassicLoseGUI");
+			_loseGUIComponents = obj.AddComponent<ClassicLoseGUI>();
+			_inLoseState = true;
+			_scoreManager.GetComponent<ScoreManager>().ScoreIsFrozen = true; // Freeze score
+		}
 	}
 }

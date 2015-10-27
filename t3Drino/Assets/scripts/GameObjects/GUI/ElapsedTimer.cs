@@ -21,4 +21,14 @@ public class ElapsedTimer : Timer {
 		base.UpdateTime();
 		_txtMesh.text = base.TextCurrentTime;
 	}
+
+	public void Pause()
+	{
+		base.Pause();
+	}
+
+	public void Resume()
+	{
+		base.Resume();
+	}
 }

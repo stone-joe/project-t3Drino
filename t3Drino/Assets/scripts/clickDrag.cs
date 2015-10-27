@@ -17,6 +17,7 @@ public class clickDrag : MonoBehaviour {
 	private Vector3 _targetPosition;
 	private bool _collided;
 
+	public Classic _classicModeState;
 
     // Use this for initialization
     void Start ()
@@ -71,22 +72,18 @@ public class clickDrag : MonoBehaviour {
     
     void OnCollisionEnter(Collision collision)
     {
-		if (collision.transform.gameObject.name == "floor" || collision.transform.gameObject.tag == "notMovableTag")
+		// TODO: Merge this & apply state changes... this code initalizes the lose screen
+		if (transform.tag == "notMovableTag" && collision.gameObject.name == "roof")
 		{
-			// Change tetromino to inactive state when hitting floor or other tetrominos
-			foreach (Transform child in transform) {
-				child.GetComponent<Renderer>().material.color = Color.black;
-			}
-			
-			transform.tag = "notMovableTag";
+			GameObject go = GameObject.Find("Main Camera");
+			_classicModeState = (Classic)go.GetComponent(typeof(Classic));
+			_classicModeState.InitLoseScreen();
 		}
-		
-		if ((collision.transform.gameObject.name == "wallLeft" || collision.transform.gameObject.name == "wallRight") && collision.transform.gameObject.tag == "movableTag")
-		{
-			ContactPoint contactPoint = collision.contacts[0];
-			curPosition = contactPoint.point;
-			_collided = true;
-		}
+
+        foreach (Transform child in transform) {
+            child.GetComponent<Renderer> ().material.color = Color.black;
+        }
+        transform.tag = "notMovableTag";
     }
 
 }

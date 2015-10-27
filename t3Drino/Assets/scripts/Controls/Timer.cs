@@ -134,6 +134,16 @@ public class Timer : MonoBehaviour {
 		_countDown = false;
 	}
 
+	public void Pause()
+	{
+		_isStarted = false;
+	}
+
+	public void Resume()
+	{
+		_isStarted = true;
+	}
+
 	private string CurrentTimetoReadable()
 	{
 		int minutes = Mathf.FloorToInt(_currentTime / 60F);
@@ -142,5 +152,10 @@ public class Timer : MonoBehaviour {
 		//string niceTime = string.Format("{0:00}:{1:00}", minutes, seconds); // For format: 00:00
 
 		return niceTime;
+	}
+
+	public int CurrentTimetoSeconds()
+	{
+		return Mathf.FloorToInt(_currentTime);
 	}
 }

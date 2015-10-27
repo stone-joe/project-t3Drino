@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IntroGUIComponents : MonoBehaviour {
+public class IntroGUI : MonoBehaviour {
 
 	public GameObject SplashScreen;
 
@@ -47,7 +47,6 @@ public class IntroGUIComponents : MonoBehaviour {
 		int _scaleHeight = 150;
 
 		float scale = 150;
-
 
 		SplashScreen.GetComponent<Renderer>().material.mainTexture = _splashScreenTexture;
 		SplashScreen.GetComponent<Transform>().localScale = new Vector3(_splashScreenTexture.width/scale, 
