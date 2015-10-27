@@ -10,32 +10,73 @@ public class ShootingRay : MonoBehaviour {
     private int layerMask = 1 << 9; // Only Raycast 'blocks' layer (9)
     private Transform hitBlock; 
     private Vector3 difference;
+    private ScoreManager _scoreManager;
+    private bool _isRowCleared;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Use this for initialization
+    void Start () {
+        // Get score manager reference
+        /*GameObject go = GameObject.Find("ScoreManager");
+        _scoreManager = (ScoreManager) go.GetComponent(typeof(ScoreManager));
+
+        _isRowCleared = false;*/
+    }
+    
+    // Update is called once per frame
+    void Update () {
         Debug.DrawRay(transform.position, transform.right * 100); // this only draws a line. just for visuals
 
         hits = Physics.RaycastAll(transform.position, transform.right, 100, layerMask);
+        /*foreach (RaycastHit hit in hits)
+        {
+
+            // hit.y
+            //blockthatwashit.transform.y - hit.point.y
+            // if above is smaller
+
+            // DETERMINE THRESTHOLD ABOVE/BELOW RayCast
+
+            // else hit = null
+        }
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit == null)
+            {
+                // add to new array of hits
+            }
+        }*/
+
+        /*if (hits.Length >= 7)
+            _isRowCleared = true;
+
+        // Check that we detect 8 blocks
+        // hit.length also includes the 2 vertical walls 
+        if (hits.Length >= 7 && _isRowCleared) {
+            _isRowCleared = false;
+
+            // TODO: Add to score since a row was cleared: UPDATE THIS.. THIS IS AN INITIAL TEST
+            _scoreManager.AddToScore(10f);
+        }*/
 
         if (hits.Length >= 7) {
             // Only clear line if all objects are stationary
             moving = false;
+
+            // Check that the block is moving or not.
             foreach (RaycastHit hit in hits) {
                 if (hit.transform.gameObject.tag == "notMovableTag" && hit.transform.gameObject.GetComponent<Rigidbody>().velocity.magnitude > 0.05F) {
                     moving = true;
                 }
             }
+
             if (!moving) {
                 foreach (RaycastHit hit in hits) {
                     // Get hit block
                     hitBlock = hit.collider.transform;
 
                     if (hitBlock.parent != null && hitBlock.parent.gameObject.tag == "notMovableTag") { // only handle blocks, not the side walls
+
                         hitBlock.GetComponent<Renderer> ().material.color = Color.red;
                         
                         // Make deleting blocks freeze to prevent chain reaction line completions

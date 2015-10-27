@@ -8,24 +8,17 @@ public class ClickDrag : MonoBehaviour {
     private Vector3 offset;
     private Vector3 curPosition;
     private bool canRotate;
-    private float rotateSpeed;
+    private float rortateSpeed;
 
-    private GameObject _wallLeft;
-    private GameObject _wallRight;
-    private Vector3 _negativeXBorder;
-    private Vector3 _positiveXBorder;
-    private Vector3 _targetPosition;
-    private bool _collided;
+    public GameObject wholeobject;
 
+	public Classic _classicModeState;
 
     // Use this for initialization
     void Start ()
     {
         canRotate = false;
-        rotateSpeed = 300.0f;
-        _wallLeft = GameObject.Find("wallLeft");
-        _wallRight = GameObject.Find("wallRight");
-        _collided = false;
+        rortateSpeed = 300.0f;
     }
     
     // Update is called once per frame
@@ -37,7 +30,7 @@ public class ClickDrag : MonoBehaviour {
             else
                 if (Input.GetKey(KeyCode.RightArrow)) rotateDirection = 1.0f;
 
-            transform.RotateAround(curPosition, Vector3.back, rotateSpeed * Time.deltaTime * rotateDirection);
+            transform.RotateAround(curPosition, Vector3.back, rortateSpeed * Time.deltaTime * rotateDirection);
         }
     }
 
@@ -46,9 +39,6 @@ public class ClickDrag : MonoBehaviour {
         canRotate = true;
         screenPoint = Camera.main.WorldToScreenPoint(transform.position);
         offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
-
-        _negativeXBorder = new Vector3(_wallLeft.transform.position.x, _wallLeft.transform.position.y, screenPoint.z);
-        _positiveXBorder = new Vector3(_wallRight.transform.position.x, _wallRight.transform.position.y, screenPoint.z);
     }
 
     void OnMouseUp()
@@ -59,34 +49,26 @@ public class ClickDrag : MonoBehaviour {
     void OnMouseDrag()
     {
         Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-
-        if (!_collided)
-            curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
-
-        if(transform.tag == "movableTag" && curPosition.x > _negativeXBorder.x && curPosition.x < _positiveXBorder.x) {
-            transform.position = Vector3.Lerp(transform.position, curPosition, Time.deltaTime * 30f);
+         curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+        if(transform.tag == "movableTag") {
+            transform.position = curPosition; //I make the parent move to the mouse's position.
         }
-        _collided = false;
     }
     
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.gameObject.name == "floor" || collision.transform.gameObject.tag == "notMovableTag")
-        {
-            transform.tag = "notMovableTag";
-            // Change tetromino to inactive state when hitting floor or other tetrominos
-            foreach (Transform child in transform) {
-                child.GetComponent<Renderer>().material.color = Color.black;
-                child.gameObject.layer = 9;
-            }
+		// TODO: Merge this & apply state changes... this code initalizes the lose screen
+		if (transform.tag == "notMovableTag" && collision.gameObject.name == "roof")
+		{
+			GameObject go = GameObject.Find("Main Camera");
+			_classicModeState = (Classic)go.GetComponent(typeof(Classic));
+			_classicModeState.InitLoseScreen();
+		}
+
+        foreach (Transform child in transform) {
+            child.GetComponent<Renderer> ().material.color = Color.black;
         }
-        
-        if ((collision.transform.gameObject.name == "wallLeft" || collision.transform.gameObject.name == "wallRight") && collision.transform.gameObject.tag == "movableTag")
-        {
-            ContactPoint contactPoint = collision.contacts[0];
-            curPosition = contactPoint.point;
-            _collided = true;
-        }
+        transform.tag = "notMovableTag";
     }
 
 }
