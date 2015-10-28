@@ -69,16 +69,8 @@ public class ShootingRay : MonoBehaviour {
 			// else hit = null
 		}
 
-		foreach (RaycastHit hit in hits)
-		{
-			if (hit == null)
-			{
-				// add to new array of hits
-			}
-		}
-
-		if (newHits.Length > 8)
-			_isRowCleared = true; // TODO
+//		if (newHits.Length > 8)
+//			_isRowCleared = true; // TODO
 
 		//if (hits.Length > 8)
 			//_isRowCleared = true;

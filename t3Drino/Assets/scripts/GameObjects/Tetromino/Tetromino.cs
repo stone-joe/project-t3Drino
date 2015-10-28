@@ -77,10 +77,15 @@ public class Tetromino : MonoBehaviour {
 	 */
 	public void setState(Tetromino.states newState){
 		state = newState;
-		if (newState == Tetromino.states.INACTIVE) {
-			gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ | 
-															   RigidbodyConstraints.FreezeRotationX |
-															   RigidbodyConstraints.FreezeRotationY;
+		if (newState == Tetromino.states.GRABBED) {
+			gameObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezePositionZ | 
+				RigidbodyConstraints.FreezeRotationX |
+				RigidbodyConstraints.FreezeRotationY | 
+				RigidbodyConstraints.FreezeRotationZ;
+		} else {
+			gameObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezePositionZ | 
+				RigidbodyConstraints.FreezeRotationX |
+				RigidbodyConstraints.FreezeRotationY;
 		}
 	}
 	/**
@@ -107,8 +112,6 @@ public class Tetromino : MonoBehaviour {
 		}
 		_cubeWidth = gameObject.GetComponentInChildren<Renderer> ().bounds.size.x;
 		_cubeHeight = gameObject.GetComponentInChildren<Renderer> ().bounds.size.y;
-
-		print (_cubeWidth);
 	}
 	/**
 	 * @member {Method} getCubeWidth
@@ -141,6 +144,7 @@ public class Tetromino : MonoBehaviour {
 	 * @description Internal method that's called once per frame. 
 	 */
 	public virtual void Update(){
+		// Check if this tetromino is moving
 		float force = this.gameObject.GetComponent<Rigidbody> ().velocity.magnitude;
 		if ( force > Tetromino.MIN_MOVE_FORCE || force < -Tetromino.MIN_MOVE_FORCE ) {
 			moving = true;
@@ -148,6 +152,14 @@ public class Tetromino : MonoBehaviour {
 			moving = false;
 		}
 	}
+	/**
+	 * @member {Method} moveToWall
+	 * @param {Tetromino.Wall} wall - The wall to which the tetromino should be moved
+	 * @param {float} y - The new y-position of the tetrominon
+	 * @description Using the tetromino's current rotation, this method calculates the new position of the tetromino
+	 * based on the corner that is nearest the wall, as well as the x-distance between the wall and the corner.
+	 */
+	public virtual void moveToWall(Tetromino.Wall wall, float y){}
 	/**
 	 * @member {Method} rayHitWall
 	 * @param {Vector3} rayVector

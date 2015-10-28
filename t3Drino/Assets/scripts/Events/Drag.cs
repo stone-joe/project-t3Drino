@@ -89,7 +89,7 @@ public class Drag : MonoBehaviour {
 				transform.position = curPosition; //I make the parent move to the mouse's position.            
 			}
 			else {
-				transform.position = new Vector3(transform.position.x, curPosition.y, transform.position.z);
+				tetromino.moveToWall(collisionData.wall, curPosition.y);
 			}
         }
     }
@@ -97,7 +97,8 @@ public class Drag : MonoBehaviour {
     void OnCollisionEnter(Collision collision)
     {	
 		if (tetromino) {
-			if ( collision.transform.gameObject.GetComponent<Tetromino>() != null && collision.transform.gameObject.GetComponent<Tetromino>().getState() == Tetromino.states.INACTIVE){
+			if ( (collision.transform.gameObject.GetComponent<Tetromino>() != null && collision.transform.gameObject.GetComponent<Tetromino>().getState() == Tetromino.states.INACTIVE) 
+			    	|| collision.transform.name == "floor" ){
 				foreach (Transform child in transform) {
 					child.GetComponent<Renderer> ().material.color = Color.black;
 				}
