@@ -11,8 +11,8 @@ public class ClickDrag : MonoBehaviour {
     private float rortateSpeed;
 
     public GameObject wholeobject;
-
-	public Classic _classicModeState;
+    public Classic _classicModeState;
+    public bool disabled; // For Leap Menu. Don't deactivate shapes when they hit the table.
 
     // Use this for initialization
     void Start ()
@@ -56,19 +56,21 @@ public class ClickDrag : MonoBehaviour {
     }
     
     void OnCollisionEnter(Collision collision)
-    {
-		// TODO: Merge this & apply state changes... this code initalizes the lose screen
-		if (transform.tag == "notMovableTag" && collision.gameObject.name == "roof")
-		{
-			GameObject go = GameObject.Find("Main Camera");
-			_classicModeState = (Classic)go.GetComponent(typeof(Classic));
-			_classicModeState.InitLoseScreen();
-		}
+    {   
+        if (!disabled) {
+            // TODO: Merge this & apply state changes... this code initalizes the lose screen
+            if (transform.tag == "notMovableTag" && collision.gameObject.name == "roof")
+            {
+                GameObject go = GameObject.Find("Main Camera");
+                _classicModeState = (Classic)go.GetComponent(typeof(Classic));
+                _classicModeState.InitLoseScreen();
+            }
 
-        foreach (Transform child in transform) {
-            child.GetComponent<Renderer> ().material.color = Color.black;
+            foreach (Transform child in transform) {
+                child.GetComponent<Renderer> ().material.color = Color.black;
+            }
+            transform.tag = "notMovableTag";
         }
-        transform.tag = "notMovableTag";
     }
 
 }

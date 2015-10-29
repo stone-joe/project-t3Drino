@@ -11,12 +11,17 @@ public class HandScript : MonoBehaviour {
     private Vector3 offsetPos;
     private Vector3 pivotPoint;
     private Vector3 dropVelocity;
+    private float palmRotationX;
+    private float palmRotationY;
     private float palmRotationZ;
-    private float offsetRot;
+    private float offsetRotX;
+    private float offsetRotY;
+    private float offsetRotZ;
     private float handCenterPosOffsetX;
     private float handCenterPosOffsetY;
     private float handCenterPosOffsetZ;
     private bool headMounted = false;
+    private bool constrainTet = true;
 
     // configurable
     private float grabRadius = 2.0F;
@@ -34,6 +39,11 @@ public class HandScript : MonoBehaviour {
             headMounted = true;
         }
 
+        // If scene is Leap Menu, don't constrain tetrominos
+        if (Application.loadedLevelName == "LeapMenu") {
+            constrainTet = false;
+        }
+
         // Different offsets if facing up or facing out
         if (headMounted) {
             handCenterPosOffsetX = 0F;
@@ -41,7 +51,7 @@ public class HandScript : MonoBehaviour {
             handCenterPosOffsetZ = -310F; // actually Y
         } else {
             handCenterPosOffsetX = 0F;
-            handCenterPosOffsetY = -70F;
+            handCenterPosOffsetY = -130F;
             handCenterPosOffsetZ = 120F;
         }
 
@@ -74,11 +84,13 @@ public class HandScript : MonoBehaviour {
                                         ).ToUnityScaled() * 40;
         } else {
             handCenterPos = (new Vector((hand.PalmPosition.x + handCenterPosOffsetX + hand.PalmNormal.x * 50),
-                                        (hand.PalmPosition.y + handCenterPosOffsetY + hand.PalmNormal.y * 50),
+                                        1.5F*(hand.PalmPosition.y + handCenterPosOffsetY + hand.PalmNormal.y * 50 / 1.5F),
                                         (hand.PalmPosition.z + handCenterPosOffsetZ + hand.PalmNormal.z * 50)
                                         )
                                         ).ToUnityScaled() * 40;
         }
+        palmRotationX = -hand.Direction.Pitch * Mathf.Rad2Deg;
+        palmRotationY = hand.Direction.Yaw * Mathf.Rad2Deg;
         palmRotationZ = hand.PalmNormal.Roll * Mathf.Rad2Deg;
 
         if (grabStrength > 0.3F) {
@@ -104,7 +116,9 @@ public class HandScript : MonoBehaviour {
                     grabbing = true;
                     // Record position and rotation relative to hand
                     offsetPos = handCenterPos - grabbedObject.transform.position;
-                    offsetRot = palmRotationZ - grabbedObject.transform.localEulerAngles.z;
+                    offsetRotX = palmRotationX - grabbedObject.transform.localEulerAngles.x;
+                    offsetRotY = palmRotationY - grabbedObject.transform.localEulerAngles.y;
+                    offsetRotZ = palmRotationZ - grabbedObject.transform.localEulerAngles.z;
                     foreach (Transform block in grabbedObject.transform) {
                         block.GetComponent<Renderer> ().material.color = Color.yellow;
                     }
@@ -124,8 +138,13 @@ public class HandScript : MonoBehaviour {
         // Update position and rotation if grabbing shape
         if (grabbing && grabbedObject != null) {
             pivotPoint = handCenterPos - offsetPos;
-            grabbedObject.transform.position = new Vector3(pivotPoint.x, pivotPoint.y, 0);
-            grabbedObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, palmRotationZ - offsetRot));
+            if (constrainTet) {
+                grabbedObject.transform.position = new Vector3(pivotPoint.x, pivotPoint.y, 0);
+                grabbedObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, palmRotationZ - offsetRotZ));
+            } else {
+                grabbedObject.transform.position = pivotPoint;
+                grabbedObject.transform.rotation = Quaternion.Euler(new Vector3(palmRotationX - offsetRotX, palmRotationY - offsetRotY, palmRotationZ - offsetRotZ));
+            }
 
             // Force drop if deactivated for some reason
             if (grabbedObject.transform.tag == "notMovableTag") {
