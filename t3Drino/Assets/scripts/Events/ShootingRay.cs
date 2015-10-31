@@ -19,11 +19,12 @@ public class ShootingRay : MonoBehaviour {
 	 * @description An array of raycasthit objects containing references to the cubes that were hit
 	 */
     private RaycastHit[] hits;
-	/**
-	 * @member {Transform} hitBlock
-	 * @description The transform object of a cube that in the above 'hits' array
-	 */
+        /**
+         * @member {Transform} hitBlock
+         * @description The transform object of a cube that in the above 'hits' array
+         */
     private Transform hitBlock; 
+    private int layerMask = 1 << 9; // Only Raycast 'blocks' layer (9)
 	/**
 	 * @member {Vector3} difference
 	 */
@@ -41,51 +42,49 @@ public class ShootingRay : MonoBehaviour {
 	private ScoreManager _scoreManager;
 	private bool _isRowCleared;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
+        // Get score manager reference
+        GameObject go = GameObject.Find("ScoreManager");
+        _scoreManager = (ScoreManager) go.GetComponent(typeof(ScoreManager));
 
-		Debug.DrawRay(transform.position, transform.right * 100); // this only draws a line. just for visuals
+        //_isRowCleared = false;
+    }
+    
+    // Update is called once per frame
+    void Update () {
+        Debug.DrawRay(transform.position, transform.right * 100); // this only draws a line. just for visuals
 
-		// Get score manager reference
-		GameObject go = GameObject.Find("ScoreManager");
-		_scoreManager = (ScoreManager) go.GetComponent(typeof(ScoreManager));
+        hits = Physics.RaycastAll(transform.position, transform.right, 100, layerMask);
+        /*foreach (RaycastHit hit in hits)
+        {
 
-		_isRowCleared = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+            // hit.y
+            //blockthatwashit.transform.y - hit.point.y
+            // if above is smaller
 
-        hits = Physics.RaycastAll(transform.position, transform.right, 100);
-		foreach (RaycastHit hit in hits)
-		{
-
-			// hit.y
-			//blockthatwashit.transform.y - hit.point.y
-			// if above is smaller
-
-			// DETERMINE THRESTHOLD ABOVE/BELOW RayCast
-
-			// else hit = null
-		}
+            // DETERMINE THRESTHOLD ABOVE/BELOW RayCast
 
 //		if (newHits.Length > 8)
 //			_isRowCleared = true; // TODO
 
-		//if (hits.Length > 8)
-			//_isRowCleared = true;
+        /*if (hits.Length >= 7)
+            _isRowCleared = true;
 
-		// Check that we detect 8 blocks
+        // Check that we detect 8 blocks
         // hit.length also includes the 2 vertical walls 
-		if (hits.Length > 8 && _isRowCleared) 
-		{
-			_isRowCleared = false;
+        if (hits.Length >= 7 && _isRowCleared) {
+            _isRowCleared = false;
 
-			// TODO: Add to score since a row was cleared: UPDATE THIS.. THIS IS AN INITIAL TEST
-			_scoreManager.AddToScore(10f);
+            // TODO: Add to score since a row was cleared: UPDATE THIS.. THIS IS AN INITIAL TEST
+            _scoreManager.AddToScore(10f);
+        }*/
 
+        if (hits.Length >= 7) {
             // Only clear line if all objects are stationary
             moving = false;
+
+            // Check that the block is moving or not.
             foreach (RaycastHit hit in hits) {
 				Tetromino tetrominoState = hit.transform.GetComponent<Tetromino>();
                 if (tetrominoState != null && (tetrominoState.getState () == Tetromino.states.INACTIVE && tetrominoState.isMoving())) {
@@ -93,10 +92,11 @@ public class ShootingRay : MonoBehaviour {
                 }
             }
 
-            if (!moving) 
-			{
-                foreach (RaycastHit hit in hits)
-				{
+            if (!moving) {
+
+				_scoreManager.AddToScore(10f);
+
+                foreach (RaycastHit hit in hits) {
                     // Get hit block
                     hitBlock = hit.collider.transform;
 
@@ -120,15 +120,13 @@ public class ShootingRay : MonoBehaviour {
                         Destroy(hitBlock.gameObject, 1F);						                       
 
                         // iterate through all children blocks in tet/new parent...
-                        foreach (Transform child in hitBlock.parent) 
-						{
+                        foreach (Transform child in hitBlock.parent) {
                             // ...except for the destroyed block or any destroying block
 							Cube cube = child.gameObject.GetComponent<Cube>();
                             if (child.name != hitBlock.name || (cube && cube.getState() == Cube.states.DO_NOT_DESTROY)) {
                                 neighborCount = 0;
                                 // count number of adjacent neighbors...
-                                foreach (Transform potentialNeighbor in hitBlock.parent) 
-								{
+                                foreach (Transform potentialNeighbor in hitBlock.parent) {
                                     // ...besides the destroyed block or any other blocks to be destroyed
 									Cube neighborCube = potentialNeighbor.gameObject.GetComponent<Cube>();
                                     if (potentialNeighbor.name != child.name || (neighborCube && neighborCube.getState() == Cube.states.DO_NOT_DESTROY)) {

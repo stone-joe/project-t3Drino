@@ -20,7 +20,7 @@ public class TetrinoSpawner : MonoBehaviour {
 
 		// Set to spawn every 3 seconds
 		_period = 3f;
-		_decreaseAmount = 0.20f;		// Decrease by this many seconds (for time between spawns)
+		_decreaseAmount = 0.15f;		// Decrease by this many seconds (for time between spawns)
 		_intervalPerDecrease = 30f;		// Second interval to up the difficulty (a.k.a. decrease the spawn rate by _decreaseAmont time)
 		_nextIntervalDecreaseTime = 0f + _intervalPerDecrease;
 
@@ -61,8 +61,8 @@ public class TetrinoSpawner : MonoBehaviour {
 		// Apply modifier to rate if the interval between spawn is longer than 1 second, we have not lost yet, and if its time to update...
 		// 1 second is the minimum amount of time between spawns
 		// Afterwhich, we no longer decrease time
-		if (_tetrinoSpawnTimer.CurrentTime > _nextIntervalDecreaseTime && 
-		    _tetrinoSpawnTimer.IntervalBetweenSpawn > 1f
+		if (_tetrinoSpawnTimer.CurrentTime > _nextIntervalDecreaseTime
+		    && _tetrinoSpawnTimer.IntervalBetweenSpawn > 1f
 		    && !_classicModeState.InLoseState)
 		{
 			ApplyDifficultyModifierToTimer();
