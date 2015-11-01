@@ -60,7 +60,7 @@ public class Tetromino_I : Tetromino {
 		_hypotenuse = (2 * _cubeWidth / Mathf.Cos (_phi));
 
 		// Magnitude of vector from tetromino origin to corners
-		_magnitude = Vector3.SqrMagnitude (new Vector3(2f * _cubeWidth, 0.5f * _cubeHeight, 0.0f));
+		_magnitude = new Vector3(2.0f * _cubeWidth, 0.5f * _cubeHeight, 0.0f).sqrMagnitude;
 	}
 	/**
 	 * @member {Method} getExtremeCorners
@@ -68,7 +68,7 @@ public class Tetromino_I : Tetromino {
 	 * the corner closest to the right wall. The ints represent the corner number in the tetromino. See the diagram at the
 	 * top of the file.
 	 */
-	private int[] getExtremeCorners(){
+	protected override int[] getExtremeCorners(){
 		float angleZ = transform.eulerAngles.z * Mathf.Deg2Rad;
 
 		if (angleZ >= 0 && angleZ < (Mathf.PI / 2)) {
@@ -84,51 +84,30 @@ public class Tetromino_I : Tetromino {
 	/**
 	 * @override
 	 */
-	public override void moveToWall(Tetromino.Wall wall, float y){
-		// Current angle of tetromino
+	protected override float getAdjustedAngle(int corner){
 		float angleZ = transform.eulerAngles.z * Mathf.Deg2Rad;
-		// The position of wall to which the tetromino corner is moving
-		float positionOfWall = 0.0f;
-		// The angle of the tetromino plus the constant angle of the corner with respect to the tetromino origin
-		float adjustedAngle = 0.0f;
 
-		// The new position of the tetromino origin
-		int newX = 0;
-		// The extreme corners of the tetromino
-		int[] corners = getExtremeCorners ();
-		int extreme = -1;
-
-		if (wall == Wall.RIGHT) {
-			GameObject rightWall = GameObject.Find ("wallRight");
-			positionOfWall = rightWall.transform.position.x - rightWall.GetComponent<Renderer> ().bounds.size.x / 2;
-			extreme = 1;
+		if (corner == 0) {
+			return angleZ + (Mathf.PI + _phi);
+		} else if (corner == 1) {
+			return angleZ - _phi;
+		} else if (corner == 2) {
+			return angleZ + _phi;
 		} else {
-			GameObject leftWall = GameObject.Find ("wallLeft");
-			positionOfWall = leftWall.transform.position.x + leftWall.GetComponent<Renderer> ().bounds.size.x / 2;
-			extreme = 0;
+			return angleZ + (Mathf.PI - _phi);
 		}
-
-		if (corners [extreme] == 0) {
-			adjustedAngle = angleZ + (Mathf.PI + _phi);
-		} else if (corners [extreme] == 1) {
-			adjustedAngle = angleZ - _phi;
-		} else if (corners [extreme] == 2) {
-			adjustedAngle = angleZ + _phi;
-		} else {
-			adjustedAngle = angleZ + (Mathf.PI - _phi);
-		}
-
-		transform.position = new Vector3 (positionOfWall - (_hypotenuse * Mathf.Cos(adjustedAngle)),
-		                                  y, transform.position.z);
 	}
 	/**
 	 * @override
 	 */
-	public override WallCollision willCollideWithWall(Vector3 curScreenPoint, Vector3 prevScreenPoint){
-		int[] extremeCorners = getExtremeCorners ();
+	public override float getHypotenuse(int corner){
+		return _hypotenuse;
+	}
+	/**
+	 * @override
+	 */
+	protected override Vector3 getTestVector(int[] extremeCorners, float deltaX, float deltaY){
 		float angleZ = transform.eulerAngles.z * Mathf.Deg2Rad;
-		float deltaX = curScreenPoint.x - prevScreenPoint.x;
-		float deltaY = curScreenPoint.y - prevScreenPoint.y;
 
 		float moveMagnitude = new Vector3 (deltaX, deltaY, 0).magnitude;
 		float adjustedMagnitude = _magnitude + moveMagnitude;
@@ -174,6 +153,6 @@ public class Tetromino_I : Tetromino {
 			}
 		}
 		
-		return rayHitWall(rotateVector(testVector, angleZ));
+		return testVector;
 	}
 }

@@ -15,7 +15,7 @@ public class TetrinoSelector : MonoBehaviour {
 	public TetrinoSelector()
 	{
 		_queue = new List<Object>();
-		_queueSize = 10;
+		_queueSize = 4;
 		_prefabs = (Object[])Resources.LoadAll("Tetrinos");
 
 		// Pre-populate queue
@@ -46,6 +46,7 @@ public class TetrinoSelector : MonoBehaviour {
 	}
 
 	private GameObject GetNextTetrino(){
-		return (GameObject)_prefabs[Random.Range(0, _prefabs.Length)];
+		return (GameObject)_prefabs[0];
+		//return (GameObject)_prefabs[Random.Range(0, _prefabs.Length)];
 	}
 }

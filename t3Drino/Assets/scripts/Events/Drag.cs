@@ -89,7 +89,8 @@ public class Drag : MonoBehaviour {
 				transform.position = curPosition; //I make the parent move to the mouse's position.            
 			}
 			else {
-				tetromino.moveToWall(collisionData.wall, curPosition.y);
+				//tetromino.moveToWall(collisionData.wall, curPosition.y);
+				transform.position = new Vector3(transform.position.x, curPosition.y, transform.position.z);
 			}
         }
     }

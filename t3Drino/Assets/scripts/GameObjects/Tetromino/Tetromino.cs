@@ -153,13 +153,45 @@ public class Tetromino : MonoBehaviour {
 		}
 	}
 	/**
+	 * @member {Method} getAdjustedAngle
+	 * @param {int} corner
+	 */
+	protected virtual float getAdjustedAngle(int corner){
+		return 0;
+	}
+	/**
 	 * @member {Method} moveToWall
 	 * @param {Tetromino.Wall} wall - The wall to which the tetromino should be moved
 	 * @param {float} y - The new y-position of the tetrominon
 	 * @description Using the tetromino's current rotation, this method calculates the new position of the tetromino
 	 * based on the corner that is nearest the wall, as well as the x-distance between the wall and the corner.
 	 */
-	public virtual void moveToWall(Tetromino.Wall wall, float y){}
+	public virtual void moveToWall(Tetromino.Wall wall, float y){
+		// Current angle of tetromino
+		float angleZ = transform.eulerAngles.z * Mathf.Deg2Rad;
+		// The position of wall to which the tetromino corner is moving
+		float positionOfWall = 0.0f;
+		// The angle of the tetromino plus the constant angle of the corner with respect to the tetromino origin
+		float adjustedAngle = 0.0f;
+
+		// The extreme corners of the tetromino
+		int[] corners = getExtremeCorners ();
+		int extreme = -1;
+		
+		if (wall == Wall.RIGHT) {
+			GameObject rightWall = GameObject.Find ("wallRight");
+			positionOfWall = rightWall.transform.position.x - rightWall.GetComponent<Renderer> ().bounds.size.x / 2;
+			extreme = 1;
+		} else {
+			GameObject leftWall = GameObject.Find ("wallLeft");
+			positionOfWall = leftWall.transform.position.x + leftWall.GetComponent<Renderer> ().bounds.size.x / 2;
+			extreme = 0;
+		}
+
+		adjustedAngle = getAdjustedAngle (corners[extreme]);
+		transform.position = new Vector3 (positionOfWall - (getHypotenuse(corners[extreme]) * Mathf.Cos(adjustedAngle)),
+		                                  y, transform.position.z);
+	}
 	/**
 	 * @member {Method} rayHitWall
 	 * @param {Vector3} rayVector
@@ -220,6 +252,48 @@ public class Tetromino : MonoBehaviour {
 	 * @returns {Tetromino.Wall} Returns the wall that is hit, Wall.NONE if no collision occurs 
 	 */
 	public virtual WallCollision willCollideWithWall(Vector3 curScreenPoint, Vector3 prevScreenPoint){
-		return new WallCollision();
+		int[] extremeCorners = getExtremeCorners ();
+		float angleZ = transform.eulerAngles.z * Mathf.Deg2Rad;
+		float deltaX = curScreenPoint.x - prevScreenPoint.x;
+		float deltaY = curScreenPoint.y - prevScreenPoint.y;
+
+		Vector3 testVector = getTestVector (extremeCorners, deltaX, deltaY);
+		return rayHitWall(rotateVector(testVector, angleZ));
+	}
+	/**
+	 * @member {Method} getHypotenuse
+	 * @param {int} corner
+	 */
+	public virtual float getHypotenuse(int corner){
+		return 0.0f;
+	}
+	/**
+	 * @member {Method} getExtrementCorners
+	 */
+	protected virtual int[] getExtremeCorners(){
+		return new int[]{0, 0};
+	}
+	/**
+	 * @member {Method} getTestVector
+	 * @param {int[]} extremeCorners
+	 * @param {float} deltaX
+	 * @param {float} deltaY
+	 */
+	protected virtual Vector3 getTestVector(int[] extremeCorners, float deltaX, float deltaY){
+		Vector3 testVector;
+		int index;
+
+		if (deltaX < 0) {
+			index = 0;		
+		} else {
+			index = 1;
+		}
+
+		float angleZ = transform.eulerAngles.z * Mathf.Deg2Rad;		
+		float moveMagnitude = new Vector3 (deltaX, deltaY, 0).magnitude;		
+		float adjustedMagnitude = getHypotenuse(extremeCorners[index]) + moveMagnitude;
+
+		// Value used by derived classes
+		return new Vector3((float)extremeCorners[index], adjustedMagnitude, 0.0f);
 	}
 }

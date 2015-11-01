@@ -5,12 +5,12 @@ using System.Collections;
 
 public class Spawner : MonoBehaviour {
 
-    private float _period = 10f; // Every 3 seconds
+    private float _period = 15.0f; // Every 3 seconds
 	public float nextActionTime = 0.0f;
     public int _tetrinoCount = 0;
 	private TetrinoSelector _tetrinoSelector;
 
-    public int numberOfTetrinosToSpawn=20;
+    public int numberOfTetrinosToSpawn=1;
 
     // Use this for initialization
     void Start () {

@@ -19,7 +19,7 @@ public class TetrinoSpawner : MonoBehaviour {
     void Start () {
 
 		// Set to spawn every 3 seconds
-		_period = 3f;
+		_period = 10f;
 		_decreaseAmount = 0.15f;		// Decrease by this many seconds (for time between spawns)
 		_intervalPerDecrease = 30f;		// Second interval to up the difficulty (a.k.a. decrease the spawn rate by _decreaseAmont time)
 		_nextIntervalDecreaseTime = 0f + _intervalPerDecrease;
