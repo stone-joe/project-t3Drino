@@ -1206,6 +1206,10 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: -12.1000004
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 157640}
