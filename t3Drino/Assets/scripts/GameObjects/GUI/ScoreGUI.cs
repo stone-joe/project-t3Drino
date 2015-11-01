@@ -20,7 +20,7 @@ public class ScoreGUI : MonoBehaviour {
 
 	public void InitializeScoreGO()
 	{
-		gameObject.transform.position = new Vector3(13.55f, 16f, 0f);			// Set position of text/object
+        gameObject.transform.position = new Vector3(14f, 20F, 0f);			// Set position of text/object
 
 		Destroy(gameObject.GetComponent("MeshCollider"));						// Remove collider
 

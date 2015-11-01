@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+public enum MotionType { FLOOR, SIDE, FRONT};
+
 public class wave : MonoBehaviour {
 
     // Use this for initialization
@@ -9,13 +12,15 @@ public class wave : MonoBehaviour {
         y = transform.position.y;
         x = transform.position.x ; /// 2;
         z = transform.position.z ;/// 2;
+                                  /// 
+
     }
 
 
 
     
 
-    public int _motion;
+    public MotionType _motion;
     float amplitudeY = 5.0f;
     float omegaY = 1.0f;
     float index;
@@ -25,11 +30,11 @@ public class wave : MonoBehaviour {
     public void Update()
     {
 
-        if (_motion == 0)  floorwave();
-        else 
-        if (_motion == 1) sidewallwave();
+        if (_motion == MotionType.FLOOR)  floorwave();
         else
-            if (_motion == 2) frontwallwave();
+            if (_motion == MotionType.SIDE) sidewallwave();
+        else
+                if (_motion == MotionType.FRONT) frontwallwave();
     }
 
     public void floorwave()

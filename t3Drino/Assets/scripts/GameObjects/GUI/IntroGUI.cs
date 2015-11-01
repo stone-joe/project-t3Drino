@@ -26,8 +26,8 @@ public class IntroGUI : MonoBehaviour {
 	public void LoadTextures()
 	{
 		_splashScreenPath = "GUI/TEMP_tetris_block_splash_screen";
-        _splashScreenTexture = Resources.Load(_splashScreenPath) as Texture2D;
-
+      //  _splashScreenTexture = Resources.Load(_splashScreenPath, typeof(Texture2D)) as Texture2D;
+        _splashScreenTexture = Resources.Load<Texture2D>(_splashScreenPath);
 
 	}
 
@@ -36,7 +36,7 @@ public class IntroGUI : MonoBehaviour {
 		SplashScreen = GameObject.CreatePrimitive(PrimitiveType.Quad);							// Create base game object of type Quad
 		SplashScreen.name = "SplashScreen";														// Name base game object
 		Destroy(SplashScreen.GetComponent("MeshCollider"));										// Remove collider
-		SplashScreen.GetComponent<Renderer>().material.shader = Shader.Find("Sprites/Diffuse");	// Set transparency
+		//SplashScreen.GetComponent<Renderer>().material.shader = Shader.Find("Sprites/Diffuse");	// Set transparency
 	}
 
 	private void SetSplashScreenLocation(float x, float y, float z)

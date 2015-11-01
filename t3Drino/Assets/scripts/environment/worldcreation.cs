@@ -22,7 +22,9 @@ public class worldcreation : MonoBehaviour {
             g.transform.parent = this.transform;
             g.transform.localScale = new Vector3(coef, coef, coef);
             g.AddComponent<wave>();
-            g.GetComponent<wave>()._motion = 0;
+            g.GetComponent<wave>()._motion = MotionType.FLOOR;
+
+
             listofblocks.Add(g);
 
         }
@@ -37,7 +39,7 @@ public class worldcreation : MonoBehaviour {
             g.transform.parent = this.transform;
             g.transform.localScale = new Vector3(coef, coef, coef);
             g.AddComponent<wave>();
-            g.GetComponent<wave>()._motion = 0;
+            g.GetComponent<wave>()._motion = MotionType.FLOOR;
             listofblocks.Add(g);
         }
 
@@ -56,7 +58,7 @@ public class worldcreation : MonoBehaviour {
             g.transform.parent = this.transform;
             g.transform.localScale = new Vector3(coef, coef, coef);
              g.AddComponent<wave>();
-             g.GetComponent<wave>()._motion = 1;
+             g.GetComponent<wave>()._motion = MotionType.SIDE;
              listofblocks.Add(g);
         }
 
@@ -70,7 +72,7 @@ public class worldcreation : MonoBehaviour {
             g.transform.parent = this.transform;
             g.transform.localScale = new Vector3(coef, coef, coef);
             g.AddComponent<wave>();
-            g.GetComponent<wave>()._motion = 1;
+            g.GetComponent<wave>()._motion = MotionType.SIDE;
             listofblocks.Add(g);
         }
 
@@ -89,7 +91,7 @@ public class worldcreation : MonoBehaviour {
             g.transform.parent = this.transform;
             g.transform.localScale = new Vector3(coef, coef, coef);
             g.AddComponent<wave>();
-            g.GetComponent<wave>()._motion = 2;   
+            g.GetComponent<wave>()._motion = MotionType.FRONT;
             listofblocks.Add(g);
         }
 
@@ -103,7 +105,7 @@ public class worldcreation : MonoBehaviour {
             g.transform.parent = this.transform;
             g.transform.localScale = new Vector3(coef, coef, coef);
             g.AddComponent<wave>();
-            g.GetComponent<wave>()._motion = 2;
+            g.GetComponent<wave>()._motion = MotionType.FRONT;
             listofblocks.Add(g);
 
         }
