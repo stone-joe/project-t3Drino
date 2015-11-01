@@ -57,6 +57,7 @@ public class ShootingRay : MonoBehaviour {
 
 			// If any one of the blocks is still moving, set moving flag
             foreach (RaycastHit hit in hits) {
+				// TODO: Need to apply tetromino state here so that we detect movement when the block state == INACTIVE
                 if (hit.transform.gameObject.tag == "notMovableTag" && hit.transform.gameObject.GetComponent<Rigidbody>().velocity.magnitude > 0.05F) {
                     moving = true;
                 }
