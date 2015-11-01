@@ -83,11 +83,8 @@ public class TetrinoPreviewer : MonoBehaviour {
 
 	private void SetNextTetromino()
 	{
-		float widthIO = 15f;
-		float heightIO = widthIO;
-		
-		float widthJLSTZ = 10f;
-		float heightJLSTZ = widthJLSTZ * 1.5f;
+		_scaleWidth = 15f;
+		_scaleHeight = _scaleWidth;
 
 		// Set texture and scaling
 		string tetrinoName = _tetrinoSelector.Queue[0].name;
@@ -95,44 +92,30 @@ public class TetrinoPreviewer : MonoBehaviour {
 		if (tetrinoName.Equals(TetrinoSpriteLibrary.PrefabTetrominoNameI))
 		{
 			_nextTetrinoSprite = _tetrinoSprites[I];
-			_scaleWidth = widthIO;
-			_scaleHeight = heightIO;
 		}
 		else if (tetrinoName.Equals(TetrinoSpriteLibrary.PrefabTetrominoNameJ))
 		{
 			_nextTetrinoSprite = _tetrinoSprites[J];
-			_scaleWidth = widthJLSTZ;
-			_scaleHeight = heightJLSTZ;
 		}
 		else if (tetrinoName.Equals(TetrinoSpriteLibrary.PrefabTetrominoNameL))
 		{
 			_nextTetrinoSprite = _tetrinoSprites[L];
-			_scaleWidth = widthJLSTZ;
-			_scaleHeight = heightJLSTZ;
 		}
 		else if (tetrinoName.Equals(TetrinoSpriteLibrary.PrefabTetrominoNameO))
 		{
 			_nextTetrinoSprite = _tetrinoSprites[O];
-			_scaleWidth = widthIO;
-			_scaleHeight = heightIO;
 		}
 		else if (tetrinoName.Equals(TetrinoSpriteLibrary.PrefabTetrominoNameS))
 		{
 			_nextTetrinoSprite = _tetrinoSprites[S];
-			_scaleWidth = widthJLSTZ;
-			_scaleHeight = heightJLSTZ;
 		}
 		else if (tetrinoName.Equals(TetrinoSpriteLibrary.PrefabTetrominoNameT))
 		{
 			_nextTetrinoSprite = _tetrinoSprites[T];
-			_scaleWidth = widthJLSTZ;
-			_scaleHeight = heightJLSTZ;
 		}
 		else if (tetrinoName.Equals(TetrinoSpriteLibrary.PrefabTetrominoNameZ))
 		{
 			_nextTetrinoSprite = _tetrinoSprites[Z];
-			_scaleWidth = widthJLSTZ;
-			_scaleHeight = heightJLSTZ;
 		}
 	}
 }
