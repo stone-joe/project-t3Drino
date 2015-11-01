@@ -92,8 +92,8 @@ public class ClassicLoseGUI : MonoBehaviour {
 	#region Initialization Methods
 	public void LoadTextures()
 	{
-		_loseImagePath = "Assets/Resources/GUI/TEMP_tetris_block_splash_screen.png"; // TODO: Change this for updating image
-		_loseImageTexture = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(_loseImagePath, typeof(Texture2D));
+		//_loseImagePath = "Assets/Resources/GUI/TEMP_tetris_block_splash_screen.png"; // TODO: Change this for updating image
+		//_loseImageTexture = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(_loseImagePath, typeof(Texture2D));
 	}
 	
 	public void InitializeSplashScreenGO()

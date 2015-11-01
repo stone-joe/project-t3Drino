@@ -244,4 +244,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
-  _guiComponents: {fileID: 0}

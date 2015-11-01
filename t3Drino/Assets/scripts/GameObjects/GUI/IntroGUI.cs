@@ -8,6 +8,8 @@ public class IntroGUI : MonoBehaviour {
 	public Texture2D _splashScreenTexture;
 	public string _splashScreenPath;
 
+   
+
 	// Use this for initialization
 	void Start () {
 		LoadTextures();
@@ -23,8 +25,10 @@ public class IntroGUI : MonoBehaviour {
 
 	public void LoadTextures()
 	{
-		_splashScreenPath = "Assets/Resources/GUI/TEMP_tetris_block_splash_screen.png"; // TODO: Change this for updating image
-		_splashScreenTexture = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(_splashScreenPath, typeof(Texture2D));
+		_splashScreenPath = "GUI/TEMP_tetris_block_splash_screen";
+        _splashScreenTexture = Resources.Load(_splashScreenPath) as Texture2D;
+
+
 	}
 
 	public void InitializeSplashScreenGO()
@@ -50,7 +54,7 @@ public class IntroGUI : MonoBehaviour {
 
 		SplashScreen.GetComponent<Renderer>().material.mainTexture = _splashScreenTexture;
 		SplashScreen.GetComponent<Transform>().localScale = new Vector3(_splashScreenTexture.width/scale, 
-		                                                                _splashScreenTexture.height/scale, 
-		                                                                1);
+																		_splashScreenTexture.height/scale, 
+																		1);
 	}
 }

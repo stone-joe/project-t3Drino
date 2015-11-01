@@ -59,13 +59,13 @@ public class TetrinoPreviewer : MonoBehaviour {
 	private void LoadTextures()
 	{
 		_tetrinoSprites = new Texture2D[_totalSprites];
-		_tetrinoSprites[I] = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(TetrinoSpriteLibrary.PathTetrominoSpriteI, typeof(Texture2D));
-		_tetrinoSprites[J] = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(TetrinoSpriteLibrary.PathTetrominoSpriteJ, typeof(Texture2D));
-		_tetrinoSprites[L] = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(TetrinoSpriteLibrary.PathTetrominoSpriteL, typeof(Texture2D));
-		_tetrinoSprites[O] = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(TetrinoSpriteLibrary.PathTetrominoSpriteO, typeof(Texture2D));
-		_tetrinoSprites[S] = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(TetrinoSpriteLibrary.PathTetrominoSpriteS, typeof(Texture2D));
-		_tetrinoSprites[T] = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(TetrinoSpriteLibrary.PathTetrominoSpriteT, typeof(Texture2D));
-		_tetrinoSprites[Z] = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(TetrinoSpriteLibrary.PathTetrominoSpriteZ, typeof(Texture2D));
+		_tetrinoSprites[I] = Resources.Load(TetrinoSpriteLibrary.PathTetrominoSpriteI) as Texture2D;
+        _tetrinoSprites[J] = Resources.Load(TetrinoSpriteLibrary.PathTetrominoSpriteJ) as Texture2D;
+        _tetrinoSprites[L] = Resources.Load(TetrinoSpriteLibrary.PathTetrominoSpriteL) as Texture2D;
+        _tetrinoSprites[O] = Resources.Load(TetrinoSpriteLibrary.PathTetrominoSpriteO) as Texture2D;
+        _tetrinoSprites[S] = Resources.Load(TetrinoSpriteLibrary.PathTetrominoSpriteS) as Texture2D;
+        _tetrinoSprites[T] = Resources.Load(TetrinoSpriteLibrary.PathTetrominoSpriteT) as Texture2D;
+        _tetrinoSprites[Z] = Resources.Load(TetrinoSpriteLibrary.PathTetrominoSpriteZ) as Texture2D;
 	}
 
 	private void InitializeNextTetrominoGO()
