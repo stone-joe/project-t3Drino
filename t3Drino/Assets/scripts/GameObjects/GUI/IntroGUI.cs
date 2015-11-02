@@ -36,7 +36,7 @@ public class IntroGUI : MonoBehaviour {
 		SplashScreen = GameObject.CreatePrimitive(PrimitiveType.Quad);							// Create base game object of type Quad
 		SplashScreen.name = "SplashScreen";														// Name base game object
 		Destroy(SplashScreen.GetComponent("MeshCollider"));										// Remove collider
-		//SplashScreen.GetComponent<Renderer>().material.shader = Shader.Find("Sprites/Diffuse");	// Set transparency
+		SplashScreen.GetComponent<Renderer>().material = Resources.Load<Material>("Shaders/SpriteTransparentMaterial");	// Set transparency
 	}
 
 	private void SetSplashScreenLocation(float x, float y, float z)

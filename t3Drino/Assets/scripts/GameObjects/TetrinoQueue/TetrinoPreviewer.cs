@@ -73,7 +73,7 @@ public class TetrinoPreviewer : MonoBehaviour {
 		NextTetrino = GameObject.CreatePrimitive(PrimitiveType.Quad);							// Create base game object of type Quad
 		NextTetrino.name = "NextTetrino";														// Name base game object
 		Destroy(NextTetrino.GetComponent("MeshCollider"));										// Remove collider
-	//	NextTetrino.GetComponent<Renderer>().material.shader = Shader.Find("Sprites/Diffuse");	// Set transparency
+		NextTetrino.GetComponent<Renderer>().material = Resources.Load<Material>("Shaders/SpriteTransparentMaterial");	// Set transparency
 	}
 
 	private void SetNextTetrominoLocation(float x, float y, float z)
