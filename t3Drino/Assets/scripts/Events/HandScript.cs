@@ -88,14 +88,19 @@ public class HandScript : MonoBehaviour {
                 Collider[] close_things = Physics.OverlapSphere(handCenterPos, grabRadius);
                 Vector3 dist = new Vector3(grabRadius, 0.0F, 0.0F);
                 foreach (Collider close_thing in close_things) {
-                    Vector3 new_dist = handCenterPos - close_thing.transform.position;
-                    if (close_thing.gameObject.transform.parent != null
-                        && close_thing.gameObject.transform.parent.transform.tag== "movableTag"
-                        && new_dist.magnitude < dist.magnitude
-                    ) {
-                        // Get the block's parent shape
-                        grabbedObject = close_thing.gameObject.transform.parent.gameObject;
-                        dist = new_dist;
+                    if (close_thing.transform.parent != null) {
+                        TetrominoState tetrominoState = close_thing.transform.parent.gameObject.GetComponent<TetrominoState> ();
+                        Vector3 new_dist = handCenterPos - close_thing.transform.position;
+                        
+                        if (close_thing.gameObject.transform.parent != null
+                            && tetrominoState != null
+                            && tetrominoState.getState() == TetrominoState.states.ACTIVE
+                            && new_dist.magnitude < dist.magnitude
+                        ) {
+                            // Get the block's parent shape
+                            grabbedObject = close_thing.gameObject.transform.parent.gameObject;
+                            dist = new_dist;
+                        }
                     }
                 }
                 if (grabbedObject != null) {
@@ -128,7 +133,8 @@ public class HandScript : MonoBehaviour {
             grabbedObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, palmRotationZ - offsetRot));
 
             // Force drop if deactivated for some reason
-            if (grabbedObject.transform.tag == "notMovableTag") {
+            TetrominoState grabbedObjectState = grabbedObject.GetComponent<TetrominoState> ();
+            if (grabbedObjectState.getState() == TetrominoState.states.INACTIVE) {
                 dropVelocity = grabbedObject.GetComponent<Rigidbody>().velocity;
                 LimitVelocity(dropVelocity);
                 grabbedObject.GetComponent<Rigidbody>().velocity = new Vector3(dropVelocity.x, dropVelocity.y, dropVelocity.z);

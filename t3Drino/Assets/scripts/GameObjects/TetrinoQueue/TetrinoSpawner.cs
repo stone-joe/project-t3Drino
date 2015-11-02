@@ -11,6 +11,7 @@ public class TetrinoSpawner : MonoBehaviour {
 	private float _intervalPerDecrease;
 	private float _nextIntervalDecreaseTime;
 	private TetrinoSelector _tetrinoSelector;
+	private TetrominoState tetrominoState;
 	private TetrinoSpawnTimer _tetrinoSpawnTimer;
 	private TetrinoSpawnRateModifier _tetrinoSpawnRateModifier;
 	private Classic _classicModeState;
@@ -54,6 +55,8 @@ public class TetrinoSpawner : MonoBehaviour {
 		if (_tetrinoSpawnTimer.ShouldPop)
 		{
 			GameObject go = _tetrinoSelector.Pop();	// I think we should :)
+			tetrominoState = go.GetComponent<TetrominoState>();
+			tetrominoState.setState(TetrominoState.states.ACTIVE);
 			Instantiate(go, transform.position, transform.rotation); // Pop goes the weasle!
 			_tetrinoSpawnTimer.ShouldPop = false; 	// Stop da pop
 		}

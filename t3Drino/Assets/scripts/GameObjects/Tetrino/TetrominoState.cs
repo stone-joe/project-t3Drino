@@ -21,7 +21,7 @@ public class TetrominoState : MonoBehaviour {
 	 * @member {TetrominState.states} state
 	 * @description The current state of the tetromino
 	 */
-	private TetrominoState.states state = TetrominoState.states.QUEUED; // Default
+	public TetrominoState.states state = TetrominoState.states.QUEUED; // Default
 	/**
 	 * @member {bool} moving
 	 * @description Whether or not the tetromino is moving. This is calculated in the Update method once per frame

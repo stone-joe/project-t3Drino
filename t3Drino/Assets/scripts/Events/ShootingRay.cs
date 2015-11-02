@@ -30,8 +30,8 @@ public class ShootingRay : MonoBehaviour {
     
         // There are two ways/options to determine if line should be cleared via block distance from this ray
         // Set values depending on which option used. See method Update() to select option 1 or 2
-        halfDistanceBetweenRays = 1.10f;            // For option 1
-        plusMinusThreshholdRangeFromRay = 0.6f;     // For option 2
+        //halfDistanceBetweenRays = 1.10f;            // For option 1
+        plusMinusThreshholdRangeFromRay = 1.0f  ;     // For option 2
     }
     
     // Update is called once per frame
@@ -55,31 +55,36 @@ public class ShootingRay : MonoBehaviour {
             // Only clear line if all objects are within threshhold
             allObjectsInThreshhold = true;
 
-            // If any one of the blocks is still lineInvalid, set lineInvalid flag
+            // Find any reason to invalidate the line (moving or out of threshold)
             foreach (RaycastHit hit in hits) {
-                TetrominoState tetrominoState = hit.transform.gameObject.GetComponent<TetrominoState> ();
+                if (hit.transform.gameObject.GetComponent<TetrominoState> () == null) {
+                    lineInvalid = true;
+                } else {
+                    TetrominoState tetrominoState = hit.transform.gameObject.GetComponent<TetrominoState> ();
 
-                if (tetrominoState.getState() == TetrominoState.states.INACTIVE) {
-                    if (hit.transform.gameObject.GetComponent<Rigidbody>().velocity.magnitude > 0.05F) {
+                    if (tetrominoState.getState() == TetrominoState.states.INACTIVE) {
+                        if (hit.transform.gameObject.GetComponent<Rigidbody>().velocity.magnitude > 0.06F) {
+                            lineInvalid = true;
+                        }
+
+                        float hitBlockY = hit.collider.transform.position.y;                    
+                        // There are two ways to determine if block is within threshhold/should be destroyed or not.
+                        // Option 1
+                        /*if (!(hitBlockY >= threshholdLower && hitBlockY < threshholdUpper))
+                        {
+                            allObjectsInThreshhold = false;
+                        }*/
+                        // Option 2: This seems easier to adjust
+                        float distanceBlockFromRay = Mathf.Abs(hitBlockY - rayYCoord);
+                        if (distanceBlockFromRay > plusMinusThreshholdRangeFromRay) {
+                            allObjectsInThreshhold = false;
+                        }
+                    } else {
                         lineInvalid = true;
                     }
-
-                    float hitBlockY = hit.collider.transform.position.y;                    
-                    // There are two ways to determine if block is within threshhold/should be destroyed or not.
-                    // Option 1
-                    /*if (!(hitBlockY >= threshholdLower && hitBlockY < threshholdUpper))
-                    {
-                        allObjectsInThreshhold = false;
-                    }*/
-                    // Option 2: This seems easier to adjust
-                    float distanceBlockFromRay = hitBlockY - rayYCoord;
-                    if (distanceBlockFromRay > plusMinusThreshholdRangeFromRay)
-                    {
-                        allObjectsInThreshhold = false;
-                    }
-                } else {
-                    lineInvalid = true;
                 }
+                
+                
                 
             }
 
@@ -95,7 +100,6 @@ public class ShootingRay : MonoBehaviour {
         foreach (RaycastHit hit in hits) {
             // Get hit block
             hitBlock = hit.collider.transform;
-            
             if (hitBlock.parent != null) {
                 TetrominoState tetrominoState = hitBlock.parent.gameObject.GetComponent<TetrominoState> ();  
                 if (tetrominoState.getState() == TetrominoState.states.INACTIVE) { // only handle blocks, not the side walls
@@ -147,15 +151,18 @@ public class ShootingRay : MonoBehaviour {
                                 newParent.AddComponent<SelfCleanUp>();
                                 newParent.AddComponent<TetrominoState>().setState(TetrominoState.states.INACTIVE);
                                 child.parent = newParent.transform;
-                                child.gameObject.AddComponent<Rigidbody>();
-                                child.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ
-                                    | RigidbodyConstraints.FreezeRotationX
-                                        | RigidbodyConstraints.FreezeRotationY; 
+                                child.parent.gameObject.AddComponent<Rigidbody>();
+                                child.parent.GetComponent<Rigidbody>().mass = 10;
+                                child.parent.GetComponent<Rigidbody>().drag = 1;
+                                child.parent.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ
+                                                                                        | RigidbodyConstraints.FreezeRotationX
+                                                                                        | RigidbodyConstraints.FreezeRotationY;
                             }
                         }
                     }
                     hitBlock.parent = null;
                 }
+            }
         }
     }
 }
