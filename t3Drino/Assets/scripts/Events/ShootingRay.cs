@@ -20,6 +20,7 @@ public class ShootingRay : MonoBehaviour {
     private Vector3 difference;
 
     private ScoreManager _scoreManager;
+	
 
     // Use this for initialization
     void Start () {
@@ -27,7 +28,8 @@ public class ShootingRay : MonoBehaviour {
         // Get score manager reference
         GameObject go = GameObject.Find("ScoreManager");
         _scoreManager = (ScoreManager) go.GetComponent(typeof(ScoreManager));
-    
+		
+
         // There are two ways/options to determine if line should be cleared via block distance from this ray
         // Set values depending on which option used. See method Update() to select option 1 or 2
         //halfDistanceBetweenRays = 1.10f;            // For option 1
@@ -89,7 +91,7 @@ public class ShootingRay : MonoBehaviour {
             }
 
             if (!lineInvalid && allObjectsInThreshhold) {
-                _scoreManager.AddToScore(10f);      // Increase score
+				_scoreManager.AddToScore(_scoreManager.ScoreToAdd);      // Increase score
                 DestroyAndDeparent();               // Destroy and initiate explosion
             }
         }

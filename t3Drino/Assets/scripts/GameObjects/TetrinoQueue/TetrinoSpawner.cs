@@ -16,6 +16,8 @@ public class TetrinoSpawner : MonoBehaviour {
 	private TetrinoSpawnTimer _tetrinoSpawnTimer;
 	private TetrinoSpawnRateModifier _tetrinoSpawnRateModifier;
 	private Classic _classicModeState;
+	private ScoreManager _scoreManager;
+
 
     // Use this for initialization
     void Start () {
@@ -49,10 +51,17 @@ public class TetrinoSpawner : MonoBehaviour {
 		// Get Classic mode state to check if game is over
 		GameObject go4 = GameObject.Find("Main Camera");
 		_classicModeState = (Classic)go4.GetComponent(typeof(Classic));
+
+		// Get score manager reference
+		GameObject go5 = GameObject.Find("ScoreManager");
+		_scoreManager = (ScoreManager) go5.GetComponent(typeof(ScoreManager));
     }
 
     void FixedUpdate()
-    {
+    {    
+		// Checking current spawn interval time
+		//Debug.Log("Current spawn time: " + _tetrinoSpawnTimer.IntervalBetweenSpawn);
+
 		// Should we pop the next tetromino from the queue?
 		if (_tetrinoSpawnTimer.ShouldPop)
 		{
@@ -71,12 +80,12 @@ public class TetrinoSpawner : MonoBehaviour {
 		    && !_classicModeState.InLoseState)
 		{
 			ApplyDifficultyModifierToTimer();
+			_scoreManager.SetScoreToAdd(_scoreManager.ScoreToAdd + 100f);
 			//Debug.Log("Spawn timer current time: " + _tetrinoSpawnTimer.CurrentTime);
 			//Debug.Log ("Spawn timer interval between spawn: " + _tetrinoSpawnTimer.IntervalBetweenSpawn);
 		}
 
 		// We can do something similar here for applying a faster falling speed for the tetrominoes
-
     }
 
 	public void SetSpawnerLocation(Vector3 vector)
