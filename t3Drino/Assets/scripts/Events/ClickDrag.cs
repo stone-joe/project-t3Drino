@@ -9,14 +9,18 @@ public class ClickDrag : MonoBehaviour {
     private Vector3 curPosition;
     private bool canRotate;
     private float rortateSpeed;
+    private Vector3 initPosition; // For Leap Menu respawn of shape
+    private Vector3 initRotation; // For Leap Menu respawn of shape
 
     public GameObject wholeobject;
     public Classic _classicModeState;
-    public bool disabled; // For Leap Menu. Don't deactivate shapes when they hit the table.
+    public bool isLeapMenuTet; // For Leap Menu. Don't deactivate shapes when they hit the table.
 
     // Use this for initialization
     void Start ()
     {
+        initPosition = transform.position;
+        initRotation = transform.localEulerAngles;
         canRotate = false;
         rortateSpeed = 300.0f;
     }
@@ -25,12 +29,17 @@ public class ClickDrag : MonoBehaviour {
     void FixedUpdate ()
     {
         float rotateDirection = 0.0f;
-        if (canRotate  && transform.tag == "movableTag") {
+        if (canRotate && transform.tag == "movableTag") {
             if (Input.GetKey(KeyCode.LeftArrow)) rotateDirection = -1.0f;
             else
                 if (Input.GetKey(KeyCode.RightArrow)) rotateDirection = 1.0f;
 
             transform.RotateAround(curPosition, Vector3.back, rortateSpeed * Time.deltaTime * rotateDirection);
+        }
+
+        if (isLeapMenuTet && transform.position.y < -15F) {
+            transform.position = initPosition;
+            transform.localEulerAngles = initRotation;
         }
     }
 
@@ -57,7 +66,7 @@ public class ClickDrag : MonoBehaviour {
     
     void OnCollisionEnter(Collision collision)
     {   
-        if (!disabled) {
+        if (!isLeapMenuTet) {
             // TODO: Merge this & apply state changes... this code initalizes the lose screen
             if (transform.tag == "notMovableTag" && collision.gameObject.name == "roof")
             {

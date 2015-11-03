@@ -10,4 +10,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/MainMenu.unity
   - enabled: 1
+    path: Assets/scenes/LeapMenu.unity
+  - enabled: 1
     path: Assets/scenes/basic_test_scene.unity

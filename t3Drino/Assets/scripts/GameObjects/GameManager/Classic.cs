@@ -113,6 +113,8 @@ public class Classic : MonoBehaviour {
 			_loseGUIComponents = obj.AddComponent<ClassicLoseGUI>();
 			_inLoseState = true;
 			_scoreManager.GetComponent<ScoreManager>().ScoreIsFrozen = true; // Freeze score
+
+			_loseGUIComponents.StartLeapMenu(5.0F);
 		}
 	}
 }

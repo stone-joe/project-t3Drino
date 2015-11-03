@@ -119,9 +119,9 @@ public class HandScript : MonoBehaviour {
                     offsetRotX = palmRotationX - grabbedObject.transform.localEulerAngles.x;
                     offsetRotY = palmRotationY - grabbedObject.transform.localEulerAngles.y;
                     offsetRotZ = palmRotationZ - grabbedObject.transform.localEulerAngles.z;
-                    foreach (Transform block in grabbedObject.transform) {
+                    /*foreach (Transform block in grabbedObject.transform) {
                         block.GetComponent<Renderer> ().material.color = Color.yellow;
-                    }
+                    }*/
                 }
             }
         } else {

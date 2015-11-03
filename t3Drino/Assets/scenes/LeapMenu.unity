@@ -472,6 +472,10 @@ Prefab:
       propertyPath: m_Name
       value: start_tet
       objectReference: {fileID: 0}
+    - target: {fileID: 11452438, guid: fc8e41b23e20bab4da126a902c71b2ef, type: 2}
+      propertyPath: isLeapMenuTet
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fc8e41b23e20bab4da126a902c71b2ef, type: 2}
   m_IsPrefabParent: 0
@@ -851,6 +855,10 @@ Prefab:
     - target: {fileID: 164752, guid: d671b69db8a315b4b89b1304ccb1e918, type: 2}
       propertyPath: m_Name
       value: quit_tet
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423576, guid: d671b69db8a315b4b89b1304ccb1e918, type: 2}
+      propertyPath: isLeapMenuTet
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d671b69db8a315b4b89b1304ccb1e918, type: 2}
