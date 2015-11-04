@@ -6,16 +6,33 @@ public class ScoreGUI : MonoBehaviour {
 	//private GameObject _scoreGO;
 	private Score _score;
 	private TextMesh _txtMesh;
+	private bool _isFrozen;
 
 	// Use this for initialization
 	void Start () {
 		InitializeScoreGO();
 		FindScoreGO();
 	}
+
+	#region Public Properties
+	public bool IsFrozen
+	{
+		get
+		{
+			return _isFrozen;
+		}
+
+		set
+		{
+			_isFrozen = value;
+		}
+	}
+	#endregion
 	
 	// Update is called once per frame
 	void Update () {
-		_txtMesh.text = _score.CurrentScore.ToString();
+		if (!_isFrozen)
+			_txtMesh.text = _score.CurrentScore.ToString();
 	}
 
 	public void InitializeScoreGO()
@@ -37,5 +54,45 @@ public class ScoreGUI : MonoBehaviour {
 	{
 		GameObject go = GameObject.Find("Score");
 		_score = (Score) go.GetComponent(typeof(Score));
+	}
+
+	public void SetText(string text)
+	{
+		_txtMesh.text = text;
+	}
+
+	public string GetCurrentText()
+	{
+		return _txtMesh.text;
+	}
+
+	public void FreezeScoreUpdating()
+	{
+		_isFrozen = true;
+	}
+
+	public void UnFreezeScoreUpdating()
+	{
+		_isFrozen = false;
+	}
+
+	public void SetFontSize(int size)
+	{
+		_txtMesh.fontSize = size;
+	}
+
+	public void SetFontStyleToBold()
+	{
+		_txtMesh.fontStyle = FontStyle.Bold;
+	}
+
+	public void AlignToCenter()
+	{
+		_txtMesh.alignment = TextAlignment.Center;
+	}
+
+	public void SetTextColor(Color color)
+	{
+		_txtMesh.color = color;
 	}
 }

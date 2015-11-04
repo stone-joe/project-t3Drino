@@ -17,7 +17,8 @@ public class Classic : MonoBehaviour {
 	public GameObject _scoreGUI;
 	//public GameObject _elapsedTimer;
 
-	public ClassicLoseGUI _loseGUIComponents;
+	//public ClassicLoseGUI _loseGUIComponents;
+	public ClassicLoseLeapGUI _loseLeapGUIComponents; // Lose screen GUI for leap version
 	private bool _inLoseState;
 
 	#region Public Properties
@@ -109,12 +110,20 @@ public class Classic : MonoBehaviour {
 		// Only enter lose state once
 		if (!_inLoseState)
 		{
-			GameObject obj = new GameObject("ClassicLoseGUI");
-			_loseGUIComponents = obj.AddComponent<ClassicLoseGUI>();
 			_inLoseState = true;
 			_scoreManager.GetComponent<ScoreManager>().ScoreIsFrozen = true; // Freeze score
 
-			_loseGUIComponents.StartLeapMenu(5.0F);
+			// Enable these only for normal gameplay
+			//GameObject obj = new GameObject("ClassicLoseGUI");
+			//_loseGUIComponents = obj.AddComponent<ClassicLoseGUI>();
+
+			// Adjust lose gui - leap version
+			GameObject obj = new GameObject("ClassicLoseLeapGUI");
+			_loseLeapGUIComponents = obj.AddComponent<ClassicLoseLeapGUI>();
+
+			// Redirect to leap menu after 5 seconds
+			//_loseGUIComponents.StartLeapMenu(5.0F);
+			_loseLeapGUIComponents.StartLeapMenu(5.0F);
 		}
 	}
 }

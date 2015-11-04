@@ -610,7 +610,7 @@ MonoBehaviour:
   _player: {fileID: 0}
   _scoreManager: {fileID: 0}
   _scoreGUI: {fileID: 0}
-  _loseGUIComponents: {fileID: 0}
+  _loseLeapGUIComponents: {fileID: 0}
 --- !u!1001 &1379431940
 Prefab:
   m_ObjectHideFlags: 0

@@ -16,10 +16,10 @@ public class ShootingRay : MonoBehaviour {
     // Use this for initialization
     void Start () {
         // Get score manager reference
-        /*GameObject go = GameObject.Find("ScoreManager");
+        GameObject go = GameObject.Find("ScoreManager");
         _scoreManager = (ScoreManager) go.GetComponent(typeof(ScoreManager));
 
-        _isRowCleared = false;*/
+        _isRowCleared = false;
     }
     
     // Update is called once per frame
@@ -71,6 +71,7 @@ public class ShootingRay : MonoBehaviour {
             }
 
             if (!moving) {
+				_scoreManager.AddToScore(10f);
                 foreach (RaycastHit hit in hits) {
                     // Get hit block
                     hitBlock = hit.collider.transform;
