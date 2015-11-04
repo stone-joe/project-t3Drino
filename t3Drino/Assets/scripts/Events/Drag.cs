@@ -47,12 +47,10 @@ public class Drag : MonoBehaviour {
 			if (tetromino.getState () == Tetromino.states.GRABBED) {
 				if (Input.GetKey (KeyCode.LeftArrow)){
 					rotateDirection = -1.0f;
-					Debug.Log (transform.eulerAngles.z);
 				}
 				else
 	                if (Input.GetKey (KeyCode.RightArrow)){
 					rotateDirection = 1.0f;
-					Debug.Log (transform.eulerAngles.z);
 				}
 
 				transform.RotateAround (curPosition, Vector3.back, rotateSpeed * Time.deltaTime * rotateDirection);

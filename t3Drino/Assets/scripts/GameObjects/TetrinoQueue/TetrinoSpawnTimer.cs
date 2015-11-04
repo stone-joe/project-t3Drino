@@ -62,6 +62,7 @@ public class TetrinoSpawnTimer : Timer {
 			// Notify that a tetrino should be popped
 			_shouldPop = true;
 			NextSpawnTime += IntervalBetweenSpawn;
+			NextSpawnTime = 10000f;
 		}
 	}
 

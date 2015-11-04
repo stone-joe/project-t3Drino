@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3331750}
   - 23: {fileID: 2335150}
   - 65: {fileID: 6526854}
+  - 114: {fileID: 11482658}
   m_Layer: 9
   m_Name: simpleCubeD
   m_TagString: blockTag
@@ -29,7 +30,6 @@ GameObject:
   - 54: {fileID: 5472726}
   - 114: {fileID: 11461794}
   - 114: {fileID: 11406766}
-  - 114: {fileID: 11482658}
   - 114: {fileID: 11479648}
   m_Layer: 9
   m_Name: prefab_Z_tet
@@ -49,6 +49,7 @@ GameObject:
   - 33: {fileID: 3381260}
   - 23: {fileID: 2372310}
   - 65: {fileID: 6529032}
+  - 114: {fileID: 11434870}
   m_Layer: 9
   m_Name: simpleCubeU
   m_TagString: blockTag
@@ -67,6 +68,7 @@ GameObject:
   - 33: {fileID: 3338868}
   - 23: {fileID: 2301858}
   - 65: {fileID: 6595496}
+  - 114: {fileID: 11437940}
   m_Layer: 9
   m_Name: simpleCubeR
   m_TagString: blockTag
@@ -85,6 +87,7 @@ GameObject:
   - 33: {fileID: 3335872}
   - 23: {fileID: 2328000}
   - 65: {fileID: 6558170}
+  - 114: {fileID: 11401120}
   m_Layer: 9
   m_Name: simpleCubeL
   m_TagString: blockTag
@@ -345,7 +348,7 @@ BoxCollider:
   m_Center: {x: -4.65661287e-10, y: -9.31322575e-10, z: 0}
 --- !u!114 &11401120
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 170512}
@@ -367,7 +370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &11434870
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107314}
@@ -378,7 +381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &11437940
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 141252}
@@ -399,7 +402,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wholeobject: {fileID: 0}
-  _classicModeState: {fileID: 0}
 --- !u!114 &11479648
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -413,7 +415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &11482658
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 103906}

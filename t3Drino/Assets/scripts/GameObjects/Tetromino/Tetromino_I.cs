@@ -4,11 +4,11 @@ using System.Collections;
 /**
  * @class Tetromino_I
  * @extends Tetromino
- * 		   y
- * 		   ^
- * 		   |
+ * 		 y  
+ * 		 ^  
+ * 		 |  
  * 3---+---+---+---2
- * |   |   o   |   | -> x
+ * |   | o |   |   | -> x
  * 0---+---+---+---1
  * 
  * o = origin
@@ -61,6 +61,8 @@ public class Tetromino_I : Tetromino {
 
 		// Magnitude of vector from tetromino origin to corners
 		_magnitude = new Vector3(2.0f * _cubeWidth, 0.5f * _cubeHeight, 0.0f).sqrMagnitude;
+
+		cubeIndex = 2;
 	}
 	/**
 	 * @member {Method} getExtremeCorners

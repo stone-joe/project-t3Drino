@@ -46,7 +46,7 @@ public class TetrinoSelector : MonoBehaviour {
 	}
 
 	private GameObject GetNextTetrino(){
-		return (GameObject)_prefabs[0];
+		return (GameObject)_prefabs[6];
 		//return (GameObject)_prefabs[Random.Range(0, _prefabs.Length)];
 	}
 }

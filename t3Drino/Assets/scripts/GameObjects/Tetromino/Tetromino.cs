@@ -7,6 +7,11 @@ using System.Collections;
  */
 public class Tetromino : MonoBehaviour {
 	/**
+	 * @member {int} cubeIndex
+	 * @description The index of the cube from which the rays are calculated
+	 */
+	protected int cubeIndex = -1;
+	/**
 	 * @member {struct} WallCollision
 	 * @description A simple struct that stores two pieces of information: the all that was hit and the distance from that hit.
 	 * This is used by the rayHitWall method to check if a tetromino has moved beyond a wall.
@@ -189,6 +194,7 @@ public class Tetromino : MonoBehaviour {
 		}
 
 		adjustedAngle = getAdjustedAngle (corners[extreme]);
+		Debug.Log (adjustedAngle);
 		transform.position = new Vector3 (positionOfWall - (getHypotenuse(corners[extreme]) * Mathf.Cos(adjustedAngle)),
 		                                  y, transform.position.z);
 	}
@@ -202,9 +208,9 @@ public class Tetromino : MonoBehaviour {
 		float magnitude = (rayVector.magnitude);
 		WallCollision colliderData = new WallCollision ();
 
-		Debug.DrawRay (transform.position, rayVector, Color.black);
+		Debug.DrawRay (transform.GetChild(cubeIndex).position, rayVector, Color.black);
 
-		if (Physics.Raycast (transform.position, rayVector, out hit, magnitude, 1 << 8)) {
+		if (Physics.Raycast (transform.GetChild(cubeIndex).position, rayVector, out hit, magnitude, 1 << 8)) {
 			if (hit.transform.name == "wallRight") {
 				colliderData.wall = Wall.RIGHT;
 			} else if (hit.transform.name == "wallLeft") {
