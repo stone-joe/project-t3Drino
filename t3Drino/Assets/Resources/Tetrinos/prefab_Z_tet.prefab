@@ -31,6 +31,7 @@ GameObject:
   - 114: {fileID: 11461794}
   - 114: {fileID: 11406766}
   - 114: {fileID: 11479648}
+  - 114: {fileID: 11422108}
   m_Layer: 9
   m_Name: prefab_Z_tet
   m_TagString: Tetromino_Z
@@ -368,6 +369,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139e3b8c5c95af3459a81e8623ab22c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11422108
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cb63b86f39754df0afbb5149495ea7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 2
 --- !u!114 &11434870
 MonoBehaviour:
   m_ObjectHideFlags: 0

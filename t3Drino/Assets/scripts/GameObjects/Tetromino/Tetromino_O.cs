@@ -5,18 +5,18 @@ using System.Collections;
  * @class Tetromino_I		
  * @extends Tetromino		
  * 		
- * 		 y
- * 		 ^
- * 		 |
- * 0---+---5
+ * 	 y
+ * 	 ^
+ *   |
+ * 0---+---3
  * |   |   |
- * 1---+---+---4
- * 	   | o |   | ---> x
- *     2---+---3
+ * +---+---+
+ * | o |   | ---> x
+ * 1---+---2
  * 
  * o = origin
  */
-public class Tetromino_S : Tetromino {
+public class Tetromino_O : Tetromino {
 
 	/**
 	 * @member {Tetromino} tetromino
@@ -28,7 +28,7 @@ public class Tetromino_S : Tetromino {
 	 */
 	public override void Start(){
 		base.Start();
-		cubeIndex = 1;
+		cubeIndex = 0;
 		tetromino = transform.gameObject.GetComponent<Tetromino> ();
 	}
 	/**
@@ -40,41 +40,31 @@ public class Tetromino_S : Tetromino {
 	protected override int[] getExtremeCorners(){
 		float angleZ = transform.eulerAngles.z * Mathf.Deg2Rad;
 		
-		if (angleZ >= 0 && angleZ < (Mathf.PI / 2)) {
-			return new int[]{0, 3};
-		} else if (angleZ >= (Mathf.PI / 2) && angleZ < (5 * Mathf.PI / 6)) {
+		if (angleZ >= 0 && angleZ < Mathf.PI / 2) {
 			return new int[]{0, 2};
-		} else if (angleZ >= (5 * Mathf.PI / 6) && angleZ < (Mathf.PI )) {
-			return new int[]{4, 2};
-		} else if (angleZ >= Mathf.PI && angleZ < (Mathf.PI * 5 / 4)) {
+		} else if (angleZ >= Mathf.PI / 2 && angleZ < Mathf.PI) {
 			return new int[]{3, 1};
-		} else if (angleZ >= (5 * Mathf.PI / 4) && angleZ < (Mathf.PI * 3 / 2)) {
-			return new int[]{3, 0};
-		} else if (angleZ >= (3 * Mathf.PI / 2) && angleZ < (Mathf.PI * 5 / 3)) {
+		} else if (angleZ >= Mathf.PI && angleZ < 3 * Mathf.PI / 2) {
 			return new int[]{2, 0};
 		} else {
-			return new int[]{2, 4};
-		}
+			return new int[]{1, 3};
+		} 
 	}
-	/**
-	 * @override
-	 */
-	protected override float getAdjustedAngle(int corner){
+	protected override float getPositionFromWall(int corner){
 		float angleZ = transform.eulerAngles.z * Mathf.Deg2Rad;
+		float adjustedAngle = 0.0f;
 		
 		if (corner == 0) {
-			return angleZ + (Mathf.PI * 3 / 4);
+			adjustedAngle = angleZ + ((Mathf.PI / 2) + Mathf.Atan2((1.5f * _cubeHeight), (0.5f * _cubeWidth)));
 		} else if (corner == 1) {
-			return angleZ + Mathf.PI - Mathf.Atan2(0.5f, 1.5f);
+			adjustedAngle = angleZ + (5 * Mathf.PI / 4);
 		} else if (corner == 2) {
-			return angleZ + Mathf.PI * 5 / 4;
-		} else if ( corner == 3 ){
-			return angleZ + (3 * Mathf.PI / 4) + Mathf.Atan2(0.5f, 1.5f);
-		} else if (corner == 4){
-			return angleZ - Mathf.Atan2(0.5f, 1.5f);
+			adjustedAngle = angleZ - (Mathf.Atan2((0.5f * _cubeHeight), (1.5f * _cubeWidth)));
 		} else {
-			return angleZ + Mathf.Atan2(1.5f, 0.5f);
+			adjustedAngle = angleZ + (Mathf.PI / 4);
 		}
+
+		return (getHypotenuse(corner) * Mathf.Cos(adjustedAngle)) + ((_cubeWidth / 2) * Mathf.Cos (Mathf.PI / 4));
 	}
 	/**
 	 * @member {Method} getUnitVector
@@ -83,18 +73,14 @@ public class Tetromino_S : Tetromino {
 	 */
 	public Vector3 getVector(int corner){
 		if (corner == 0) {
-			return new Vector3 (-1.5f * _cubeWidth, 1.5f * _cubeHeight, 0);
+			return new Vector3 (-0.5f * _cubeWidth, 1.5f * _cubeHeight, 0);
 		} else if (corner == 1) {
-			return new Vector3 (-1.5f * _cubeWidth, 0.5f * _cubeHeight, 0);
+			return new Vector3 (-_cubeWidth / 2, -_cubeHeight / 2, 0);
 		} else if (corner == 2) {
-			return new Vector3 (-0.5f * _cubeWidth, -0.5f * _cubeHeight, 0);
-		} else if (corner == 3) {
 			return new Vector3 (1.5f * _cubeWidth, -0.5f * _cubeHeight, 0);
-		} else if (corner == 4) {
-			return new Vector3 (1.5f * _cubeWidth, 0.5f * _cubeHeight, 0);
 		} else {
-			return new Vector3 (0.5f * _cubeWidth, 1.5f * _cubeHeight, 0);
-		}
+			return new Vector3 (1.5f * _cubeWidth, 1.5f * _cubeHeight, 0);
+		} 
 	}
 	/**
 	 * @override

@@ -176,8 +176,6 @@ public class Tetromino : MonoBehaviour {
 		float angleZ = transform.eulerAngles.z * Mathf.Deg2Rad;
 		// The position of wall to which the tetromino corner is moving
 		float positionOfWall = 0.0f;
-		// The angle of the tetromino plus the constant angle of the corner with respect to the tetromino origin
-		float adjustedAngle = 0.0f;
 
 		// The extreme corners of the tetromino
 		int[] corners = getExtremeCorners ();
@@ -193,10 +191,11 @@ public class Tetromino : MonoBehaviour {
 			extreme = 0;
 		}
 
-		adjustedAngle = getAdjustedAngle (corners[extreme]);
-		Debug.Log (adjustedAngle);
-		transform.position = new Vector3 (positionOfWall - (getHypotenuse(corners[extreme]) * Mathf.Cos(adjustedAngle)),
+		transform.position = new Vector3 (positionOfWall + getPositionFromWall(corners[extreme]),
 		                                  y, transform.position.z);
+	}
+	protected virtual float getPositionFromWall(int corner){
+		return 0.0f;
 	}
 	/**
 	 * @member {Method} rayHitWall

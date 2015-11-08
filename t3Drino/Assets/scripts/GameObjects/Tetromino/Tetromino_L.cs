@@ -2,21 +2,20 @@ using UnityEngine;
 using System.Collections;
 
 /**
- * @class Tetromino_I		
- * @extends Tetromino		
- * 		
- * 		 y
- * 		 ^
- * 		 |
- * 0---+---5
- * |   |   |
- * 1---+---+---4
- * 	   | o |   | ---> x
- *     2---+---3
+ * @class Tetromino_L
+ * @extends Tetromino
+ * 		 y 			
+ * 		 ^			
+ * 	 	 |			
+ *  	 | 0---1	
+ * 		 | |   |		
+ * 4---+---+---+    	
+ * |   | o |   | --> x	
+ * 3---+---+---2		
  * 
  * o = origin
  */
-public class Tetromino_S : Tetromino {
+public class Tetromino_L : Tetromino {
 
 	/**
 	 * @member {Tetromino} tetromino
@@ -41,19 +40,17 @@ public class Tetromino_S : Tetromino {
 		float angleZ = transform.eulerAngles.z * Mathf.Deg2Rad;
 		
 		if (angleZ >= 0 && angleZ < (Mathf.PI / 2)) {
-			return new int[]{0, 3};
-		} else if (angleZ >= (Mathf.PI / 2) && angleZ < (5 * Mathf.PI / 6)) {
-			return new int[]{0, 2};
-		} else if (angleZ >= (5 * Mathf.PI / 6) && angleZ < (Mathf.PI )) {
-			return new int[]{4, 2};
-		} else if (angleZ >= Mathf.PI && angleZ < (Mathf.PI * 5 / 4)) {
-			return new int[]{3, 1};
-		} else if (angleZ >= (5 * Mathf.PI / 4) && angleZ < (Mathf.PI * 3 / 2)) {
-			return new int[]{3, 0};
-		} else if (angleZ >= (3 * Mathf.PI / 2) && angleZ < (Mathf.PI * 5 / 3)) {
+			return new int[]{3, 1};	
+		} else if (angleZ >= (Mathf.PI / 2) && angleZ < (2 * Mathf.PI / 3)) {
 			return new int[]{2, 0};
-		} else {
+		} else if (angleZ >= (2 * Mathf.PI / 3) && angleZ < Mathf.PI) {
 			return new int[]{2, 4};
+		} else if (angleZ >= Mathf.PI && angleZ < (3 * Mathf.PI / 2)) {
+			return new int[]{1, 3};
+		} else if (angleZ >= (3 * Mathf.PI / 2) && angleZ < (Mathf.PI * 5 / 3)) {
+			return new int[]{0, 2};
+		} else {
+			return new int[]{4, 2};
 		}
 	}
 	/**
@@ -63,17 +60,15 @@ public class Tetromino_S : Tetromino {
 		float angleZ = transform.eulerAngles.z * Mathf.Deg2Rad;
 		
 		if (corner == 0) {
-			return angleZ + (Mathf.PI * 3 / 4);
+			return angleZ + ((Mathf.PI / 2) + Mathf.Atan2(1.5f * _cubeHeight, (0.5f * _cubeWidth)));
 		} else if (corner == 1) {
-			return angleZ + Mathf.PI - Mathf.Atan2(0.5f, 1.5f);
+			return angleZ + ((Mathf.PI / 2) + Mathf.Atan2(1.5f * _cubeHeight, (1.5f * _cubeWidth)));
 		} else if (corner == 2) {
-			return angleZ + Mathf.PI * 5 / 4;
+			return angleZ + (Mathf.PI + Mathf.Atan2(0.5f * _cubeHeight, (1.5f * _cubeWidth)));
 		} else if ( corner == 3 ){
-			return angleZ + (3 * Mathf.PI / 4) + Mathf.Atan2(0.5f, 1.5f);
-		} else if (corner == 4){
-			return angleZ - Mathf.Atan2(0.5f, 1.5f);
+			return angleZ + ((2 * Mathf.PI) - Mathf.Atan2(0.5f * _cubeHeight, (1.5f * _cubeWidth)));
 		} else {
-			return angleZ + Mathf.Atan2(1.5f, 0.5f);
+			return angleZ;
 		}
 	}
 	/**
@@ -83,17 +78,15 @@ public class Tetromino_S : Tetromino {
 	 */
 	public Vector3 getVector(int corner){
 		if (corner == 0) {
-			return new Vector3 (-1.5f * _cubeWidth, 1.5f * _cubeHeight, 0);
-		} else if (corner == 1) {
-			return new Vector3 (-1.5f * _cubeWidth, 0.5f * _cubeHeight, 0);
-		} else if (corner == 2) {
-			return new Vector3 (-0.5f * _cubeWidth, -0.5f * _cubeHeight, 0);
-		} else if (corner == 3) {
-			return new Vector3 (1.5f * _cubeWidth, -0.5f * _cubeHeight, 0);
-		} else if (corner == 4) {
-			return new Vector3 (1.5f * _cubeWidth, 0.5f * _cubeHeight, 0);
-		} else {
 			return new Vector3 (0.5f * _cubeWidth, 1.5f * _cubeHeight, 0);
+		} else if (corner == 1) {
+			return new Vector3 (1.5f * _cubeWidth, 1.5f * _cubeHeight, 0);
+		} else if (corner == 2) {
+			return new Vector3 (1.5f * _cubeWidth, -0.5f * _cubeHeight, 0);
+		} else if (corner == 3) {
+			return new Vector3 (-1.5f * _cubeWidth, -0.5f * _cubeHeight, 0);
+		} else {
+			return new Vector3 (-1.5f * _cubeWidth, 0.5f * _cubeHeight, 0);
 		}
 	}
 	/**
