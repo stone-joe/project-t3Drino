@@ -37,7 +37,7 @@ public class ClickDrag : MonoBehaviour {
             transform.RotateAround(curPosition, Vector3.back, rortateSpeed * Time.deltaTime * rotateDirection);
         }
 
-        if (isLeapMenuTet && transform.position.y < -15F) {
+        if (isLeapMenuTet && transform.position.y < -20F) {
             transform.position = initPosition;
             transform.localEulerAngles = initRotation;
         }

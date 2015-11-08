@@ -4,9 +4,10 @@ using System.Collections;
 public class LeapMenu : MonoBehaviour {
 
     public GameManager gameManager;
+    private Animation anim;
 
 	void Awake () {
-
+		//anim = GetComponent<Animation>();
 		gameManager = GameManager.Instance;
 		gameManager.OnStateChange += HandleOnStateChange;
 	}
@@ -29,7 +30,8 @@ public class LeapMenu : MonoBehaviour {
 	public void StartClassicMode()
 	{
 		gameManager.SetGameState(GameState.CLASSIC);
-		Invoke("LoadLevel", 1f);
+		//anim.Play("LeapMenuCam");
+		Invoke("LoadLevel", 1.0F);
 	}
 
 	public void LoadLevel()

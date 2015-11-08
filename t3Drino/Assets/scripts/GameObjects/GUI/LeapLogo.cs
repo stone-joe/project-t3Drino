@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IntroGUI : MonoBehaviour {
+public class LeapLogo : MonoBehaviour {
 
 	public GameObject SplashScreen;
 
@@ -12,7 +12,7 @@ public class IntroGUI : MonoBehaviour {
 	void Start () {
 		LoadTextures();
 		InitializeSplashScreenGO();
-		SetSplashScreenLocation(0, 0, 0);
+		SetSplashScreenLocation(0, 8, 14);
 		ApplySplashScreenTexture();
 	}
 	
@@ -43,10 +43,10 @@ public class IntroGUI : MonoBehaviour {
 	private void ApplySplashScreenTexture()
 	{
 		// TODO: Find better way to scale, aspect ratio to screen
-		int _scaleWidth = 150;
-		int _scaleHeight = 150;
+		int _scaleWidth = 35;
+		int _scaleHeight = 35;
 
-		float scale = 150;
+		float scale = 35;
 
 		SplashScreen.GetComponent<Renderer>().material.mainTexture = _splashScreenTexture;
 		SplashScreen.GetComponent<Transform>().localScale = new Vector3(_splashScreenTexture.width/scale, 
