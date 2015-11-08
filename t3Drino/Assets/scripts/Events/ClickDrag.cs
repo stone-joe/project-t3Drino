@@ -43,17 +43,17 @@ public class ClickDrag : MonoBehaviour {
         }
     }
 
-    void OnMouseDown()
-    {
-        canRotate = true;
-        screenPoint = Camera.main.WorldToScreenPoint(transform.position);
-        offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
-    }
+	void OnMouseDown()
+	{
+		canRotate = true;
+		screenPoint = Camera.main.WorldToScreenPoint(transform.position);
+		offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+	}
 
-    void OnMouseUp()
-    {
-        canRotate = false;
-    }
+	void OnMouseUp()
+	{
+		canRotate = false;
+	}
 
     void OnMouseDrag()
     {

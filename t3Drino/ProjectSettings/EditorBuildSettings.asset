@@ -13,3 +13,9 @@ EditorBuildSettings:
     path: Assets/scenes/LeapMenu.unity
   - enabled: 1
     path: Assets/scenes/basic_test_scene.unity
+  - enabled: 1
+    path: Assets/scenes/basic_Oculus_test_scene.unity
+  - enabled: 1
+    path: Assets/scenes/basic_Oculus_test_scene_fixed.unity
+  - enabled: 1
+    path: Assets/scenes/Oculus_test_scene.unity

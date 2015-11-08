@@ -22,7 +22,7 @@ public class TetrinoPreviewer : MonoBehaviour {
 		LoadTextureArrayIndices();
 		LoadTextures();
 		InitializeNextTetrominoGO();
-		SetNextTetrominoLocation(16.49f, 7.5f, 0);	// Set previewer location
+		SetNextTetrominoLocation(17f, 15F, -2);	// Set previewer location
 	}
 
 
@@ -33,8 +33,8 @@ public class TetrinoPreviewer : MonoBehaviour {
 		// Change texture and rescale
 		NextTetrino.GetComponent<Renderer>().material.mainTexture = _nextTetrinoSprite;
 		NextTetrino.GetComponent<Transform>().localScale = new Vector3(_nextTetrinoSprite.width/_scaleWidth,
-		                                                               _nextTetrinoSprite.height/_scaleHeight,
-		                                                               1);
+																	   _nextTetrinoSprite.height/_scaleHeight,
+																	   1);
 	}
 
 	private void LoadTetrinoSelectorReference()
@@ -59,13 +59,13 @@ public class TetrinoPreviewer : MonoBehaviour {
 	private void LoadTextures()
 	{
 		_tetrinoSprites = new Texture2D[_totalSprites];
-		_tetrinoSprites[I] = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(TetrinoSpriteLibrary.PathTetrominoSpriteI, typeof(Texture2D));
-		_tetrinoSprites[J] = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(TetrinoSpriteLibrary.PathTetrominoSpriteJ, typeof(Texture2D));
-		_tetrinoSprites[L] = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(TetrinoSpriteLibrary.PathTetrominoSpriteL, typeof(Texture2D));
-		_tetrinoSprites[O] = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(TetrinoSpriteLibrary.PathTetrominoSpriteO, typeof(Texture2D));
-		_tetrinoSprites[S] = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(TetrinoSpriteLibrary.PathTetrominoSpriteS, typeof(Texture2D));
-		_tetrinoSprites[T] = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(TetrinoSpriteLibrary.PathTetrominoSpriteT, typeof(Texture2D));
-		_tetrinoSprites[Z] = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(TetrinoSpriteLibrary.PathTetrominoSpriteZ, typeof(Texture2D));
+		_tetrinoSprites[I] = Resources.Load(TetrinoSpriteLibrary.PathTetrominoSpriteI, typeof(Texture2D)) as Texture2D;
+		_tetrinoSprites[J] = Resources.Load(TetrinoSpriteLibrary.PathTetrominoSpriteJ, typeof(Texture2D)) as Texture2D;
+		_tetrinoSprites[L] = Resources.Load(TetrinoSpriteLibrary.PathTetrominoSpriteL, typeof(Texture2D)) as Texture2D;
+		_tetrinoSprites[O] = Resources.Load(TetrinoSpriteLibrary.PathTetrominoSpriteO, typeof(Texture2D)) as Texture2D;
+		_tetrinoSprites[S] = Resources.Load(TetrinoSpriteLibrary.PathTetrominoSpriteS, typeof(Texture2D)) as Texture2D;
+		_tetrinoSprites[T] = Resources.Load(TetrinoSpriteLibrary.PathTetrominoSpriteT, typeof(Texture2D)) as Texture2D;
+		_tetrinoSprites[Z] = Resources.Load(TetrinoSpriteLibrary.PathTetrominoSpriteZ, typeof(Texture2D)) as Texture2D;
 	}
 
 	private void InitializeNextTetrominoGO()
@@ -73,7 +73,7 @@ public class TetrinoPreviewer : MonoBehaviour {
 		NextTetrino = GameObject.CreatePrimitive(PrimitiveType.Quad);							// Create base game object of type Quad
 		NextTetrino.name = "NextTetrino";														// Name base game object
 		Destroy(NextTetrino.GetComponent("MeshCollider"));										// Remove collider
-		NextTetrino.GetComponent<Renderer>().material.shader = Shader.Find("Sprites/Diffuse");	// Set transparency
+		NextTetrino.GetComponent<Renderer>().material = Resources.Load<Material>("Shaders/SpriteTransparentMaterial");	// Set transparency
 	}
 
 	private void SetNextTetrominoLocation(float x, float y, float z)
@@ -83,11 +83,8 @@ public class TetrinoPreviewer : MonoBehaviour {
 
 	private void SetNextTetromino()
 	{
-		float widthIO = 15f;
-		float heightIO = widthIO;
-		
-		float widthJLSTZ = 10f;
-		float heightJLSTZ = widthJLSTZ * 1.5f;
+		_scaleWidth = 15f;
+		_scaleHeight = _scaleWidth;
 
 		// Set texture and scaling
 		string tetrinoName = _tetrinoSelector.Queue[0].name;
@@ -95,44 +92,30 @@ public class TetrinoPreviewer : MonoBehaviour {
 		if (tetrinoName.Equals(TetrinoSpriteLibrary.PrefabTetrominoNameI))
 		{
 			_nextTetrinoSprite = _tetrinoSprites[I];
-			_scaleWidth = widthIO;
-			_scaleHeight = heightIO;
 		}
 		else if (tetrinoName.Equals(TetrinoSpriteLibrary.PrefabTetrominoNameJ))
 		{
 			_nextTetrinoSprite = _tetrinoSprites[J];
-			_scaleWidth = widthJLSTZ;
-			_scaleHeight = heightJLSTZ;
 		}
 		else if (tetrinoName.Equals(TetrinoSpriteLibrary.PrefabTetrominoNameL))
 		{
 			_nextTetrinoSprite = _tetrinoSprites[L];
-			_scaleWidth = widthJLSTZ;
-			_scaleHeight = heightJLSTZ;
 		}
 		else if (tetrinoName.Equals(TetrinoSpriteLibrary.PrefabTetrominoNameO))
 		{
 			_nextTetrinoSprite = _tetrinoSprites[O];
-			_scaleWidth = widthIO;
-			_scaleHeight = heightIO;
 		}
 		else if (tetrinoName.Equals(TetrinoSpriteLibrary.PrefabTetrominoNameS))
 		{
 			_nextTetrinoSprite = _tetrinoSprites[S];
-			_scaleWidth = widthJLSTZ;
-			_scaleHeight = heightJLSTZ;
 		}
 		else if (tetrinoName.Equals(TetrinoSpriteLibrary.PrefabTetrominoNameT))
 		{
 			_nextTetrinoSprite = _tetrinoSprites[T];
-			_scaleWidth = widthJLSTZ;
-			_scaleHeight = heightJLSTZ;
 		}
 		else if (tetrinoName.Equals(TetrinoSpriteLibrary.PrefabTetrominoNameZ))
 		{
 			_nextTetrinoSprite = _tetrinoSprites[Z];
-			_scaleWidth = widthJLSTZ;
-			_scaleHeight = heightJLSTZ;
 		}
 	}
 }
