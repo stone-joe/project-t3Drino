@@ -4,6 +4,7 @@ using System.Collections;
 public class LeapMenu : MonoBehaviour {
 
     public GameManager gameManager;
+    public GameObject lightPrefab;
     private Animation anim;
 
 	void Awake () {
@@ -13,7 +14,7 @@ public class LeapMenu : MonoBehaviour {
 	}
 	
     void Start () {
-
+    	Instantiate(lightPrefab);
     }
 
 	void HandleOnStateChange ()

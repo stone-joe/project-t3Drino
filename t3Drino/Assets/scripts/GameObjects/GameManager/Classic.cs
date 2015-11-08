@@ -15,6 +15,8 @@ public class Classic : MonoBehaviour {
 	public GameObject _player;
 	public GameObject _scoreManager;
 	public GameObject _scoreGUI;
+
+	public GameObject _lightPrefab;
 	//public GameObject _elapsedTimer;
 
 	//public ClassicLoseGUI _loseGUIComponents;
@@ -45,6 +47,7 @@ public class Classic : MonoBehaviour {
 	void Start()
 	{
 		InitGame();
+		Instantiate(_lightPrefab);
 	}
 	
 	void HandleOnStateChange ()

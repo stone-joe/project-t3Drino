@@ -583,7 +583,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &797958271
 Light:
   m_ObjectHideFlags: 0
@@ -642,6 +642,7 @@ GameObject:
   - 81: {fileID: 863889145}
   - 114: {fileID: 863889150}
   - 114: {fileID: 863889151}
+  - 45: {fileID: 863889152}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -728,6 +729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
+  lightPrefab: {fileID: 141640, guid: 52277d66924ec4d4a838e13b60bf57f6, type: 2}
 --- !u!114 &863889151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -742,6 +744,14 @@ MonoBehaviour:
   SplashScreen: {fileID: 0}
   _splashScreenTexture: {fileID: 0}
   _splashScreenPath: 
+--- !u!45 &863889152
+Skybox:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 863889144}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 2f4dfa75265639144a98b7deda072d8c, type: 2}
 --- !u!1001 &935100359
 Prefab:
   m_ObjectHideFlags: 0
@@ -779,7 +789,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 402014, guid: d671b69db8a315b4b89b1304ccb1e918, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5411956, guid: d671b69db8a315b4b89b1304ccb1e918, type: 2}
       propertyPath: m_Constraints
