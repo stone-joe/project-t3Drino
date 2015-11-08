@@ -13,8 +13,13 @@ public class ShootingRay : MonoBehaviour {
     private ScoreManager _scoreManager;
     private bool _isRowCleared;
 
+    public AudioClip fart;
+    public AudioSource audio;
+
     // Use this for initialization
     void Start () {
+        //audio = GetComponent<AudioSource>();
+        
         // Get score manager reference
         GameObject go = GameObject.Find("ScoreManager");
         _scoreManager = (ScoreManager) go.GetComponent(typeof(ScoreManager));
@@ -145,7 +150,7 @@ public class ShootingRay : MonoBehaviour {
                         doExplosion(hitBlock);
                        
                         Destroy(hitBlock.gameObject, 1F);
-
+                        AudioSource.PlayClipAtPoint(fart, new Vector3(0, 0, 0));
                         hitBlock.gameObject.tag = "blockDestroyingTag";
 
                         // iterate through all children blocks in tet/new parent...

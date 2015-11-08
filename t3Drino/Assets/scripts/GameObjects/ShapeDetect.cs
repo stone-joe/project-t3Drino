@@ -6,6 +6,8 @@ public class ShapeDetect : MonoBehaviour {
     private Transform detectedTransform;
 
     public LeapMenu leapMenuScript;
+    public AudioClip fart;
+    public AudioSource audio;
 
     // Use this for initialization
     void Start () {
@@ -31,6 +33,7 @@ public class ShapeDetect : MonoBehaviour {
 
             if (other.transform.root.transform.name == "start_tet") {
                 leapMenuScript.StartClassicMode();
+                AudioSource.PlayClipAtPoint(fart, new Vector3(0, 0, 0));
             } else if (other.transform.root.transform.name == "quit_tet") {
                 leapMenuScript.Quit();
             }
