@@ -83,5 +83,12 @@ public class TetrominoState : MonoBehaviour {
 		} else {
 			moving = false;
 		}
+
+		if  ( transform.position.y < -12 ){
+			foreach (Transform child in transform){
+				Destroy(child.transform.gameObject);
+			}
+			Destroy (transform.gameObject);
+		}
 	}
 }
