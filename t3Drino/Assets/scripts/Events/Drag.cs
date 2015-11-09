@@ -39,7 +39,7 @@ public class Drag : MonoBehaviour {
 
             transform.RotateAround(curPosition, Vector3.back, rotateSpeed * Time.deltaTime * rotateDirection);
         }
-        if (isLeapMenuTet && transform.position.y < -20F) {
+        if (isLeapMenuTet && transform.position.y < -10F) {
             transform.position = initPosition;
             transform.localEulerAngles = initRotation;
         }

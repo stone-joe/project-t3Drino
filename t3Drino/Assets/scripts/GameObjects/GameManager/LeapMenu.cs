@@ -32,7 +32,7 @@ public class LeapMenu : MonoBehaviour {
 	{
 		gameManager.SetGameState(GameState.CLASSIC);
 		//anim.Play("LeapMenuCam");
-		Invoke("LoadLevel", 1.0F);
+		Invoke("LoadLevel", 0.5F);
 	}
 
 	public void LoadLevel()
