@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: ac4371c1348efc84586a0401f604952f
-timeCreated: 1444082116
+timeCreated: 1447032519
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - fart: {fileID: 8300000, guid: d80a63e08ffae0945ada33847c2a18fb, type: 3}
+  - audio: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -30,7 +30,7 @@ public class Intro : MonoBehaviour {
 	
 	public void LoadLevel()
 	{
-		Application.LoadLevel("MainMenu");
+		Application.LoadLevel("LeapMenu");
 	}
 
 	public void InitSplashScreen()

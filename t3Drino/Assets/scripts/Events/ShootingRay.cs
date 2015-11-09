@@ -22,9 +22,14 @@ public class ShootingRay : MonoBehaviour {
     private ScoreManager _scoreManager;
 	
 
+    public AudioClip fart;
+    public AudioSource audio;
+
     // Use this for initialization
     void Start () {
-
+        audio = GetComponent<AudioSource>();
+        //audio.priority = 0;
+        
         // Get score manager reference
         GameObject go = GameObject.Find("ScoreManager");
         _scoreManager = (ScoreManager) go.GetComponent(typeof(ScoreManager));
@@ -33,9 +38,62 @@ public class ShootingRay : MonoBehaviour {
         // There are two ways/options to determine if line should be cleared via block distance from this ray
         // Set values depending on which option used. See method Update() to select option 1 or 2
         //halfDistanceBetweenRays = 1.10f;            // For option 1
-        plusMinusThreshholdRangeFromRay = 1.0f  ;     // For option 2
+        plusMinusThreshholdRangeFromRay = 2.0f  ;     // For option 2
     }
+
+
+    void doExplosion(Transform thisHitblock) {
+        //prefab_S_tet(Clone)  Explosion_SZ
+        //prefab_Z_tet(Clone)  Explosion_SZ
+        //prefab_L_tet(Clone)  Explosion_LJ
+        //prefab_J_tet(Clone)  Explosion_LJ
+        //prefab_O_tet(Clone)  Explosion_O
+        //prefab_I_tet(Clone)  Explosion_I
+        //prefab_T_tet(Clone)  Explosion_T
+        // default Explosion_simple
+
+        
+
+
+        Vector3 pos = thisHitblock.transform.position;
+        string explosionpath = "Explosions/";
+        string nameofparent = thisHitblock.transform.parent.name;
+        print(nameofparent);
+        switch (nameofparent) { 
+            case "prefab_S_tet(Clone)":
+                explosionpath = explosionpath + "Explosion_SZ";
+                break;
+            case "prefab_Z_tet(Clone)":
+                explosionpath = explosionpath + "Explosion_SZ";
+                break;
+            case "prefab_L_tet(Clone)":
+                explosionpath = explosionpath + "Explosion_LJ";
+                break;
+            case "prefab_J_tet(Clone)":
+                explosionpath = explosionpath + "Explosion_LJ";
+                break;
+            case "prefab_O_tet(Clone)":
+                explosionpath = explosionpath + "Explosion_O";
+                break;
+            case "prefab_I_tet(Clone)":
+                explosionpath = explosionpath + "Explosion_I";
+                break;
+            case "prefab_T_tet(Clone)":
+                explosionpath = explosionpath + "Explosion_T";
+                break;
+            default:
+                explosionpath = explosionpath + "Explosion_simple";
+                break;
+        }
+
+
+        Debug.Log("my name is " + nameofparent);
+
+        GameObject explo = (Resources.Load(explosionpath, typeof(GameObject))) as GameObject;
+        Instantiate(explo, pos, Quaternion.identity);
     
+    }
+
     // Update is called once per frame
     void Update () {
 
@@ -84,10 +142,7 @@ public class ShootingRay : MonoBehaviour {
                     } else {
                         lineInvalid = true;
                     }
-                }
-                
-                
-                
+                }    
             }
 
             if (!lineInvalid && allObjectsInThreshhold) {
@@ -117,11 +172,12 @@ public class ShootingRay : MonoBehaviour {
                     
                     //getting the position of explosion, the starting the explosion.
                     //each explosion has a ExplosionSelfDestruct.cs which takes care of destroying the eplosion particle system
-                    Vector3 pos = hitBlock.transform.position;         
-                    GameObject explo = (Resources.Load("Explosions/Explosion1", typeof(GameObject))) as GameObject;
-                    Instantiate(explo, pos, Quaternion.identity);
+                    Vector3 pos = hitBlock.transform.position;
+                    doExplosion(hitBlock.transform);
+
+                    AudioSource.PlayClipAtPoint(fart, new Vector3(0, 0, 0));
                     
-                    Destroy(hitBlock.gameObject, 1F);
+                    Destroy(hitBlock.gameObject, 0F);
                     
                     Cube cubeState = hitBlock.gameObject.GetComponent<Cube> ();
                     cubeState.setState(Cube.states.DESTROYING);

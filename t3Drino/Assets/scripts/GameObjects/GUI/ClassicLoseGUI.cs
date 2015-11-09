@@ -64,16 +64,22 @@ public class ClassicLoseGUI : MonoBehaviour {
 		Debug.Log("Handling state change to: " + gameManager.gameState);
 	}
 
-	public void StartMainMenu()
+	public void StartMainMenu(float delay = 1F)
 	{
 		gameManager.SetGameState(GameState.MAINMENU);
-		Invoke("LoadMainMenu", 1f);
+		Invoke("LoadMainMenu", delay);
 	}
 
-	public void ReplayClassicMode()
+	public void ReplayClassicMode(float delay = 1F)
 	{
 		gameManager.SetGameState(GameState.CLASSIC);
-		Invoke("LoadClassicMode", 1f);
+		Invoke("LoadClassicMode", delay);
+	}
+
+	public void StartLeapMenu(float delay = 1F)
+	{
+		gameManager.SetGameState(GameState.MAINMENU);
+		Invoke("LoadLeapMenu", delay);
 	}
 	#endregion
 
@@ -87,13 +93,18 @@ public class ClassicLoseGUI : MonoBehaviour {
 	{
 		Application.LoadLevel("basic_test_scene"); // TODO change scene name
 	}
+
+	public void LoadLeapMenu()
+	{
+		Application.LoadLevel("LeapMenu");
+	}
 	#endregion
 
 	#region Initialization Methods
 	public void LoadTextures()
 	{
-		_loseImagePath = "Assets/Resources/GUI/TEMP_tetris_block_splash_screen.png"; // TODO: Change this for updating image
-		_loseImageTexture = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(_loseImagePath, typeof(Texture2D));
+		//_loseImagePath = "Assets/Resources/GUI/TEMP_tetris_block_splash_screen.png"; // TODO: Change this for updating image
+		//_loseImageTexture = (Texture2D)UnityEditor.AssetDatabase.LoadAssetAtPath(_loseImagePath, typeof(Texture2D));
 	}
 	
 	public void InitializeSplashScreenGO()

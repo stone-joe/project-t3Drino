@@ -529,7 +529,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 151748}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -553,7 +553,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 188536}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -577,7 +577,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 152906}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -601,7 +601,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106968}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -625,7 +625,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 185298}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -649,7 +649,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 143154}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -673,7 +673,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157744}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -697,7 +697,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142238}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -721,7 +721,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176314}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -745,7 +745,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 122890}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -769,7 +769,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 184044}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -793,7 +793,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190052}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -817,7 +817,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168516}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -841,7 +841,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 125652}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -865,7 +865,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155332}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -889,7 +889,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145946}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
@@ -1030,6 +1030,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4371c1348efc84586a0401f604952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fart: {fileID: 8300000, guid: d80a63e08ffae0945ada33847c2a18fb, type: 3}
+  audio: {fileID: 0}
 --- !u!114 &11417616
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1041,6 +1043,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4371c1348efc84586a0401f604952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fart: {fileID: 8300000, guid: d80a63e08ffae0945ada33847c2a18fb, type: 3}
+  audio: {fileID: 0}
 --- !u!114 &11436288
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1052,6 +1056,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4371c1348efc84586a0401f604952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fart: {fileID: 8300000, guid: d80a63e08ffae0945ada33847c2a18fb, type: 3}
+  audio: {fileID: 0}
 --- !u!114 &11439636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1063,6 +1069,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4371c1348efc84586a0401f604952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fart: {fileID: 8300000, guid: d80a63e08ffae0945ada33847c2a18fb, type: 3}
+  audio: {fileID: 0}
 --- !u!114 &11443262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1074,6 +1082,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4371c1348efc84586a0401f604952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fart: {fileID: 8300000, guid: d80a63e08ffae0945ada33847c2a18fb, type: 3}
+  audio: {fileID: 0}
 --- !u!114 &11447780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1085,6 +1095,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4371c1348efc84586a0401f604952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fart: {fileID: 8300000, guid: d80a63e08ffae0945ada33847c2a18fb, type: 3}
+  audio: {fileID: 0}
 --- !u!114 &11451212
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1096,6 +1108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4371c1348efc84586a0401f604952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fart: {fileID: 8300000, guid: d80a63e08ffae0945ada33847c2a18fb, type: 3}
+  audio: {fileID: 0}
 --- !u!114 &11452290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1107,6 +1121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4371c1348efc84586a0401f604952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fart: {fileID: 8300000, guid: d80a63e08ffae0945ada33847c2a18fb, type: 3}
+  audio: {fileID: 0}
 --- !u!114 &11465678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1118,6 +1134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4371c1348efc84586a0401f604952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fart: {fileID: 8300000, guid: d80a63e08ffae0945ada33847c2a18fb, type: 3}
+  audio: {fileID: 0}
 --- !u!114 &11483230
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1129,6 +1147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4371c1348efc84586a0401f604952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fart: {fileID: 8300000, guid: d80a63e08ffae0945ada33847c2a18fb, type: 3}
+  audio: {fileID: 0}
 --- !u!114 &11483482
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1140,6 +1160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4371c1348efc84586a0401f604952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fart: {fileID: 8300000, guid: d80a63e08ffae0945ada33847c2a18fb, type: 3}
+  audio: {fileID: 0}
 --- !u!114 &11489492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1151,6 +1173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4371c1348efc84586a0401f604952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fart: {fileID: 8300000, guid: d80a63e08ffae0945ada33847c2a18fb, type: 3}
+  audio: {fileID: 0}
 --- !u!114 &11491084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1162,6 +1186,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4371c1348efc84586a0401f604952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fart: {fileID: 8300000, guid: d80a63e08ffae0945ada33847c2a18fb, type: 3}
+  audio: {fileID: 0}
 --- !u!114 &11493308
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1173,6 +1199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4371c1348efc84586a0401f604952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fart: {fileID: 8300000, guid: d80a63e08ffae0945ada33847c2a18fb, type: 3}
+  audio: {fileID: 0}
 --- !u!114 &11493326
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1184,6 +1212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4371c1348efc84586a0401f604952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fart: {fileID: 8300000, guid: d80a63e08ffae0945ada33847c2a18fb, type: 3}
+  audio: {fileID: 0}
 --- !u!114 &11494508
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1195,6 +1225,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4371c1348efc84586a0401f604952f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fart: {fileID: 8300000, guid: d80a63e08ffae0945ada33847c2a18fb, type: 3}
+  audio: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -1209,6 +1241,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: fart
+      value: 
+      objectReference: {fileID: 8300000, guid: d80a63e08ffae0945ada33847c2a18fb, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

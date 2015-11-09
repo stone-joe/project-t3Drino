@@ -21,7 +21,6 @@ public class TetrinoSpawner : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
 		// Set to spawn every 4 seconds
 		_period = 5f;
 		_decreaseAmount = 0.10f;		// Decrease by this many seconds (for time between spawns)
@@ -40,6 +39,7 @@ public class TetrinoSpawner : MonoBehaviour {
 		GameObject go2 = GameObject.Find("TetrinoSpawnTimer");
 		_tetrinoSpawnTimer = (TetrinoSpawnTimer) go2.GetComponent(typeof(TetrinoSpawnTimer));
 		_tetrinoSpawnTimer.SetTimer(0f, float.PositiveInfinity, 0f, _period);
+		_tetrinoSpawnTimer.ShouldPop = true;
 		_tetrinoSpawnTimer.BeginCountUp();
 
 		// Grab reference of the tetromino spawn rate modifier (for adjusting difficulty on the spawn timer)
