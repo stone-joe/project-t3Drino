@@ -900,8 +900,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leapMenuScript: {fileID: 0}
-  fart: {fileID: 8300000, guid: f2d2983a6a9ad284c924512092a576d1, type: 3}
-  audio: {fileID: 0}
 --- !u!1 &1719423786
 GameObject:
   m_ObjectHideFlags: 0
